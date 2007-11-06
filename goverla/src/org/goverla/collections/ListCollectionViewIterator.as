@@ -2,7 +2,7 @@ package org.goverla.collections {
 
 	import mx.collections.ListCollectionView;
 	
-	import org.goverla.collections.interfaces.IIterator;
+	import org.goverla.interfaces.IIterator;
 	
 	public class ListCollectionViewIterator implements IIterator {
 

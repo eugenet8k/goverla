@@ -1,7 +1,7 @@
 package org.goverla.collections {
 
-	import org.goverla.collections.interfaces.IQueue;
 	import org.goverla.errors.CollectionError;
+	import org.goverla.interfaces.IQueue;
 	
 	public class LinearQueue implements IQueue {
 
