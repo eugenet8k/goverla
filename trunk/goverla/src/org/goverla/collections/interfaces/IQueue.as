@@ -1,4 +1,4 @@
-package org.goverla.core.collections.interfaces {
+package org.goverla.collections.interfaces {
 
 	public interface IQueue	{
 		

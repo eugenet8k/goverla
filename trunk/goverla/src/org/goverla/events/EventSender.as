@@ -1,4 +1,4 @@
-package org.goverla.core.event {
+package org.goverla.events {
 	
 	import flash.events.Event;
 	

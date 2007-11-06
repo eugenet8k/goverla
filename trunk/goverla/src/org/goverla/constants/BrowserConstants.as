@@ -1,4 +1,4 @@
-package org.goverla.core.constants {
+package org.goverla.constants {
 
 	public class BrowserConstants {
 		

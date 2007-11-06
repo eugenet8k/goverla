@@ -1,4 +1,4 @@
-package org.goverla.core.utils.common {
+package org.goverla.utils.common {
 	
 	public class FieldDescription extends MemberDescription {
 		

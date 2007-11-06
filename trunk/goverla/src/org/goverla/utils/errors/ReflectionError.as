@@ -1,4 +1,4 @@
-package org.goverla.core.utils.errors {
+package org.goverla.utils.errors {
 	
 	public class ReflectionError extends Error {
 		

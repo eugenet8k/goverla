@@ -1,15 +1,11 @@
-package org.goverla.core.reflect.overload {
+package org.goverla.reflection.overload {
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.goverla.core.reflect.overload.common.OverloadHandler;
-	import org.goverla.core.reflect.overload.errors.OverloadError;
+	import org.goverla.reflection.overload.common.OverloadHandler;
+	import org.goverla.reflection.overload.errors.OverloadError;
 	
-	public class Overload
-	{
-		private var _handlers : ArrayCollection = new ArrayCollection();
-		
-		private var _thisObject : Object;
+	public class Overload {
 		
 		public function Overload(thisObject : Object) : void {
 			_thisObject = thisObject;
@@ -36,5 +32,10 @@ package org.goverla.core.reflect.overload {
 			return overloadHandler.handler.apply(_thisObject, arguments);
 		}
 		
+		private var _handlers : ArrayCollection = new ArrayCollection();
+		
+		private var _thisObject : Object;
+		
 	}
+	
 }
