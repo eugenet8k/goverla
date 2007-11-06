@@ -2,7 +2,7 @@ package org.goverla.utils.comparing {
 
 	import mx.collections.ArrayCollection;
 	
-	import org.goverla.collections.interfaces.IMap;
+	import org.goverla.interfaces.IMap;
 	import org.goverla.interfaces.IRequirement;
 	
 	/**

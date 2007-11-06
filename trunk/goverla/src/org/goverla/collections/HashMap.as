@@ -2,9 +2,9 @@ package org.goverla.collections {
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.goverla.collections.interfaces.IIterator;
-	import org.goverla.collections.interfaces.IMap;
 	import org.goverla.errors.IllegalArgumentError;
+	import org.goverla.interfaces.IIterator;
+	import org.goverla.interfaces.IMap;
 	
 	public class HashMap implements IMap {
 		

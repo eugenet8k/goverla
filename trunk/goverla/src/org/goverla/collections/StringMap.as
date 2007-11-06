@@ -2,8 +2,8 @@ package org.goverla.collections {
 	
 	import flash.events.EventDispatcher;
 	
-	import org.goverla.collections.interfaces.IIterator;
-	import org.goverla.collections.interfaces.IStringMap;
+	import org.goverla.interfaces.IIterator;
+	import org.goverla.interfaces.IStringMap;
 
 	public class StringMap extends EventDispatcher implements IStringMap {
 		
