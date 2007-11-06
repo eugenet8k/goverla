@@ -1,4 +1,4 @@
-package org.goverla.utils.interfaces {
+package org.goverla.interfaces {
 
 	public interface IComparer {
 	
