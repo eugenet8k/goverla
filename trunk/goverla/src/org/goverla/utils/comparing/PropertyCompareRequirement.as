@@ -1,6 +1,6 @@
 package org.goverla.utils.comparing {
 
-	import org.goverla.utils.interfaces.IRequirement;
+	import org.goverla.interfaces.IRequirement;
 	
 	/**
 	 * @author Maxym Hryniv

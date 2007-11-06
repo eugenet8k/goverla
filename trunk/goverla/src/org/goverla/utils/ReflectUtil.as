@@ -9,8 +9,8 @@ package org.goverla.utils {
 	import mx.utils.StringUtil;
 	
 	import org.goverla.constants.MetadataNames;
+	import org.goverla.errors.ReflectionError;
 	import org.goverla.utils.common.FieldDescription;
-	import org.goverla.utils.errors.ReflectionError;
 	
 	public class ReflectUtil {
 		

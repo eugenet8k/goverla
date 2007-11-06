@@ -7,8 +7,8 @@ package org.goverla.utils {
 	import org.goverla.collections.interfaces.IIterator;
 	import org.goverla.collections.interfaces.IMap;
 	import org.goverla.reflection.overload.Overload;
-	import org.goverla.utils.interfaces.IConverter;
-	import org.goverla.utils.interfaces.IRequirement;
+	import org.goverla.interfaces.IConverter;
+	import org.goverla.interfaces.IRequirement;
 	
 	/**
 	 * @author Maxym Hryniv

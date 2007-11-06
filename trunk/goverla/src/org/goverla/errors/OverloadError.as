@@ -1,4 +1,4 @@
-package org.goverla.reflection.overload.errors {
+package org.goverla.errors {
 
 	public class OverloadError extends Error {
 
