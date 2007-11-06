@@ -1,12 +1,12 @@
-package org.goverla.core.utils {
+package org.goverla.utils {
 
 	import flash.xml.XMLNode;
 	
 	import mx.collections.ArrayCollection;
 	import mx.utils.StringUtil;
 	
-	import org.goverla.core.errors.XMLError;
-	import org.goverla.core.utils.comparing.PropertyCompareRequirement;
+	import org.goverla.errors.XMLError;
+	import org.goverla.utils.comparing.PropertyCompareRequirement;
 	
 	/**
 	 * @author Sergey Kovalyov

@@ -1,4 +1,4 @@
-package org.goverla.core.errors {
+package org.goverla.errors {
 
 	/**
 	 * @author Maxym Hryniv

@@ -1,8 +1,8 @@
-package org.goverla.core.collections {
+package org.goverla.collections {
 
 	import mx.collections.ListCollectionView;
 	
-	import org.goverla.core.collections.interfaces.IIterator;
+	import org.goverla.collections.interfaces.IIterator;
 	
 	public class ListCollectionViewIterator implements IIterator {
 

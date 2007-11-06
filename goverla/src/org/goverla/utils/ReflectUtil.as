@@ -1,4 +1,4 @@
-package org.goverla.core.utils {
+package org.goverla.utils {
 	
 	import flash.system.ApplicationDomain;
 	import flash.utils.describeType;
@@ -8,9 +8,9 @@ package org.goverla.core.utils {
 	import mx.utils.ObjectUtil;
 	import mx.utils.StringUtil;
 	
-	import org.goverla.core.constants.MetadataNames;
-	import org.goverla.core.utils.common.FieldDescription;
-	import org.goverla.core.utils.errors.ReflectionError;
+	import org.goverla.constants.MetadataNames;
+	import org.goverla.utils.common.FieldDescription;
+	import org.goverla.utils.errors.ReflectionError;
 	
 	public class ReflectUtil {
 		

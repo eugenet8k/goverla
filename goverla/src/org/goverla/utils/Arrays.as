@@ -1,14 +1,14 @@
-package org.goverla.core.utils {
+package org.goverla.utils {
 
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
-	import org.goverla.core.collections.ListCollectionViewIterator;
-	import org.goverla.core.collections.interfaces.IIterator;
-	import org.goverla.core.collections.interfaces.IMap;
-	import org.goverla.core.reflect.overload.Overload;
-	import org.goverla.core.utils.interfaces.IConverter;
-	import org.goverla.core.utils.interfaces.IRequirement;
+	import org.goverla.collections.ListCollectionViewIterator;
+	import org.goverla.collections.interfaces.IIterator;
+	import org.goverla.collections.interfaces.IMap;
+	import org.goverla.reflection.overload.Overload;
+	import org.goverla.utils.interfaces.IConverter;
+	import org.goverla.utils.interfaces.IRequirement;
 	
 	/**
 	 * @author Maxym Hryniv
@@ -36,6 +36,7 @@ package org.goverla.core.utils {
 			}
 			return result;
 		}
+		
 		public static function removeItem(item : Object, list : Object) : Object {
 			var o : Overload = new Overload(Arrays);
 			o.addHandler([Object, Array], removeItemForArray);
