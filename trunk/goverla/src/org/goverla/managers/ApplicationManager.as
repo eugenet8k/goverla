@@ -4,7 +4,7 @@ package org.goverla.managers {
 	
 	import mx.core.Application;
 	
-	internal class ApplicationManager {
+	public class ApplicationManager {
 		
 		private static var _instance : ApplicationManager;
 		
