@@ -1,4 +1,4 @@
-package org.goverla.reflection.overload.common {
+package org.goverla.reflection {
 	
 	public class OverloadHandler {
 		

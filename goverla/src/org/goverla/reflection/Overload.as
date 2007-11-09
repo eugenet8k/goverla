@@ -1,9 +1,8 @@
-package org.goverla.reflection.overload {
+package org.goverla.reflection {
 	
 	import mx.collections.ArrayCollection;
 	
 	import org.goverla.errors.OverloadError;
-	import org.goverla.reflection.overload.common.OverloadHandler;
 	
 	public class Overload {
 		
