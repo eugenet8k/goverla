@@ -26,7 +26,7 @@ package org.goverla.collections {
 			return new ListCollectionViewIterator(this);
 		}
 		
-		public function addItems(source : ListCollectionView) : void {
+		public function addItems(source : Object) : void {
 			Arrays.insertAll(this, source);
 		}
 		
