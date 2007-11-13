@@ -64,9 +64,15 @@ package org.goverla.utils {
 			return list.toArray();
 		}
 	
-		public static function insertAll(target : ListCollectionView, list : ListCollectionView) : ListCollectionView {
-			for(var i : Number = 0; i < list.length; i++) {
-				target.addItem(list.getItemAt(i)); 
+		public static function insertAll(target : ListCollectionView, list : Object) : ListCollectionView {
+			if (list is ListCollectionView) {
+				for(var i : uint = 0; i < ListCollectionView(list).length; i++) {
+					target.addItem(ListCollectionView(list).getItemAt(i)); 
+				}
+			} else if (list is Array) {
+				for(i = 0; i < (list as Array).length; i++) {
+					target.addItem((list as Array)[i]); 
+				}
 			}
 			return target;
 		}
