@@ -11,6 +11,11 @@ package org.goverla.utils {
 				Application.application.mouseY);
 		}
 		
+		public static function getApplicationMouseShift(startPosition : Point) : Point {
+			return new Point(Application.application.mouseX - startPosition.x,
+					Application.application.mouseY - startPosition.y);
+		}
+		
 	}
 	
 }
