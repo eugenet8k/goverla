@@ -1,5 +1,6 @@
 package org.goverla.utils {
 
+	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
 	import mx.core.Application;
