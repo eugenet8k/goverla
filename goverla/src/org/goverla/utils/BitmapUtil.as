@@ -6,6 +6,7 @@ package org.goverla.utils {
 	import flash.geom.Rectangle;
 	
 	import mx.core.UIComponent;
+	import mx.utils.ColorUtil;
 	
 	public class BitmapUtil {
 
@@ -32,7 +33,29 @@ package org.goverla.utils {
 			result.draw(source, matrix, colorTransform, blendMode, clipRect, smoothing);
 			
 			return result;
-		}		
+		}
+		
+		public static function adjustBrightness(bitmapData : BitmapData, brite : Number) : void {
+			for (var i : uint = 0; i < bitmapData.width; i++) {
+				for (var j : uint = 0; j < bitmapData.height; j++) {
+					var color : uint = bitmapData.getPixel(i, j);
+					if (color != 0xFFFFFF) {
+						bitmapData.setPixel(i, j, ColorUtil.adjustBrightness(color, brite));
+					}
+				}
+			}
+		}
+		
+		public static function adjustBrightness2(bitmapData : BitmapData, brite : Number) : void {
+			for (var i : uint = 0; i < bitmapData.width; i++) {
+				for (var j : uint = 0; j < bitmapData.height; j++) {
+					var color : uint = bitmapData.getPixel(i, j);
+					if (color != 0xFFFFFF) {
+						bitmapData.setPixel(i, j, ColorUtil.adjustBrightness2(color, brite));
+					}
+				}
+			}
+		}	
 
 	}
 	
