@@ -1,6 +1,5 @@
 package org.goverla.utils {
 
-	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
 	import mx.core.Application;
@@ -15,6 +14,10 @@ package org.goverla.utils {
 		public static function getApplicationMouseShift(startPosition : Point) : Point {
 			return new Point(Application.application.mouseX - startPosition.x,
 					Application.application.mouseY - startPosition.y);
+		}
+		
+		public static function sumPoint(point1 : Point, point2 : Point) : Point {
+			return new Point(point1.x + point2.x, point1.y + point2.y);
 		}
 		
 	}
