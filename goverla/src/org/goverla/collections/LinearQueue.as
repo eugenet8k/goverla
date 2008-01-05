@@ -5,29 +5,34 @@ package org.goverla.collections {
 	
 	public class LinearQueue implements IQueue {
 
-		private var _data : Array;
+		protected var data : Array;
 		
 		public function LinearQueue(source : Array = null) {
 			if(source != null) {
-				_data = source;
+				data = source;
 			} else {
-				_data = new Array();
+				data = new Array();
 			}
 		}
+
 		
 		public function enqueue(item : Object) : void {
-			_data.push(item);
+			data.push(item);
 		}
 		
 		public function dequeue() : Object {
 			if(isEmpty()) {
 				throw new CollectionError("Cannot dequeue from an empty queue");
 			}
-			return _data.shift();
+			return data.shift();
+		}
+		
+		public function clear() : void {
+			data = [];
 		}
 		
 		public function isEmpty() : Boolean {
-			return _data.length == 0;
+			return data.length == 0;
 		}
 		
 	}

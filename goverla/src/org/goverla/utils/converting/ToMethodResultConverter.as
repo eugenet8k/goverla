@@ -1,6 +1,7 @@
 package org.goverla.utils.converting {
 	
 	import org.goverla.interfaces.IConverter;
+	import org.goverla.utils.Objects;
 
 	public class ToMethodResultConverter implements IConverter {
 		
@@ -14,7 +15,7 @@ package org.goverla.utils.converting {
 		}
 		
 		public function convert(source : Object) : Object {
-			var method : Function = source[_methodName] as Function;
+			var method : Function = Objects.castToFunction(source[_methodName]);
 			return method.apply(source, _arguments);
 		}
 	

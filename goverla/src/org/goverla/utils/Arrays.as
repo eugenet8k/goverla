@@ -3,12 +3,18 @@ package org.goverla.utils {
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
+	import org.goverla.collections.ArrayList;
 	import org.goverla.collections.ListCollectionViewIterator;
+	import org.goverla.comparing.ValueComparer;
+	import org.goverla.interfaces.IComparer;
 	import org.goverla.interfaces.IConverter;
 	import org.goverla.interfaces.IIterator;
 	import org.goverla.interfaces.IMap;
 	import org.goverla.interfaces.IRequirement;
 	import org.goverla.reflection.Overload;
+	import org.goverla.sorting.QuickSorter;
+	import org.goverla.utils.comparing.ComparingResult;
+	import org.goverla.utils.comparing.RequirementsCollection;
 	
 	/**
 	 * @author Maxym Hryniv
@@ -16,8 +22,31 @@ package org.goverla.utils {
 	 */
 	public class Arrays {
 		
+		public static function sort(source : ListCollectionView) : void {
+			new QuickSorter().sort(source, new ValueComparer());
+		}
+				
+		public static function sortBy(source : ListCollectionView, comparer : IComparer) : void {
+			new QuickSorter().sort(source, comparer);
+		}
+		
+		public static function isSorted(source : ListCollectionView) : Boolean {
+			return isSortedBy(source, new ValueComparer());
+
+		}		
+		public static function isSortedBy(source : ListCollectionView, comparer : IComparer) : Boolean {
+			var i : uint = 0;
+			while(i < source.length - 1) {
+				if(comparer.compare(source.getItemAt(i), source.getItemAt(i+1)) == ComparingResult.GREATER)
+					return false;
+				i++;
+			}
+			
+			return true;
+		}		
+		
 		public static function forceArray(source : Object) : Array {
-			return source == null ? [] : source as Array;
+			return source == null ? [] : Objects.castToArray(source);
 		}
 		
 		public static function itemsEqual(firstList : ListCollectionView, secondList : ListCollectionView) : Boolean {
@@ -36,7 +65,6 @@ package org.goverla.utils {
 			}
 			return result;
 		}
-		
 		public static function removeItem(item : Object, list : Object) : Object {
 			var o : Overload = new Overload(Arrays);
 			o.addHandler([Object, Array], removeItemForArray);
@@ -107,8 +135,8 @@ package org.goverla.utils {
 			}
 		}
 
-		public static function getConverted(list : ListCollectionView, converter : IConverter) : ArrayCollection {
-			var result : ArrayCollection = new ArrayCollection();
+		public static function getConverted(list : ListCollectionView, converter : IConverter) : ArrayList {
+			var result : ArrayList = new ArrayList();
 			for(var i : Number = 0; i < list.length; i++) {
 				result.addItem(converter.convert(list.getItemAt(i))); 
 			}
@@ -119,35 +147,40 @@ package org.goverla.utils {
 			return getByRequirement(collection, requirement).getItemAt(0);
 		}		
 		
+		public static function removeByRequirements(collection : ListCollectionView, requirements : Array) : ArrayCollection {
+			var reqs : RequirementsCollection = new RequirementsCollection(requirements);
+			return removeByRequirement(collection, reqs);
+		}		
+		
 		public static function removeByRequirement(collection : ListCollectionView, requirement : IRequirement) : ArrayCollection {
 			var items : ArrayCollection = getByRequirement(collection, requirement);
 			removeAll(collection, items); 
 			return items;
 		}		
 
-		public static function getByRequirement(collection : Object, requirement : IRequirement) : ArrayCollection {
+		public static function getByRequirement(collection : Object, requirement : IRequirement) : ArrayList {
 			var o : Overload = new Overload(Arrays);
 			o.addHandler([Array, IRequirement], getByRequirementForArray);
 			o.addHandler([ListCollectionView, IRequirement], getByRequirementForListCollectionView);
 			o.addHandler([IMap, IRequirement], getByRequirementForMap);
 			o.addHandler([IIterator, IRequirement], getByRequirementForIIterator);
-			return ArrayCollection(o.forward(arguments));
+			return ArrayList(o.forward(arguments));
 		}
 		
-		private static function getByRequirementForArray(array : Array, requirement : IRequirement) : ArrayCollection {
-			return getByRequirement(new ArrayCollection(array), requirement);
+		private static function getByRequirementForArray(array : Array, requirement : IRequirement) : ArrayList {
+			return getByRequirement(new ArrayList(array), requirement);
 		}
 	
-		private static function getByRequirementForListCollectionView(list : ListCollectionView, requirement : IRequirement) : ArrayCollection {
+		private static function getByRequirementForListCollectionView(list : ListCollectionView, requirement : IRequirement) : ArrayList {
 			return getByRequirement(new ListCollectionViewIterator(list), requirement);
 		}
 		
-		private static function getByRequirementForMap(map : IMap, requirement : IRequirement) : ArrayCollection {
+		private static function getByRequirementForMap(map : IMap, requirement : IRequirement) : ArrayList {
 			return getByRequirement(map.valueIterator(), requirement);
 		}
 		
-		private static function getByRequirementForIIterator(iterator : IIterator, requirement : IRequirement) : ArrayCollection {
-			var result : ArrayCollection = new ArrayCollection();
+		private static function getByRequirementForIIterator(iterator : IIterator, requirement : IRequirement) : ArrayList {
+			var result : ArrayList = new ArrayList();
 			while (iterator.hasNext()) {
 				var obj : Object = iterator.next();
 				if(requirement.meet(obj)) {
@@ -165,6 +198,7 @@ package org.goverla.utils {
 			o.addHandler([ListCollectionView, ArrayCollection], getByRequirementsForListCollectionView);
 			o.addHandler([IMap, ArrayCollection], getByRequirementsForMap);
 			o.addHandler([IIterator, ArrayCollection], getByRequirementsForIIterator);
+			o.addHandler([Array, ArrayCollection], getByRequirementsForArray);
 			return ArrayCollection(o.forward(arguments));		
 		}
 		
@@ -174,6 +208,10 @@ package org.goverla.utils {
 		
 		private static function getByRequirementsForMap(map : IMap, requirements : ArrayCollection) : ArrayCollection {
 			return getByRequirements(map.valueIterator(), requirements);
+		}
+
+		private static function getByRequirementsForArray(array : Array, requirements : ArrayCollection) : ArrayCollection {
+			return getByRequirements(new ArrayCollection(array), requirements);
 		}
 		
 		private static function getByRequirementsForIIterator(iterator : IIterator, requirements : ArrayCollection) : ArrayCollection {
@@ -195,6 +233,11 @@ package org.goverla.utils {
 			return result;	
 		}	
 	
+		public static function containsByRequirements(collection : Object, requirements : Array) : Boolean {
+			var reqs : RequirementsCollection = new RequirementsCollection(requirements);
+			return containsByRequirement(collection, reqs);
+		}		
+		
 		public static function containsByRequirement(collection : Object, requirement : IRequirement) : Boolean {
 			var o : Overload = new Overload(Arrays);
 			o.addHandler([Array, IRequirement], containsByRequirementForArray);
@@ -282,7 +325,5 @@ package org.goverla.utils {
 			}
 			return result;
 		}
-		
 	}
-	
 }

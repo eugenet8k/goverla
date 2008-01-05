@@ -1,6 +1,7 @@
 package org.goverla.utils.converting {
 
 	import org.goverla.interfaces.IConverter;
+	import org.goverla.utils.Objects;
 	
 	/**
 	 * @author Maxym Hryniv
@@ -14,7 +15,7 @@ package org.goverla.utils.converting {
 		}
 		
 		public function convert(source : Object) : Object {
-			return source[_propertyName];
+			return Objects.getProperty(source, _propertyName);
 		}
 	
 	}

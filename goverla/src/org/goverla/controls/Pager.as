@@ -12,10 +12,10 @@ package org.goverla.controls {
 	
 	import org.goverla.constants.Images;
 	import org.goverla.constants.StyleNames;
+	import org.goverla.css.CSSUtils;
 	import org.goverla.events.MultipageEvent;
 	import org.goverla.interfaces.IMultipage;
 	import org.goverla.interfaces.INavigator;
-	import org.goverla.utils.CSSUtils;
 	import org.goverla.utils.TextFormatter;
 	import org.goverla.utils.common.PairEntry;
 

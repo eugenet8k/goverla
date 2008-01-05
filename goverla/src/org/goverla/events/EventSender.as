@@ -1,4 +1,8 @@
-package org.goverla.events {
+package org.goverla.events 
+{
+	
+	import org.goverla.events.DefaultEvent;
+	import org.goverla.utils.Objects;
 	
 	import flash.events.Event;
 	
@@ -18,16 +22,12 @@ package org.goverla.events {
 		}
 		
 		public function addListener(listener : Function) : void {
-			if(hasListener(listener)) {
-				throw new Error("Allready have this listener");
-			} else {
-				_listeners.addItem(listener);	
-			}
+			_listeners.addItem(listener);
 		}
-
+		
 		public function addListenerIfHasNot(listener : Function) : void {
 			if(!hasListener(listener)) {
-				_listeners.addItem(listener);
+				addListener(listener);
 			}
 		}
 	
@@ -38,10 +38,13 @@ package org.goverla.events {
 			_listeners.removeItemAt(_listeners.getItemIndex(listener));
 		}
 
-		public function sendEvent(eventObject : Event) : void {
+		public function sendEvent(eventObject : Event = null) : void {
+			if(eventObject == null) {
+				eventObject = new DefaultEvent();
+			}
 			if (_type == null || (_type != null && eventObject is _type)) {
 				for(var index : int = 0; index < _listeners.length; index++) {
-					var listener : Function = _listeners.getItemAt(index) as Function;
+					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
 					listener(eventObject);
 				}
 			} else {

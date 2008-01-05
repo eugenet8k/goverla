@@ -1,0 +1,21 @@
+package org.goverla.comparing.requirements
+{
+	import org.goverla.interfaces.IRequirement;
+	import org.goverla.utils.Objects;
+
+	public class StringEqualRequirement implements IRequirement
+	{
+		private var _string : String;
+		
+		public function StringEqualRequirement(string : String) {
+			_string = string.toLowerCase();
+		}
+		
+		public function meet(object:Object):Boolean
+		{
+			var compareString : String = Objects.castToString(object).toLowerCase();
+			return compareString == _string;
+		}
+		
+	}
+}
