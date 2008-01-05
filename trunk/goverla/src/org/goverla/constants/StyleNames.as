@@ -8,6 +8,11 @@ package org.goverla.constants {
 		/**
 		 * Native styles
 		 */
+
+		public static const STROKE_COLOR : String = "strokeColor";
+
+		public static const STROKE_WIDTH : String = "strokeWidth";
+
 		public static const COLOR : String = "color";
 		
 		public static const DISABLED_COLOR : String = "disabledColor";
@@ -74,6 +79,8 @@ package org.goverla.constants {
 
 		public static const RIGHT : String = "right";
 
+		public static const HORIZINTAL_ALIGN : String = "horizontalAlign";
+
 		public static const DROP_SHADOW_ENABLED : String = "dropShadowEnabled";
 		
 		public static const DROP_SHADOW_COLOR : String = "dropShadowColor";
@@ -118,10 +125,6 @@ package org.goverla.constants {
 		
 		public static const DISABLED_SKIN : String = "disabledSkin";
 		
-		public static const STROKE_COLOR : String = "strokeColor";
-		
-		public static const STROKE_WIDTH : String = "strokeWidth";
-		
 		public static const SHADOW_COLOR : String = "shadowColor";
 		
 		public static const USE_ROLL_OVER : String = "useRollOver";
@@ -137,7 +140,7 @@ package org.goverla.constants {
 		/**
 		 * Custom styles
 		 */ 
-
+		
 		public static const VIEW_CONTROL_STYLE_NAME : String = "viewControlStyleName";
 
 		public static const EDIT_CONTROL_STYLE_NAME : String = "editControlStyleName";

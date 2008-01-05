@@ -1,6 +1,7 @@
 package org.goverla.utils.comparing {
-
+	
 	import org.goverla.interfaces.IRequirement;
+	import org.goverla.utils.Objects;
 	
 	/**
 	 * @author Maxym Hryniv
@@ -16,8 +17,24 @@ package org.goverla.utils.comparing {
 			_propertyValue = propertyValue;
 		}
 		
+		public function get propertyValue() : Object {
+			return _propertyValue;
+		}
+		
+		public function set propertyValue(value : Object) : void {
+			_propertyValue = value;
+		}
+		
+		public function get propertyName() : String {
+			return _propertyName;
+		}
+		
+		public function set propertyName(value : String) : void {
+			_propertyName = value;
+		}
+		
 		public function meet(object : Object) : Boolean {
-			return object[_propertyName] === _propertyValue;
+			return Objects.getProperty(object, _propertyName) === propertyValue;
 		}
 	
 	}

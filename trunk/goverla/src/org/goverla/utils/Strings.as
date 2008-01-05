@@ -1,4 +1,6 @@
 ﻿package org.goverla.utils {
+	import org.goverla.errors.IllegalArgumentError;
+	
 	
 	/**
 	 * @author Maxym Hryniv
@@ -7,9 +9,19 @@
 	
 		public static const DELIMITER : String = " `~!@#$%^&*()-_=+[]{};:\'\",<.>/?\\|";
 		
-		protected static const RETURN_EXPRESSION : RegExp = /\r\n/g;
+		private static const ID_CHARS : String = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_";
+		protected static const RETURN_EXPRESSION : RegExp = /\r\n/gm;
 		
 		protected static const SPACE_EXPRESSION : RegExp = /[ ]/g;
+		
+		public static function generateRandomId(length : uint = 10) : String {
+			var result : String = "";
+			for(var i : uint = 0; i < length; i++) {
+				var index : uint = uint(Math.random() * ID_CHARS.length);
+				result += ID_CHARS.charAt(index);
+			}
+			return result;
+		} 
 		
 		public static function escapeSpecialCharacters(source : String) : String {
 			return replaceCharacters(source, ["<", ">", "\"", "\'", "&"], ["&lt;", "&gt;", "&quot;", "&apos;", "&amp;"]);
@@ -48,12 +60,20 @@
 			return (source.indexOf(sought) != -1);
 		}
 		
+		public static function removeWhiteSpaces(source : String) : String {
+			return source.split(" ").join("");
+		}
+		
 		public static function removeReturns(source : String) : String {
 			return (source != null ? source.replace(RETURN_EXPRESSION, "\n") : null);
 		}
 	
-		public static function removeWhiteSpaces(source : String) : String {
-			return (source != null ? source.replace(SPACE_EXPRESSION, "") : null);
+		public static function removeSymbols(source : String, symbols : String) : String {
+			var result : String = source;
+			for(var i : Number = 0; i < symbols.length; i++) {
+				result = result.split(symbols.charAt(i)).join("");
+			}
+			return result;
 		}
 		
 		public static function isBlank(source : String) : Boolean {
@@ -67,9 +87,23 @@
 		}
 	
 		public static function removeStringAt(source : String, startIndex : Number, endIndex : Number) : String {
+			if(startIndex > endIndex) {
+				throw new IllegalArgumentError("endIndex must be greater than startIndex");
+			}
 			var startString : String = source.substring(0, startIndex);
 			var endString : String = source.substr(endIndex, source.length);
 			return (startString + endString);
+		}
+		
+		public static function removeDuplications(source : String, substring : String) : String {
+			var firstIndex : int = source.indexOf(substring);
+			var lastIndex : int = source.lastIndexOf(substring);
+			while(firstIndex != lastIndex) {
+				source = removeStringAt(source, lastIndex, lastIndex + substring.length);
+				firstIndex = source.indexOf(substring);
+				lastIndex = source.lastIndexOf(substring);
+			}
+			return source;
 		}
 	
 		public static function isDelimiter(character : String) : Boolean {

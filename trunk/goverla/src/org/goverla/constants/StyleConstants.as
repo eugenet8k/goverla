@@ -17,7 +17,11 @@ package org.goverla.constants {
 		public static const ALIGN_RIGHT : String = "right";
 
 		public static const ALIGN_CENTER : String = "center";
-		
+
+		public static const ALIGN_TOP : String = "top";
+
+		public static const ALIGN_BOTTOM : String = "bottom";
+
 		public static const ALIGN_MIDDLE : String = "middle";
 
 		public static const BORDER_STYLE_NONE : String = "none";

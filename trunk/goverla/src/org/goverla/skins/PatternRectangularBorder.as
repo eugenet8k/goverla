@@ -2,8 +2,6 @@ package org.goverla.skins {
 
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Graphics;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.display.Shape;
@@ -17,12 +15,11 @@ package org.goverla.skins {
 	import flash.utils.getDefinitionByName;
 	
 	import mx.core.Container;
-	import mx.core.EdgeMetrics;
 	import mx.core.FlexLoader;
-	import mx.core.FlexShape;
 	import mx.core.IChildList;
 	import mx.core.mx_internal;
 	import mx.resources.ResourceBundle;
+	import mx.resources.ResourceManager;
 	import mx.skins.Border;
 	import mx.styles.ISimpleStyleClient;
 	import mx.utils.StringUtil;
@@ -39,14 +36,10 @@ package org.goverla.skins {
 
 		loadResources();
 	
-		[ResourceBundle("skins")]
-	
-		private static var packageResources:ResourceBundle;
-	
 		private static var resourceNotLoaded:String;
 	
 		private static function loadResources() : void {
-			resourceNotLoaded = packageResources.getString("notLoaded");
+			resourceNotLoaded = ResourceManager.getInstance().getString("skins", "notLoaded");
 		}
 		
 		mx_internal var loader:Loader;
