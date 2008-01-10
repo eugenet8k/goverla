@@ -14,9 +14,6 @@ package org.goverla.utils {
 	import org.goverla.reflection.Overload;
 	import org.goverla.utils.ui.UIComponentSize;
 
-	/**
-	 * @author Maxym Hryniv
-	 */
 	public class UIUtil {
 		
 		public static function getApplicationMousePosition() : Point {
@@ -24,75 +21,88 @@ package org.goverla.utils {
 				Application.application.mouseY);
 		}
 		
-		public static function isMouseOut(component : DisplayObject) : Boolean 
-		{
-			if(component.mouseX < 0)
+		public static function getApplicationMouseShift(startPosition : Point) : Point {
+			return subtractPoints(getApplicationMousePosition(), startPosition);
+		}
+	
+		public static function sumPoints(point1 : Point, point2 : Point) : Point {
+			return new Point(point1.x + point2.x, point1.y + point2.y);
+		}
+		
+		public static function subtractPoints(point1 : Point, point2 : Point) : Point {
+			return new Point(point1.x - point2.x, point1.y - point2.y);
+		}
+		
+		public static function convertToZoom(point : Point, zoom : Number) : Point {
+			var result : Point = new Point();
+			result.x = (point.x * 100) / zoom;
+			result.y = (point.y * 100) / zoom;
+			return result;
+		}
+		
+		public static function isMouseOut(component : DisplayObject) : Boolean {
+			if (component.mouseX < 0)
 				return true;
-			if(component.mouseY < 0)
+			if (component.mouseY < 0)
 				return true;
-			if(component.mouseX > component.width)
+			if (component.mouseX > component.width)
 				return true;
-			if(component.mouseY > component.height)
+			if (component.mouseY > component.height)
 				return true;
+				
 			return false;
 		}
+		
 		public static function fitToScreen(component : UIComponent) : void {
 			var position : Point = component.parent.localToGlobal(new Point(component.x, component.y));
-			
 			var screenSize : Point = component.systemManager.screen.size;
-			if(position.x + component.width > screenSize.x) {
+			
+			if (position.x + component.width > screenSize.x) {
 				position.x -= position.x + component.width - screenSize.x;
 			}
 
-			if(position.y + component.height > screenSize.y) {
+			if (position.y + component.height > screenSize.y) {
 				position.y -= position.y + component.height - screenSize.y;
 			}
 			
-			if(position.x < 0) {
+			if (position.x < 0) {
 				position.x = 0;
 			}
 			
-			if(position.y < 0) {
+			if (position.y < 0) {
 				position.y = 0;
 			}
 			
 			var localPosition : Point = component.parent.globalToLocal(position);
 			component.x = localPosition.x;
 			component.y = localPosition.y;
-			
 		}
 		
-		public static function addIfHasNot(parent : UIComponent, child : UIComponent) : void
-		{
-			if(!hasChild(parent, child))
-			{
+		public static function addIfHasNot(parent : UIComponent, child : UIComponent) : void {
+			if (!hasChild(parent, child)) {
 				parent.addChild(child);
 			}
 		}
-		public static function removeIfHas(parent : UIComponent, child : UIComponent) : void
-		{
-			if(hasChild(parent, child))
-			{
+		
+		public static function removeIfHas(parent : UIComponent, child : UIComponent) : void {
+			if (hasChild(parent, child)) {
 				parent.removeChild(child);
 			}
 		} 
 		
-		public static function hasChild(parent : UIComponent, child : UIComponent) : Boolean 
-		{
-			try
-			{
+		public static function hasChild(parent : UIComponent, child : UIComponent) : Boolean {
+			try {
 				parent.getChildIndex(child);
 				return true;
-			}
-			catch(e : ArgumentError)
-			{
+			} catch(e : ArgumentError) {
 				return false;
 			}
+			
 			return false;
 		}
 		
 		public static function applyStyles(target : UIComponent, stylesDescriptor : Object) : void {
-			for(var style : String in stylesDescriptor) {
+			for (var style : String in stylesDescriptor) {
 				target.setStyle(style, stylesDescriptor[style]);
 			}
 		}	
@@ -166,20 +176,11 @@ package org.goverla.utils {
 			var globalEndPoint : Point = target.localToGlobal(startingPoint);
 			target.x += globalStartPoint.x - globalEndPoint.x;
 			target.y += globalStartPoint.y - globalEndPoint.y;
-			
-/*			var radianAngle : Number = Math.PI * angle / 360;
-			var cos : Number = Math.cos(radianAngle);
-			var sin : Number = Math.sin(radianAngle);
-			var matrix : Matrix = new MatrixMatrix(cos, sin, -sin, cos, 0, 0);
-			matrix.*/
-			
 		}
 		
-		private static function updateAnchor(component : UIComponent
-				, anchorSet : Boolean
-				, styleName : String
-				, value : Number) : void {
-			if(anchorSet) {
+		private static function updateAnchor(component : UIComponent, anchorSet : Boolean, styleName : String, 
+				value : Number) : void {
+			if (anchorSet) {
 				component.setStyle(styleName, value);
 			} else {
 				component.setStyle(styleName, undefined);
@@ -194,21 +195,13 @@ package org.goverla.utils {
 		private static function applyAllStyles(object : UIComponent, childDescriptor : UIComponentDescriptor) : void {
 			applyStyles(object, childDescriptor.stylesFactory());
 		}
-		
-		public static function getApplicationMouseShift(startPosition : Point) : Point {
-			return new Point(Application.application.mouseX - startPosition.x,
-					Application.application.mouseY - startPosition.y);
-		}
-	
-		public static function sumPoint(point1 : Point, point2 : Point) : Point {
-			return new Point(point1.x + point2.x, point1.y + point2.y);
-		}
 
 		private static function applyEvents(target : UIComponent, document : UIComponent, childDescriptor : UIComponentDescriptor) : void {
-			for(var eventName : String in childDescriptor.events) {
+			for (var eventName : String in childDescriptor.events) {
 				target.addEventListener(eventName, childDescriptor.events[eventName]);
 			}
 		}
-			
+		
 	}
+
 }
