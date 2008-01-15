@@ -1,4 +1,6 @@
 ﻿package org.goverla.utils {
+	import mx.utils.StringUtil;
+	
 	import org.goverla.errors.IllegalArgumentError;
 	
 	
@@ -22,6 +24,10 @@
 			}
 			return result;
 		} 
+		
+		public static function addRandomParameter(url : String) : String {
+			return StringUtil.substitute("{0}?{1}", url, generateRandomId());
+		}		
 		
 		public static function escapeSpecialCharacters(source : String) : String {
 			return replaceCharacters(source, ["<", ">", "\"", "\'", "&"], ["&lt;", "&gt;", "&quot;", "&apos;", "&amp;"]);
