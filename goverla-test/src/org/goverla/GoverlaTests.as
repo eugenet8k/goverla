@@ -6,6 +6,7 @@ package org.goverla {
  	import org.goverla.collections.ListCollectionViewIteratorTest;
  	import org.goverla.collections.StringMapTest;
  	import org.goverla.collections.TypedArrayCollectionTest;
+ 	import org.goverla.command.CommandsPoolTest;
  	import org.goverla.css.CSSParserTest;
  	import org.goverla.serialization.SerializerTest;
  	import org.goverla.serialization.XMLSerializerTest;
@@ -50,6 +51,8 @@ package org.goverla {
    			suite.addTest(MethodResultCompareRequirementTest);
    			suite.addTest(ArrayMapValueCompareRequirementTest);
    			
+   			
+   			
    			suite.addTest(DateComparerTest);
    			suite.addTest(NumberComparerTest);
    			suite.addTest(StringComparerTest);
@@ -59,6 +62,9 @@ package org.goverla {
    			suite.addTest(OverloadTest);
    			suite.addTest(OverloadHandlerTest);
    			suite.addTest(DatesTest);
+   			
+   			suite.addTest(CommandsPoolTest);
+   			
    			suite.addTest(MethodsPoolTest);
    			suite.addTest(ObjectsTest);
    			suite.addTest(SerializerTest);
