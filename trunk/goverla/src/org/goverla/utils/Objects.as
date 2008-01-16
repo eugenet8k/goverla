@@ -37,15 +37,6 @@ package org.goverla.utils {
 			}
 			return result;
 		}	
-
-		public static function getTarget(context : Object, field : String) : Object {
-			var path : Array = field.split(".");
-			var result : Object = context;
-			for (var i : Number = 0; i < path.length - 1; i++) {
-				result = result[path[i]];
-			}
-			return result;
-		}	
 		
 		public static function getPropertiesCount(source : Object) : Number {
 			var result : Number = 0;

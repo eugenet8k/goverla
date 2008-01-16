@@ -9,6 +9,8 @@
 	 */
 	public class Strings {
 	
+		private static const KB_SIZE : Number = 1024;
+
 		public static const DELIMITER : String = " `~!@#$%^&*()-_=+[]{};:\'\",<.>/?\\|";
 		
 		private static const ID_CHARS : String = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_";
@@ -29,6 +31,18 @@
 			return StringUtil.substitute("{0}?{1}", url, generateRandomId());
 		}		
 		
+		public static function getFileSizeText(size : Number, precision : uint) : String 
+		{
+			var index : Number = 0;
+			var metrics : Array = ["", "K", "M", "G"];
+			while(size > KB_SIZE && metrics.length > index + 1)
+			{
+				size /= KB_SIZE;
+				index++;
+			}
+			return size.toFixed(precision) + metrics[index];
+		}
+
 		public static function escapeSpecialCharacters(source : String) : String {
 			return replaceCharacters(source, ["<", ">", "\"", "\'", "&"], ["&lt;", "&gt;", "&quot;", "&apos;", "&amp;"]);
 		}
