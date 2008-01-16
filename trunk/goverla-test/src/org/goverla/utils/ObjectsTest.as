@@ -47,7 +47,7 @@ package org.goverla.utils
 			var object : UIComponent = new UIComponent();
 			var field : String = "enabled.property";
 			
-			var result : Object = Objects.getTarget(object, field);
+			var result : Object = Objects.getProperty(object, field);
 			
 			assertTrue("Objects.getTarget()", result);
 		}
