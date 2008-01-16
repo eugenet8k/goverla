@@ -11,7 +11,7 @@ package org.goverla.collections
 	import org.goverla.sorting.QuickSorter;
 	import org.goverla.utils.Arrays;
 
-	[RemoteClass(alias="com.mokus.core.utils.ArrayList")]
+	[RemoteClass(alias="org.goverla.collections.ArrayList")]
 	public class ArrayList extends ArrayCollection implements ICloneable, ISerializableBean
 	{
 		public function ArrayList(list : Object = null) {
@@ -40,6 +40,19 @@ package org.goverla.collections
 		
 		public function get first() : Object {
 			return getItemAt(0);
+		}
+		
+		public function getItemIndices(item : Object) : ArrayList
+		{
+			var result : ArrayList = new ArrayList();
+			for(var i : uint = 0; i < length; i++)
+			{
+				if(getItemAt(i) == item)
+				{
+					result.addItem(i);
+				}
+			}
+			return result;
 		}
 		
 		public function sortDefault() : void {
