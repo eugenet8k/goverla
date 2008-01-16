@@ -31,6 +31,7 @@ package org.goverla {
  	import org.goverla.utils.comparing.NumberComparerTest;
  	import org.goverla.utils.comparing.PropertyCompareRequirementTest;
  	import org.goverla.utils.comparing.StringComparerTest;
+ 	import org.goverla.utils.comparing.UniqueFieldRequirementTest;
 
 	public class GoverlaTests {
 
@@ -47,6 +48,7 @@ package org.goverla {
    			suite.addTest(TypedArrayCollectionTest);
    			
    			suite.addTest(PropertyCompareRequirementTest);
+   			suite.addTest(UniqueFieldRequirementTest);
    			suite.addTest(NotRequirementTest);
    			suite.addTest(MethodResultCompareRequirementTest);
    			suite.addTest(ArrayMapValueCompareRequirementTest);
