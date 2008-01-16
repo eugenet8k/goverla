@@ -7,6 +7,20 @@ package org.goverla.utils
 
 	public class ArrayListTest extends TestCase
 	{
+		public function testGetItemIndices() : void 
+		{
+			var array : Array = ["a", "b", "a", "c", "a", "a"];
+			var list : ArrayList = new ArrayList(array);
+			var indices : ArrayList = list.getItemIndices("a");
+			assertTrue(indices.contains(0));
+			assertTrue(indices.contains(2));
+			assertTrue(indices.contains(4));
+			assertTrue(indices.contains(5));
+			assertEquals(indices.length, 4);
+
+			
+		}
+		
 		public function testJoin() : void {
 			var array : Array = ["a", "b", "c"];
 			var list : ArrayList = new ArrayList(array);
