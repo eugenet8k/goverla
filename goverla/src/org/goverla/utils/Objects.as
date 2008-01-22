@@ -1,12 +1,5 @@
 package org.goverla.utils {
-
-	import mx.core.UIComponent;
-	import mx.utils.ObjectUtil;
 	
-	/**
-	 * @author Stanislav Zayarsky
-	 * @author Maxym Hryniv
-	 */
 	public class Objects {
 		
         public static const TYPE_NUMBER : String = "number";
@@ -32,7 +25,7 @@ package org.goverla.utils {
 		public static function getProperty(context : Object, field : String) : Object {
 			var path : Array = field.split(".");
 			var result : Object = context;
-			for each(var propertyName : String in path) {
+			for each (var propertyName : String in path) {
 				result = result[propertyName];
 			}
 			return result;
@@ -40,7 +33,7 @@ package org.goverla.utils {
 		
 		public static function getPropertiesCount(source : Object) : Number {
 			var result : Number = 0;
-			for(var p : String in source) {
+			for (var p : String in source) {
 				result++;
 			} 
 			return result;
@@ -53,6 +46,25 @@ package org.goverla.utils {
 		public static function isPrimitive(source : Object) : Boolean {
 			var type : String = typeof(source);
 			return (type == TYPE_NUMBER || type == TYPE_BOOLEAN || type == TYPE_STRING || source is Class);
+		}
+		
+		public static function isPrimitiveClassName(className : String) : Boolean {
+			var type : String = className.toLowerCase();
+			return type == TYPE_NUMBER || type == TYPE_BOOLEAN || type == TYPE_STRING;
+		}
+		
+		public static function parseToRightType(source : Object) : Object {
+			if (source is String) {
+				if (source.toLowerCase() == "true") {
+					return true;
+				} else if (source.toLowerCase() == "false") {
+					return false;
+				} else {
+					return source;			
+				}
+			} else {
+				return source;
+			}
 		}
 		
 		public static function castToString(object : Object) : String {
@@ -98,9 +110,9 @@ package org.goverla.utils {
 		private static function castToType(object : Object, type : Class) : Object {
 			if (object is type || object == null) {
 				return object as type;
-			}
-			else {
-				throw TypeError("[" + ReflectUtil.getTypeName(new type()) + "] was expected but [" + ReflectUtil.getTypeName(object) + "] was found");
+			} else {
+				throw TypeError("[" + ReflectUtil.getTypeName(new type()) + "] was expected but [" + 
+					ReflectUtil.getTypeName(object) + "] was found");
 			}
 		}
 		
