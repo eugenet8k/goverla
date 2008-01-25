@@ -1,10 +1,8 @@
 package org.goverla.utils
 {
-	import mx.core.UIComponent;
+	import flash.text.TextFormat;
 	
 	import org.flex2unit.framework.TestCase;
-	import flash.text.TextFormat;
-	import mx.utils.ObjectUtil;
 	import org.goverla.converting.ObjectCopyConverter;
 
 	public class ObjectsTest extends TestCase
@@ -42,14 +40,16 @@ package org.goverla.utils
 			assertEquals(result, "blafield");
 		}
 		
-		public function testGetTarget() : void {
+		public function testGetProperty() : void {
 			
-			var object : UIComponent = new UIComponent();
+			var object : Object = new Object();
+			object.enabled = new Object();
+			object.enabled.property = true;
 			var field : String = "enabled.property";
 			
 			var result : Object = Objects.getProperty(object, field);
 			
-			assertTrue("Objects.getTarget()", result);
+			assertTrue(result);
 		}
 		
 		public function testGetPropertiesCount() : void {
