@@ -30,9 +30,15 @@ package org.goverla.command
 			return _progress;
 		}
 		
+		[Bindable]
 		public function get processing() : Boolean
 		{
 			return _processing;
+		}
+
+		protected function set processing(value : Boolean) : void
+		{
+			_processing = value;
 		}
 		
 		public function get currentCommand() : IAsynchronousCommand
@@ -42,7 +48,7 @@ package org.goverla.command
 		
 		public function clear() : void
 		{
-			if(_processing)
+			if(processing)
 			{
 				throw new IllegalStateError("Cannot clear while processing");
 			}
@@ -54,7 +60,7 @@ package org.goverla.command
 
 		public function add(command : IAsynchronousCommand) : void
 		{
-			if(_processing)
+			if(processing)
 			{
 				throw new IllegalStateError("Cannot add command while processing");
 			}
@@ -64,6 +70,17 @@ package org.goverla.command
 			}
 		}
 		
+		public function remove(command : IAsynchronousCommand) : void
+		{
+			if(command != currentCommand)
+			{
+				_commands.removeItem(command);
+			}
+			else 
+			{
+				throw new IllegalStateError("Cannot remove currently executing command");
+			}
+		}
 
 		override public function execute():void
 		{
@@ -75,6 +92,7 @@ package org.goverla.command
 			}
 			else
 			{
+				processing = true;
 				_iterator = new ListCollectionViewIterator(_commands);
 				processNext();
 			}
@@ -94,7 +112,7 @@ package org.goverla.command
 			}
 			else
 			{
-				_processing = false;
+				processing = false;
 				_currentCommand = null;
 				success.sendEvent(new DefaultEvent());
 			}
@@ -113,7 +131,7 @@ package org.goverla.command
 			removeCommandListeners();
 			if(haltOnError)
 			{
-				_processing = false;
+				processing = false;
 				_currentCommand = null;
 				error.sendEvent(new DefaultEvent());
 			}

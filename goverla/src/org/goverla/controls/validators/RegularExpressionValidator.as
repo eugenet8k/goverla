@@ -1,29 +1,28 @@
 package org.goverla.controls.validators {
 	
-	import org.goverla.controls.validators.common.ErrorMessages;
-	import org.goverla.utils.Objects;
-	import org.goverla.utils.Strings;
-	
 	import mx.utils.StringUtil;
+	
+	import org.goverla.controls.validators.common.ErrorMessages;
+	import org.goverla.utils.Strings;
 	
 	/**
 	 * @author Tyutyunnyk Eugene
 	 */
 	public class RegularExpressionValidator extends BaseValidator {
 		
-		private var _validationExpression : String;
+		private var _validationExpression : Object;
 		
 		/**
 		 *  Gets the regular expression that determines the pattern used to validate a field. 
 		 */
-		public function get validationExpression() : String {
+		public function get validationExpression() : Object {
 			return _validationExpression;
 		}
 	
 		/**
 		 *  Sets the regular expression that determines the pattern used to validate a field. 
 		 */
-		public function set validationExpression(validationExpression : String) : void {
+		public function set validationExpression(validationExpression : Object) : void {
 			_validationExpression = validationExpression;
 		}
 		
