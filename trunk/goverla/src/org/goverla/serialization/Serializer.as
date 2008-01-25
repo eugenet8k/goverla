@@ -2,8 +2,25 @@ package org.goverla.serialization
 {
 	import flash.utils.ByteArray;
 	
+	import mx.utils.Base64Decoder;
+	import mx.utils.Base64Encoder;
+	
 	public class Serializer
 	{
+		
+		public static function fromAMFBase64(source : String) : Object {
+			var decoder : Base64Decoder = new Base64Decoder();
+			decoder.decode(source);
+			var bytes : ByteArray = decoder.toByteArray();
+			return fromAMF(bytes);
+		}
+		
+		public static function toAMFBase64(object : Object) : String {
+			var bytes : ByteArray = toAMF(object);
+			var encoder : Base64Encoder = new Base64Encoder();
+			encoder.encodeBytes(bytes, 0, bytes.length);
+			return encoder.toString();
+		}
 		
 		public static function toAMF(object : Object) : ByteArray {
 			var result : ByteArray = new ByteArray();
