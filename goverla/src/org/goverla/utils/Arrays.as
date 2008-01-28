@@ -143,6 +143,18 @@ package org.goverla.utils {
 			return result;
 		}
 		
+		public static function safeFirstByRequirement(collection : Object, requirement : IRequirement) : Object 
+		{
+			var result : Object = null;
+			try
+			{
+				result = firstByRequirement(collection, requirement);
+			}
+			catch(e : Error){}
+			
+			return result;
+		}
+		
 		public static function firstByRequirement(collection : Object, requirement : IRequirement) : Object {
 			return getByRequirement(collection, requirement).getItemAt(0);
 		}		
