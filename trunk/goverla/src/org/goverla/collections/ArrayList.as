@@ -1,5 +1,7 @@
 package org.goverla.collections
 {
+	import flash.net.registerClassAlias;
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
@@ -14,6 +16,11 @@ package org.goverla.collections
 	[RemoteClass(alias="org.goverla.collections.ArrayList")]
 	public class ArrayList extends ArrayCollection implements ICloneable, ISerializableBean
 	{
+		public static function initialize() : void 
+		{
+			registerClassAlias("org.goverla.collections.ArrayList", ArrayList);
+		}
+		
 		public function ArrayList(list : Object = null) {
 			super();
 			var overload : Overload = new Overload(this);
