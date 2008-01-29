@@ -16,10 +16,6 @@ package org.goverla.utils {
 	import org.goverla.utils.comparing.ComparingResult;
 	import org.goverla.utils.comparing.RequirementsCollection;
 	
-	/**
-	 * @author Maxym Hryniv
-	 * @author Tutunnyk Eugene
-	 */
 	public class Arrays {
 		
 		public static function sort(source : ListCollectionView) : void {
@@ -32,13 +28,14 @@ package org.goverla.utils {
 		
 		public static function isSorted(source : ListCollectionView) : Boolean {
 			return isSortedBy(source, new ValueComparer());
-
-		}		
+		}
+		
 		public static function isSortedBy(source : ListCollectionView, comparer : IComparer) : Boolean {
 			var i : uint = 0;
-			while(i < source.length - 1) {
-				if(comparer.compare(source.getItemAt(i), source.getItemAt(i+1)) == ComparingResult.GREATER)
+			while (i < source.length - 1) {
+				if (comparer.compare(source.getItemAt(i), source.getItemAt(i + 1)) == ComparingResult.GREATER) {
 					return false;
+				}
 				i++;
 			}
 			
@@ -50,15 +47,17 @@ package org.goverla.utils {
 		}
 		
 		public static function itemsEqual(firstList : ListCollectionView, secondList : ListCollectionView) : Boolean {
-			if(firstList == secondList) 
+			if (firstList == secondList) { 
 				return true;
-			if(firstList.length != secondList.length) 
+			}
+			
+			if (firstList.length != secondList.length) { 
 				return false;
-
+			}
 
 			var result : Boolean = true;
-			for(var i : int = 0; i < firstList.length; i++) {
-				if(firstList.getItemAt(i) != secondList.getItemAt(i)) {
+			for (var i : int = 0; i < firstList.length; i++) {
+				if (firstList.getItemAt(i) != secondList.getItemAt(i)) {
 					result = false;
 					break;
 				}
@@ -107,29 +106,30 @@ package org.goverla.utils {
 
 		public static function subList(source : ListCollectionView, beginIndex : uint, length : uint) : ArrayCollection {
 			var result : ArrayCollection = new ArrayCollection();
-			for(var i : Number = 0; i < length; i++) {
+			for (var i : Number = 0; i < length; i++) {
 				result.addItem(source.getItemAt(beginIndex + i)); 
 			}
 			return result;
 		}
 
 		public static function removeItems(source : ListCollectionView, beginIndex : uint, count : uint ) : void {
-			for(var i : uint = 0; i < count; i++) {
+			for (var i : uint = 0; i < count; i++) {
 				source.removeItemAt(beginIndex); 
 			}
 		}
 
 		public static function removeAll(source : ListCollectionView, items : ListCollectionView) : void {
-			for(var i : Number = 0; i < items.length; i++) {
+			for (var i : Number = 0; i < items.length; i++) {
 				source.removeItemAt(source.getItemIndex(items.getItemAt(i))); 
 			}
 		}
 		
 		public static function forceSize(collection : ListCollectionView, length : int, defaultElement : Object) : void {
-			if(collection.length > length) {
+			if (collection.length > length) {
 				removeItems(collection, length, collection.length - length);
 			}
-			if(collection.length < length) {
+			
+			if (collection.length < length) {
 				var difference : Number = length - collection.length;
 				insertAll(collection, new ArrayCollection(Arrays.repeatItem(defaultElement, difference))); 
 			}
@@ -137,20 +137,18 @@ package org.goverla.utils {
 
 		public static function getConverted(list : ListCollectionView, converter : IConverter) : ArrayList {
 			var result : ArrayList = new ArrayList();
-			for(var i : Number = 0; i < list.length; i++) {
+			for (var i : Number = 0; i < list.length; i++) {
 				result.addItem(converter.convert(list.getItemAt(i))); 
 			}
 			return result;
 		}
 		
-		public static function safeFirstByRequirement(collection : Object, requirement : IRequirement) : Object 
-		{
+		public static function safeFirstByRequirement(collection : Object, requirement : IRequirement) : Object {
 			var result : Object = null;
-			try
-			{
+			try	{
 				result = firstByRequirement(collection, requirement);
 			}
-			catch(e : Error){}
+			catch (e : Error) {}
 			
 			return result;
 		}
@@ -179,6 +177,85 @@ package org.goverla.utils {
 			return ArrayList(o.forward(arguments));
 		}
 		
+		public static function firstByRequirements(collection : Object, requirements : ArrayCollection) : Object {
+			return getByRequirements(collection, requirements).getItemAt(0);
+		}
+		
+		public static function getByRequirements(collection : Object, requirements : ArrayCollection) : ArrayCollection {
+			var o : Overload = new Overload(Arrays);
+			o.addHandler([ListCollectionView, ArrayCollection], getByRequirementsForListCollectionView);
+			o.addHandler([IMap, ArrayCollection], getByRequirementsForMap);
+			o.addHandler([IIterator, ArrayCollection], getByRequirementsForIIterator);
+			o.addHandler([Array, ArrayCollection], getByRequirementsForArray);
+			return ArrayCollection(o.forward(arguments));		
+		}
+	
+		public static function containsByRequirements(collection : Object, requirements : Array) : Boolean {
+			var reqs : RequirementsCollection = new RequirementsCollection(requirements);
+			return containsByRequirement(collection, reqs);
+		}		
+		
+		public static function containsByRequirement(collection : Object, requirement : IRequirement) : Boolean {
+			var o : Overload = new Overload(Arrays);
+			o.addHandler([Array, IRequirement], containsByRequirementForArray);
+			o.addHandler([ListCollectionView, IRequirement], containsByRequirementForListCollectionView);
+			o.addHandler([IMap, IRequirement], containsByRequirementForMap);
+			o.addHandler([IIterator, IRequirement], containsByRequirementForIIterator);
+			return o.forward(arguments);
+		}
+	
+		public static function indexByRequirement(collection : Object, requirement : IRequirement) : int {
+			var o : Overload = new Overload(Arrays);
+			o.addHandler([Array, IRequirement], indexByRequirementForArray);
+			o.addHandler([ListCollectionView, IRequirement], indexByRequirementForListCollectionView);
+			return int(o.forward(arguments));
+		}
+
+		public static function findSimilarElements(list1 : ArrayCollection, list2 : ArrayCollection) : ArrayCollection {
+			var result : ArrayCollection = new ArrayCollection();
+			for (var i : Number = 0; i < list1.length; i++) {
+				if (list2.contains(list1.getItemAt(i))) {
+					var index : Number = list2.getItemIndex(list1.getItemAt(i));
+					result.addItem(list2.getItemAt(index));
+				}
+			}
+			return result;
+		}
+		
+		public static function addItems(target : ListCollectionView, items : ListCollectionView) : ListCollectionView {
+			return addItemsAt(target, items, target.length);
+		}		
+		
+		public static function addItemsAt(target : ListCollectionView, items : ListCollectionView, index : int) : ListCollectionView {
+			for (var i : int = items.length - 1; i >= 0; i--) {
+				target.addItemAt(items.getItemAt(i), index);
+			}
+			return target;
+		}		
+		
+		public static function merge(firstListCollectionView : ListCollectionView, secondListCollectionView : ListCollectionView) : ArrayCollection {
+			var result : ArrayCollection = new ArrayCollection();
+			insertAll(result, firstListCollectionView);			
+			insertAll(result, secondListCollectionView);			
+			return result;
+		}
+
+		public static function clone(source : Array) : Array {
+			var result : Array = new Array();
+			for (var i : int = 0; i < source.length; i++) {
+				result[i] = source[i];
+			}
+			return result;
+		}
+	
+		public static function objectToArray(source : Object) : Array {
+			var result : Array = new Array();
+			for (var property : String in source) {
+				result.push(source[property]);
+			}
+			return result;
+		}
+		
 		private static function getByRequirementForArray(array : Array, requirement : IRequirement) : ArrayList {
 			return getByRequirement(new ArrayList(array), requirement);
 		}
@@ -200,18 +277,6 @@ package org.goverla.utils {
 				}						
 			}
 			return result;
-		}
-		
-		public static function firstByRequirements(collection : Object, requirements : ArrayCollection) : Object {
-			return getByRequirements(collection, requirements).getItemAt(0);
-		}		
-		public static function getByRequirements(collection : Object, requirements : ArrayCollection) : ArrayCollection {
-			var o : Overload = new Overload(Arrays);
-			o.addHandler([ListCollectionView, ArrayCollection], getByRequirementsForListCollectionView);
-			o.addHandler([IMap, ArrayCollection], getByRequirementsForMap);
-			o.addHandler([IIterator, ArrayCollection], getByRequirementsForIIterator);
-			o.addHandler([Array, ArrayCollection], getByRequirementsForArray);
-			return ArrayCollection(o.forward(arguments));		
 		}
 		
 		private static function getByRequirementsForListCollectionView(list : ListCollectionView, requirements : ArrayCollection) : ArrayCollection {
@@ -243,20 +308,6 @@ package org.goverla.utils {
 				}
 			}
 			return result;	
-		}	
-	
-		public static function containsByRequirements(collection : Object, requirements : Array) : Boolean {
-			var reqs : RequirementsCollection = new RequirementsCollection(requirements);
-			return containsByRequirement(collection, reqs);
-		}		
-		
-		public static function containsByRequirement(collection : Object, requirement : IRequirement) : Boolean {
-			var o : Overload = new Overload(Arrays);
-			o.addHandler([Array, IRequirement], containsByRequirementForArray);
-			o.addHandler([ListCollectionView, IRequirement], containsByRequirementForListCollectionView);
-			o.addHandler([IMap, IRequirement], containsByRequirementForMap);
-			o.addHandler([IIterator, IRequirement], containsByRequirementForIIterator);
-			return o.forward(arguments);
 		}
 	
 		private static function containsByRequirementForArray(list : Array, requirement : IRequirement) : Boolean {
@@ -275,13 +326,6 @@ package org.goverla.utils {
 			var result : ArrayCollection = getByRequirementForIIterator(iterator, requirement);
 			return Boolean(result.length > 0);
 		}
-	
-		public static function indexByRequirement(collection : Object, requirement : IRequirement) : int {
-			var o : Overload = new Overload(Arrays);
-			o.addHandler([Array, IRequirement], indexByRequirementForArray);
-			o.addHandler([ListCollectionView, IRequirement], indexByRequirementForListCollectionView);
-			return int(o.forward(arguments));
-		}
 		
 		private static function indexByRequirementForArray(collection : Array, requirement : IRequirement) : int {
 			var object : Object = getByRequirement(collection, requirement).getItemAt(0);
@@ -293,49 +337,6 @@ package org.goverla.utils {
 			return collection.getItemIndex(object);
 		}
 
-		public static function findSimilarElements(list1 : ArrayCollection, list2 : ArrayCollection) : ArrayCollection {
-			var result : ArrayCollection = new ArrayCollection();
-			for(var i : Number = 0; i < list1.length; i++) {
-				if(list2.contains(list1.getItemAt(i))) {
-					var index : Number = list2.getItemIndex(list1.getItemAt(i));
-					result.addItem(list2.getItemAt(index));
-				}
-			}
-			return result;
-		}
-		
-		public static function addItems(target : ListCollectionView, items : ListCollectionView) : ListCollectionView {
-			return addItemsAt(target, items, target.length);
-		}		
-		
-		public static function addItemsAt(target : ListCollectionView, items : ListCollectionView, index : int) : ListCollectionView {
-			for(var i : int = items.length - 1; i >= 0; i--) {
-				target.addItemAt(items.getItemAt(i), index);
-			}
-			return target;
-		}		
-		
-		public static function merge(firstListCollectionView : ListCollectionView, secondListCollectionView : ListCollectionView) : ArrayCollection {
-			var result : ArrayCollection = new ArrayCollection();
-			insertAll(result, firstListCollectionView);			
-			insertAll(result, secondListCollectionView);			
-			return result;
-		}
-
-		public static function clone(source : Array) : Array {
-			var result : Array = new Array();
-			for(var i : int = 0; i < source.length; i++) {
-				result[i] = source[i];
-			}
-			return result;
-		}
-	
-		public static function objectToArray(source : Object) : Array {
-			var result : Array = new Array();
-			for (var property : String in source) {
-				result.push(source[property]);
-			}
-			return result;
-		}
 	}
+	
 }
