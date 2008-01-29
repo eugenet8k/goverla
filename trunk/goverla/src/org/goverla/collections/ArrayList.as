@@ -1,5 +1,5 @@
-package org.goverla.collections
-{
+package org.goverla.collections {
+	
 	import flash.net.registerClassAlias;
 	
 	import mx.collections.ArrayCollection;
@@ -14,10 +14,9 @@ package org.goverla.collections
 	import org.goverla.utils.Arrays;
 
 	[RemoteClass(alias="org.goverla.collections.ArrayList")]
-	public class ArrayList extends ArrayCollection implements ICloneable, ISerializableBean
-	{
-		public static function initialize() : void 
-		{
+	public class ArrayList extends ArrayCollection implements ICloneable, ISerializableBean	{
+		
+		public static function initialize() : void {
 			registerClassAlias("org.goverla.collections.ArrayList", ArrayList);
 		}
 		
@@ -49,13 +48,10 @@ package org.goverla.collections
 			return getItemAt(0);
 		}
 		
-		public function getItemIndices(item : Object) : ArrayList
-		{
+		public function getItemIndices(item : Object) : ArrayList {
 			var result : ArrayList = new ArrayList();
-			for(var i : uint = 0; i < length; i++)
-			{
-				if(getItemAt(i) == item)
-				{
+			for (var i : uint = 0; i < length; i++) {
+				if (getItemAt(i) == item) {
 					result.addItem(i);
 				}
 			}
@@ -129,8 +125,7 @@ package org.goverla.collections
 			while (i < length && length > 0) {
 				if (items.contains(getItemAt(i))) {
 					i++;
-				}
-				else{
+				} else{
 					removeItemAt(i);
 				}
 			} 
@@ -168,5 +163,7 @@ package org.goverla.collections
 		public function toArrayCollection() : ArrayCollection {
 			return new ArrayCollection(source);
 		}
+		
 	}
+	
 }
