@@ -136,6 +136,10 @@ package org.goverla.collections {
 			setItemAt(newItem, index);
 		}
 		
+		public function replaceItems(firstIndex : int, secondIndex : int) : void {
+			Arrays.replaceItems(this, firstIndex, secondIndex);
+		}
+		
 		public function setItems(list : ListCollectionView, beginIndex : int) : void {
 			if (beginIndex < 0 || list.length > (length - beginIndex)) {
 				throw new RangeError("Argument 'beginIndex' [" + beginIndex + "] is out of range, this is less than 0 or the 'beginIndex' plus the length of the given 'list' [" + list.length + "] is greater than this ArrayList's length [" + length + "].");
