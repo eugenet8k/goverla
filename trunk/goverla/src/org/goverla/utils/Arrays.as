@@ -18,6 +18,12 @@ package org.goverla.utils {
 	
 	public class Arrays {
 		
+		public static function replaceItems(source : ListCollectionView, firstIndex : int, secondIndex : int) : void {
+			var firstItem : Object = source.getItemAt(firstIndex);
+			var secondItem : Object = source.setItemAt(firstItem, secondIndex);
+			source.setItemAt(secondItem, firstIndex);
+		}
+		
 		public static function sort(source : ListCollectionView) : void {
 			new QuickSorter().sort(source, new ValueComparer());
 		}
