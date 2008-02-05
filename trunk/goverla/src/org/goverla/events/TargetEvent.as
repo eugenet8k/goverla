@@ -6,9 +6,9 @@ package org.goverla.events
 	{
 		private var _target : Object;
 		
-		public function TargetEvent(target : Object)
+		public function TargetEvent(target : Object, type : String = "")
 		{
-			super("");
+			super(type);
 			_target = target;
 		}
 		
