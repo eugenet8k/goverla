@@ -22,20 +22,30 @@ package org.goverla.remoting
 			
 		}
 		
+		protected function getServiceName(methodName : String) : String
+		{
+			var className : String = ReflectUtil.getFullTypeName(this);
+			className = ReflectUtil.normalizeTypeName(className);
+			return StringUtil.substitute("{0}.{1}", className, methodName);
+		}
+		
+		protected function processArguments(methodName : String, args : ArrayList) : ArrayList
+		{
+			return args;
+		}
+		
 		protected function doCall(methodName : String, args : Array) : void
 		{
 			var connection : NetConnection = new NetConnection();
 			connection.connect(connectionUrl);
 			
-			var className : String = ReflectUtil.getFullTypeName(this);
-			className = ReflectUtil.normalizeTypeName(className);
 			var flashResponder : Responder = new Responder(_resultHandler, _faultHandler);
-			var newArguments : ArrayList = new ArrayList([StringUtil.substitute("{0}.{1}", className, methodName), flashResponder]);
-			newArguments.addItems(new ArrayList(args));
+			var newArguments : ArrayList = new ArrayList([getServiceName(methodName), flashResponder]);
+			newArguments.addItems(processArguments(methodName, new ArrayList(args)));
 			
 			connection.call.apply(connection, newArguments.toArray());
-			
 		}
+		
 
 	}
 }
