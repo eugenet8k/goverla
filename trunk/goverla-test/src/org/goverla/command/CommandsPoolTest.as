@@ -29,15 +29,15 @@ package org.goverla.command
 				pool.add(command);
 			}
 			pool.haltOnError = true;
-			pool.error.addListener(function() {_errorDispatched = true;});
+			pool.error.addListener(function() : void {_errorDispatched = true;});
 			pool.execute();
 			assertTrue(_errorDispatched);
 			assertFalse(pool.processing);
 			
 			
 			pool.haltOnError = false;
-			pool.success.addListener(function() {_successDispatched = true;});
-			pool.progress.addListener(function(event : ProgressEvent) {_progress = event.progress;});
+			pool.success.addListener(function() : void {_successDispatched = true;});
+			pool.progress.addListener(function(event : ProgressEvent) : void {_progress = event.progress;});
 			pool.execute();
 			assertEquals(_progress, 1);
 			for each(command in _commands)
