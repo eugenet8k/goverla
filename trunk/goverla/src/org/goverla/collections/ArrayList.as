@@ -113,7 +113,12 @@ package org.goverla.collections {
 		}
 
 		public function removeItem(item : Object) : void {
+			var filterFunction : Function = this.filterFunction;
+			this.filterFunction = null;
+			refresh();
 			removeItemAt(getItemIndex(item));
+			this.filterFunction = filterFunction;
+			refresh();
 		}
 		
 		public function subList(beginIndex : int, count : int) : ArrayList {
