@@ -5,13 +5,13 @@ package org.goverla.collections {
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
-	import org.goverla.comparing.ValueComparer;
 	import org.goverla.interfaces.ICloneable;
 	import org.goverla.interfaces.IComparer;
 	import org.goverla.reflection.Overload;
 	import org.goverla.serialization.interfaces.ISerializableBean;
 	import org.goverla.sorting.QuickSorter;
 	import org.goverla.utils.Arrays;
+	import org.goverla.utils.comparing.ValueComparer;
 
 	[RemoteClass(alias="org.goverla.collections.ArrayList")]
 	public class ArrayList extends ArrayCollection implements ICloneable, ISerializableBean	{

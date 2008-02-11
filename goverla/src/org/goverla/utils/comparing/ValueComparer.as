@@ -1,18 +1,17 @@
-package org.goverla.comparing
-{
+package org.goverla.utils.comparing {
+	
 	import mx.utils.StringUtil;
 	
 	import org.goverla.errors.IllegalStateError;
 	import org.goverla.interfaces.IComparer;
-	import org.goverla.utils.comparing.ComparingResult;
 
-	public class ValueComparer implements IComparer
-	{
-		public function compare(object1:Object, object2:Object):int
-		{
-			if(object1 < object2) 
+	public class ValueComparer implements IComparer {
+		
+		public function compare(object1 : Object, object2 : Object) : int {
+			if (object1 < object2) 
 				return ComparingResult.SMALLER;
-			if(object1 > object2) 
+			
+			if (object1 > object2) 
 				return ComparingResult.GREATER;
 			
 			if(object1 == object2) 
@@ -22,4 +21,5 @@ package org.goverla.comparing
 		}
 		
 	}
+	
 }
