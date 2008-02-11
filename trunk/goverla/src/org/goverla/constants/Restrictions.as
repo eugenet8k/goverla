@@ -1,4 +1,4 @@
-package org.goverla.controls.constants {
+package org.goverla.constants {
 	
 	public final class Restrictions {
 

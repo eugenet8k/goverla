@@ -1,12 +1,8 @@
-package org.goverla.controls.comboBox {
+package org.goverla.controls {
 
 	import mx.controls.ComboBox;
 
 	public class ExtendedComboBox extends ComboBox {
-
-		public function ExtendedComboBox() {
-			super();
-		}
 		
 		public function get maxChars() : int {
 			return _maxChars;
@@ -18,7 +14,7 @@ package org.goverla.controls.comboBox {
 			invalidateProperties();
 		}
 		
-		override protected function commitProperties() : void {
+		protected override function commitProperties() : void {
 			super.commitProperties();
 			
 			if (_maxCharsChanged) {

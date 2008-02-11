@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DateSelectorBase xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns="org.goverla.controls.date.*"
-	xmlns:comboBox="org.goverla.controls.comboBox.*"
+	xmlns:controls="org.goverla.controls.*"
 	currentState="{DATE_MONTH_YEAR_STATE}">
-	
 	<states>
 		<mx:State name="{MONTH_YEAR_STATE}">
 			<mx:AddChild position="firstChild">
@@ -16,7 +15,7 @@
 		<mx:State name="{DATE_MONTH_YEAR_STATE}" basedOn="{MONTH_YEAR_STATE}">
 			<mx:AddChild relativeTo="{monthComboBox}" position="after">
 				<mx:target>
-					<comboBox:ExtendedComboBox id="dayComboBox"
+					<controls:ExtendedComboBox id="dayComboBox"
 						restrict="0-9"
 						maxChars="2"
 						change="onDayComboBoxChange()"
@@ -26,12 +25,10 @@
 			</mx:AddChild>
 		</mx:State>
 	</states>
-	
-	<comboBox:ExtendedComboBox id="yearComboBox"
+	<controls:ExtendedComboBox id="yearComboBox"
 		restrict="0-9"
 		maxChars="4"
 		change="onYearComboBoxChange()"
 		focusOut="onYearComboBoxFocusOut()"
 		enter="onYearComboBoxEnter()" />
-
 </DateSelectorBase>
