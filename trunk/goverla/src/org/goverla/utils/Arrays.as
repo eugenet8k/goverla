@@ -5,7 +5,6 @@ package org.goverla.utils {
 	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.collections.ListCollectionViewIterator;
-	import org.goverla.comparing.ValueComparer;
 	import org.goverla.interfaces.IComparer;
 	import org.goverla.interfaces.IConverter;
 	import org.goverla.interfaces.IIterator;
@@ -15,6 +14,7 @@ package org.goverla.utils {
 	import org.goverla.sorting.QuickSorter;
 	import org.goverla.utils.comparing.ComparingResult;
 	import org.goverla.utils.comparing.RequirementsCollection;
+	import org.goverla.utils.comparing.ValueComparer;
 	
 	public class Arrays {
 		
