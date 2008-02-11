@@ -8,10 +8,14 @@ package org.goverla.containers {
 	import mx.states.State;
 	
 	import org.goverla.constants.Icons;
+	import org.goverla.constants.StyleConstants;
+	import org.goverla.constants.StyleNames;
 	import org.goverla.events.CollapsablePanelEvent;
 
 	[Style(name="restoredStyleName", type="String", inherit="no")]
+	
 	[Style(name="collapsedStyleName", type="String", inherit="no")]
+	
 	public class CollapsablePanel extends TitleWindow {
 		
 		protected static const RESTORED_STATE : String = "";
@@ -25,8 +29,6 @@ package org.goverla.containers {
 		protected static const CLICK_TO_EXPAND : String = "Click to expand";
 		
 		protected static const CLICK_TO_COLLAPSE : String = "Click to collapse";
-		
-		protected static const HEADER_PADDING : Number = 14;
 		
 		protected static const RESTORED_ICON : Class = Icons.ICON_10X6_OPENED_UP;
 		
@@ -101,6 +103,14 @@ package org.goverla.containers {
 			return (currentState == COLLAPSED_STATE);
 		}
 		
+		public function set collapsed(value : Boolean) : void {
+			if (value) {
+				collapse();
+			} else {
+				restore()
+			}
+		}
+		
 		protected function get oppositeState() : String {
 			return (collapsed ? RESTORED_STATE : COLLAPSED_STATE);
 		}
@@ -127,6 +137,9 @@ package org.goverla.containers {
 			super.createChildren();
 
 			createCollapsedState();
+			
+			setOppositeState();
+			setOppositeState();
 
 			titleBar.addEventListener(MouseEvent.CLICK, onTitleBarClick);
 		}
@@ -176,12 +189,13 @@ package org.goverla.containers {
 		}
 		
 		protected function getStyleName() : String {
-			return (collapsed ? getStyle("collapsedStyleName") : getStyle("restoredStyleName"));
+			return (collapsed ? getStyle(COLLAPSED_STYLE_NAME) : getStyle(RESTORED_STYLE_NAME));
 		}
 		
 		protected function getTitleIcon() : Class {
+			var result : Class;
 			if (collapsable) {
-				var result : Class = (collapsed ? collapsedIconSource : restoredIconSource);
+				result = (collapsed ? collapsedIconSource : restoredIconSource);
 			}
 			return result;
 		}
@@ -199,7 +213,8 @@ package org.goverla.containers {
 		}
 		
 		protected function getTitleBarHeight() : Number {
-			return (titleBar.height + (getStyle("borderStyle") == "solid" ? getStyle("borderThickness") * 2 : 0));
+			return (titleBar.height + (getStyle(StyleNames.BORDER_STYLE) == 
+				StyleConstants.BORDER_STYLE_SOLID ? getStyle(StyleNames.BORDER_THICKNESS) * 2 : 0));
 		}
 		
 		private function createCollapsedState() : void {
