@@ -1,4 +1,4 @@
-package org.goverla.controls.containers {
+package org.goverla.containers {
 
 	import flash.geom.Rectangle;
 	
@@ -13,8 +13,11 @@ package org.goverla.controls.containers {
 	import org.goverla.utils.Objects;
 
 	[Style(name="fillColors",type="Array",format="Color",inherit="no")]
+	
 	[Style(name="fillAlphas",type="Array",format="Number",inherit="no")]
+	
 	[Style(name="fillAngle",type="Number",inherit="no")]
+	
 	public class GradientCanvas extends Canvas {
 		
 		private static const CLASS_NAME : String = "GradientCanvas";

@@ -1,4 +1,4 @@
-package org.goverla.controls.containers {
+package org.goverla.containers {
 	
 	import mx.containers.FormItem;
 

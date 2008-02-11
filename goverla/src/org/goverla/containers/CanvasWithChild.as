@@ -1,26 +1,17 @@
-package org.goverla.controls.containers
-{
+package org.goverla.containers {
+	
 	import mx.binding.utils.BindingUtils;
 	import mx.binding.utils.ChangeWatcher;
 	import mx.containers.Canvas;
 	import mx.core.UIComponent;
 
-	public class CanvasWithChild extends Canvas
-	{
+	public class CanvasWithChild extends Canvas {
+		
 		public var sizeByContent : Boolean = false;
-		
-		private var _child : UIComponent;
-		private var _widthWatcher : ChangeWatcher;
-		private var _heightWatcher : ChangeWatcher;
-		
-		public function CanvasWithChild()
-		{
-			super();
-		}
 		
 		public function set child(value : UIComponent) : void {
 			removeChildElement();
-			if(value != null) {
+			if (value != null) {
 				addChild(value);
 				var host : UIComponent = sizeByContent ? value : this;
 				var site : UIComponent = sizeByContent ? this : value;
@@ -35,11 +26,18 @@ package org.goverla.controls.containers
 		}
 		
 		private function removeChildElement() : void {
-			if(_child != null) {
+			if (_child != null) {
 				removeChild(_child);
 				_widthWatcher.unwatch();
 				_heightWatcher.unwatch();
 			}
 		}
+		
+		private var _child : UIComponent;
+		
+		private var _widthWatcher : ChangeWatcher;
+		
+		private var _heightWatcher : ChangeWatcher;
+
 	}
 }
