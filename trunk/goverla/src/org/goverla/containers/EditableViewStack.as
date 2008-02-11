@@ -1,4 +1,4 @@
-package org.goverla.controls.editable {
+package org.goverla.containers {
 
 	import mx.collections.ArrayCollection;
 	import mx.containers.ViewStack;
