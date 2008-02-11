@@ -1,17 +1,10 @@
-package org.goverla.text {
+package org.goverla.utils {
+	
 	import org.goverla.constants.StyleConstants;
 	
+	[RemoteClass(alias="org.goverla.utils.FontDescription")]
 	
-	[RemoteClass(alias="org.goverla.text.FontDescription")]
 	public class FontDescription {
-		
-		private var _name : String;
-		private var _isBold : Boolean;
-		private var _isItalic : Boolean;
-		private var _isUnderline : Boolean;
-		private var _size : uint;
-		private var _color : uint;
-		private var _align : String = StyleConstants.ALIGN_LEFT;
 		
 		public function FontDescription(name : String = "Arial", size : uint = 12) {
 			_name = name;
@@ -73,5 +66,21 @@ package org.goverla.text {
 		public function set align(value : String) : void {
 			_align = value;
 		}
+		
+		private var _name : String;
+		
+		private var _isBold : Boolean;
+		
+		private var _isItalic : Boolean;
+		
+		private var _isUnderline : Boolean;
+		
+		private var _size : uint;
+		
+		private var _color : uint;
+		
+		private var _align : String = StyleConstants.ALIGN_LEFT;
+
 	}
+	
 }
