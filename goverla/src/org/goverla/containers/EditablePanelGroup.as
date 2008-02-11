@@ -1,8 +1,6 @@
 package org.goverla.containers {
 
 	import mx.core.IFlexDisplayObject;
-	
-	import org.goverla.controls.editable.EditablePanel;
 
 	public class EditablePanelGroup extends CollapsablePanelGroup {
 
