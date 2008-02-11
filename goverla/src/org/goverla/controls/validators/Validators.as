@@ -6,8 +6,8 @@ package org.goverla.controls.validators {
 	import mx.collections.IViewCursor;
 	import mx.core.Container;
 	
-	import org.goverla.controls.validators.events.ValidatorEvent;
-	import org.goverla.controls.validators.interfaces.IValidator;
+	import org.goverla.events.ValidatorEvent;
+	import org.goverla.interfaces.IValidator;
 	import org.goverla.utils.Arrays;
 	import org.goverla.utils.comparing.PropertyCompareRequirement;
 	

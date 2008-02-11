@@ -14,8 +14,8 @@ package org.goverla.controls.validators {
 	import org.goverla.constants.MetadataNames;
 	import org.goverla.controls.validators.common.ErrorMessages;
 	import org.goverla.controls.validators.common.UIControlsDefaultValidationProperty;
-	import org.goverla.controls.validators.events.ValidatorEvent;
-	import org.goverla.controls.validators.interfaces.IValidator;
+	import org.goverla.events.ValidatorEvent;
+	import org.goverla.interfaces.IValidator;
 	import org.goverla.utils.Objects;
 	import org.goverla.utils.ReflectUtil;
 	import org.goverla.utils.Strings;

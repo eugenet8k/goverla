@@ -1,6 +1,6 @@
-package org.goverla.controls.validators.interfaces {
-	import flash.events.IEventDispatcher;
+package org.goverla.interfaces {
 	
+	import flash.events.IEventDispatcher;
 	
 	/**
 	 * Defines the properties and methods that objects that participate in View Forms validation must implement.  
@@ -33,4 +33,5 @@ package org.goverla.controls.validators.interfaces {
 		function set enabled(enabled : Boolean) : void;
 		
 	}
+	
 }
