@@ -1,16 +1,13 @@
-package org.goverla.converting
-{
+package org.goverla.utils.converting {
+	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.interfaces.IConverter;
 	import org.goverla.utils.ReflectUtil;
 
-	public class ObjectCopyConverter implements IConverter
-	{
-		private var _ignoredProperties : ArrayList;
-		private var _includedProperties : ArrayList;
+	public class ObjectCopyConverter implements IConverter {
 		
 		public function ObjectCopyConverter(ignoredProperties : Array = null, includedProperties : Array = null) {
-			if(ignoredProperties == null) {
+			if (ignoredProperties == null) {
 				ignoredProperties = [];
 			} 
 			_ignoredProperties = new ArrayList(ignoredProperties);
@@ -18,8 +15,7 @@ package org.goverla.converting
 		}
 		
 		
-		public function convert(source:Object):Object
-		{
+		public function convert(source : Object) : Object {
 			var type : Class = ReflectUtil.getType(source);
 			var result : Object = new type();
 			for each(var property : String in ReflectUtil.getFieldsAndPropertiesByInstance(source)) {
@@ -31,5 +27,10 @@ package org.goverla.converting
 			return result;
 		}
 		
+		private var _ignoredProperties : ArrayList;
+		
+		private var _includedProperties : ArrayList;
+		
 	}
+	
 }

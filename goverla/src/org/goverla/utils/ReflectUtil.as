@@ -10,32 +10,25 @@ package org.goverla.utils {
 	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.constants.MetadataNames;
+	import org.goverla.constants.ReflectionConstants;
 	import org.goverla.errors.IllegalArgumentError;
+	import org.goverla.errors.ReflectionError;
 	import org.goverla.interfaces.IRequirement;
 	import org.goverla.serialization.common.TrueRequirement;
 	import org.goverla.utils.common.FieldDescription;
 	import org.goverla.utils.comparing.XmlAttributeRequirement;
-	import org.goverla.utils.constants.ReflectionConstants;
-	import org.goverla.utils.errors.ReflectionError;
 	
 	public class ReflectUtil {
 		
-		public static function getChildren(source : Object) : ArrayCollection
-		{
-			if(source is ArrayCollection)
-			{
+		public static function getChildren(source : Object) : ArrayCollection {
+			if (source is ArrayCollection) {
 				return source as ArrayCollection;
-			}
-			else if(source is Array)
-			{
+			} else if (source is Array) {
 				return new ArrayCollection(source as Array);
-			}
-			else
-			{
+			} else {
 				var result : ArrayCollection = new ArrayCollection();
 				var properties : ArrayCollection = getFieldsAndPropertiesByInstance(source);
-				for each(var property : String in properties)
-				{
+				for each (var property : String in properties) {
 					result.addItem(source[property]);
 				}
 				return result;
@@ -43,52 +36,35 @@ package org.goverla.utils {
 		}
 		
 		public static function createInstance(type : Class, arguments : Array) : Object {
-			if(arguments == null || arguments.length == 0)
-			{
+			if (arguments == null || arguments.length == 0) {
 				return new type();
-			}
-			else if(arguments.length == 1)
-			{
+			} else if (arguments.length == 1) {
 				return new type(arguments[0]);
-			}
-			else if(arguments.length == 2)
-			{
+			} else if (arguments.length == 2) {
 				return new type(arguments[0], arguments[1]);
-			}
-			else if(arguments.length == 3)
-			{
+			} else if (arguments.length == 3) {
 				return new type(arguments[0], arguments[1], arguments[2]);
-			}
-			else if(arguments.length == 4)
-			{
+			} else if (arguments.length == 4) {
 				return new type(arguments[0], arguments[1], arguments[2], arguments[3]);
-			}
-			else if(arguments.length == 5)
-			{
+			} else if (arguments.length == 5) {
 				return new type(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
-			}
-			else
-			{
+			} else {
 				throw new IllegalArgumentError("For now only 5 arguments in constructor are supported");
 			}
 			
 
 		}
 		
-		public static function isDynamic(object : Object) : Boolean
-		{
+		public static function isDynamic(object : Object) : Boolean {
 			var description : XML = describeType(object);
 			return String(description.@isDynamic) == Objects.TRUE_STRING;
 		}
 		
-		public static function copyFieldsAndProperties(source : Object, target : Object) : void
-		{
+		public static function copyFieldsAndProperties(source : Object, target : Object) : void {
 			var sourceMembers : ArrayCollection = getFieldsAndPropertiesByInstance(source);
 			var targetMembers : ArrayCollection = getFieldsAndPropertiesByInstance(target);
-			for each(var property : String in sourceMembers)
-			{
-				if(targetMembers.contains(property))
-				{
+			for each (var property : String in sourceMembers) {
+				if (targetMembers.contains(property)) {
 					target[property] = source[property];
 				}
 			}
@@ -98,8 +74,7 @@ package org.goverla.utils {
 		public static function getEvents(type : Class) : ArrayList {
 			var list : XMLList = describeType(type).factory.metadata.(@name == "Event");
 			var result : ArrayList = new ArrayList();
-			for each(var child : XML in list)
-			{
+			for each (var child : XML in list) {
 				var arg : XMLList = child.arg.(@key == "name");
 				result.addItem(String(arg[0].@value));
 			}
@@ -107,19 +82,19 @@ package org.goverla.utils {
 		}
 		
 		public static function getType(instance : Object, applicationDomain : ApplicationDomain = null) : Class {
-			if(applicationDomain == null) {
+			if (applicationDomain == null) {
 				applicationDomain = ApplicationDomain.currentDomain;
 			}
 			return getTypeByName(getQualifiedClassName(instance), applicationDomain);	
 		}		
 
 		public static function getTypeByName(typeName : String, applicationDomain : ApplicationDomain = null) : Class {
-			if(applicationDomain == null) {
+			if (applicationDomain == null) {
 				applicationDomain = ApplicationDomain.currentDomain;
 			}
 
 			var result : Class;
-			if(typeName == "null") {
+			if (typeName == "null") {
 				result = null;
 			} else {
 				result = Objects.castToClass(applicationDomain.getDefinition(typeName));
@@ -156,7 +131,7 @@ package org.goverla.utils {
 		}
 		
 		public static function getFieldsDescriptionsByInstance(instance : Object, applicationDomain : ApplicationDomain = null) : ArrayCollection {
-			if(applicationDomain == null) {
+			if (applicationDomain == null) {
 				applicationDomain = ApplicationDomain.currentDomain;
 			}
 
@@ -244,23 +219,22 @@ package org.goverla.utils {
 		public static function getMethodName(instance : Object, method : Function) : String {
 			var result : String;
 			var methods : ArrayCollection = getMethodsByInstance(instance);
-			for(var i : int = 0; i < methods.length; i++) {
-				if(instance[methods.getItemAt(i)] == method) {
+			for (var i : int = 0; i < methods.length; i++) {
+				if (instance[methods.getItemAt(i)] == method) {
 					result = methods.getItemAt(i) as String;
 					break;
 				}
 			}
-			if(result == null) {
-				throw new ReflectionError(StringUtil.substitute("No method [{0}] in object [{1}]"
-					, method
-					, instance.toString()));
+			
+			if (result == null) {
+				throw new ReflectionError(StringUtil.substitute("No method [{0}] in object [{1}]", method, instance.toString()));
 			}
 			
 			return result;
 		}
 
 		private static function getFieldsDescriptions(instance : Object, description : XML, applicationDomain : ApplicationDomain = null) : Array {
-			if(applicationDomain == null) {
+			if (applicationDomain == null) {
 				applicationDomain = ApplicationDomain.currentDomain;
 			}
 
@@ -276,7 +250,8 @@ package org.goverla.utils {
 				for each (var factory : XML in description.factory) {
 					result.concat(getFieldsDescriptions(instance, factory, applicationDomain));
 				}
-			} 
+			}
+			
 			for (var field : String in instance) {
 				result.push(new FieldDescription(field, getType(instance[field], applicationDomain)));
 			}
@@ -305,13 +280,14 @@ package org.goverla.utils {
 		}
 
 		private static function getAccessors(instance : Object, description : XML, requirement : IRequirement = null) : Array {
-			if(requirement == null) {
+			if (requirement == null) {
 				requirement = new TrueRequirement();
 			}
+			
 			var result : Array = new Array();
 			
 			for each (var accessor : XML in description.accessor) {
-				if(requirement.meet(accessor)) {
+				if (requirement.meet(accessor)) {
 					result.push(XMLList(accessor.@name).toString());
 				}
 			}
