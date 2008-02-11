@@ -1,22 +1,13 @@
-package org.goverla.flash.playback
-{
+package org.goverla.flash.playback {
+	
 	import flash.display.MovieClip;
 	import flash.events.TimerEvent;
 	
 	import org.goverla.events.EventSender;
 	import org.goverla.flash.playback.events.IntervalEndEvent;
-	import org.goverla.process.EnterFrameTimer;
+	import org.goverla.flash.process.EnterFrameTimer;
 	
-	public class MovieClipPlayer
-	{
-		private var _intervaleEnd : EventSender = new EventSender(IntervalEndEvent);
-		private var _movie : MovieClip;
-		private var _timer : EnterFrameTimer = new EnterFrameTimer(1);
-		private var _difference : int;
-		private var _currentFrame : uint;
-		private var _end : uint;
-		
-		
+	public class MovieClipPlayer {
 		
 		public function MovieClipPlayer(movie : MovieClip) {
 			_movie = movie;
@@ -36,14 +27,27 @@ package org.goverla.flash.playback
 		}
 		
 		private function onTimer(event : TimerEvent) : void {
-			if(_movie.currentFrame != _currentFrame || _currentFrame == _end) {
+			if (_movie.currentFrame != _currentFrame || _currentFrame == _end) {
 				_timer.stop();
 				intervalEnd.sendEvent(new IntervalEndEvent());
 			} else {
 				_currentFrame += _difference;
 				_movie.gotoAndStop(_currentFrame);
 			}
-			
 		}
+		
+		private var _intervaleEnd : EventSender = new EventSender(IntervalEndEvent);
+		
+		private var _movie : MovieClip;
+		
+		private var _timer : EnterFrameTimer = new EnterFrameTimer(1);
+		
+		private var _difference : int;
+		
+		private var _currentFrame : uint;
+		
+		private var _end : uint;
+
 	}
+	
 }

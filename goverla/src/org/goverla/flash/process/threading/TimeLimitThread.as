@@ -1,27 +1,22 @@
-package org.goverla.process.threading
-{
-	import org.goverla.process.EnterFrameTimer;
-	import org.goverla.process.events.ThreadFinishEvent;
-	import org.goverla.process.events.ThreadProcessEvent;
-	import org.goverla.process.interfaces.IThread;
-	import org.goverla.errors.NotImplementedError;
+package org.goverla.flash.process.threading {
 	
 	import flash.events.EventDispatcher;
 	import flash.events.TimerEvent;
+	
+	import org.goverla.errors.NotImplementedError;
+	import org.goverla.flash.process.EnterFrameTimer;
+	import org.goverla.flash.process.events.ThreadFinishEvent;
+	import org.goverla.flash.process.events.ThreadProcessEvent;
+	import org.goverla.flash.process.interfaces.IThread;
 
-	public class TimeLimitThread extends EventDispatcher implements IThread
-	{
-		private var _timer : EnterFrameTimer;
-		private var _timeLimit : uint;
-		private var _started : Boolean;
-		private var _restart : Boolean;
-		private var _ignoreTimeLimit : Boolean;
+	public class TimeLimitThread extends EventDispatcher implements IThread	{
 		
 		public function TimeLimitThread(timeLimit : uint) {
 			_timeLimit = timeLimit;
 			_timer = new EnterFrameTimer(1);
 			_timer.addEventListener(TimerEvent.TIMER, onTimer);
 		}
+		
 		public function get ignoreTimeLimit() : Boolean {
 			return _ignoreTimeLimit;
 		}
@@ -30,19 +25,16 @@ package org.goverla.process.threading
 			_ignoreTimeLimit = value;
 		}
 		
-		public function finish() : void
-		{
+		public function finish() : void {
 			
 		}
 		
-		public function process() : void
-		{
+		public function process() : void {
 
 		}
 		
-		public function start() : void
-		{
-			if(!_started) {
+		public function start() : void {
+			if (!_started) {
 				_started = true;
 				_timer.start();
 				doProcess();
@@ -66,7 +58,7 @@ package org.goverla.process.threading
 				timeLimitExceeded = new Date().getTime() - startTime.getTime() > _timeLimit;
 				timeLimitExceeded = timeLimitExceeded && !ignoreTimeLimit;
 			} while(!hasToFinish() && !timeLimitExceeded);
-			if(hasToFinish()) {
+			if (hasToFinish()) {
 				doFinish();
 			}
 		}
@@ -76,21 +68,30 @@ package org.goverla.process.threading
 			_started = false;
 			finish();
 			dispatchEvent(new ThreadFinishEvent());
-			if(_restart) {
+			if (_restart) {
 				_restart = false;
 				start();
 			}
 		}
 		
 		private function onTimer(event : TimerEvent) : void {
-			if(hasToFinish()) {
+			if (hasToFinish()) {
 				doFinish();
 			} else {
 				doProcess();
 			}
 		}
 		
+		private var _timer : EnterFrameTimer;
 		
+		private var _timeLimit : uint;
+		
+		private var _started : Boolean;
+		
+		private var _restart : Boolean;
+		
+		private var _ignoreTimeLimit : Boolean;
 
 	}
+	
 }
