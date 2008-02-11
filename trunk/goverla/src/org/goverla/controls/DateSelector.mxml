@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DateSelectorBase xmlns:mx="http://www.adobe.com/2006/mxml"
-	xmlns="org.goverla.controls.date.*"
+	xmlns="org.goverla.controls.*"
 	xmlns:controls="org.goverla.controls.*"
 	currentState="{DATE_MONTH_YEAR_STATE}">
 	<states>

@@ -1,16 +1,15 @@
 package org.goverla.controls.validators.examples {
 
-	import org.goverla.controls.creditCard.CreditCardNames;
-	import org.goverla.controls.validators.CustomValidator;
-	import org.goverla.controls.validators.Validators;
-	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import mx.containers.VBox;
 	import mx.controls.Button;
-	import mx.controls.ComboBox;
 	import mx.events.FlexEvent;
+	
+	import org.goverla.constants.CreditCardNames;
+	import org.goverla.controls.validators.CustomValidator;
+	import org.goverla.controls.validators.Validators;
 	
 	/**
 	 * @author Tyutyunnyk Eugene

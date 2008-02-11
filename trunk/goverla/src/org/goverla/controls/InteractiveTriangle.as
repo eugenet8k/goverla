@@ -1,14 +1,19 @@
-package org.goverla.controls.display {
+package org.goverla.controls {
 
 	import flash.geom.Point;
 	
 	import mx.core.UIComponent;
 
 	[Style(name="borderColor", type="uint", format="Color")]
+	
 	[Style(name="borderStyle", type="String", enumeration="none,solid")]
+	
 	[Style(name="borderThickness", type="Number", format="Length")]
+	
 	[Style(name="backgroundColor", type="uint", format="Color")]
+	
 	[Style(name="backgroundAlpha", type="Number")]
+	
 	public class InteractiveTriangle extends UIComponent {
 		
 		public static const TOP : String = "top";
@@ -18,11 +23,6 @@ package org.goverla.controls.display {
 		public static const DOWN : String = "down";
 		
 		public static const LEFT : String = "left";
-		
-		private var _direction : String = RIGHT;
-		
-		public function InteractiveTriangle() {
-		}
 		
 		[Inspectable(enumeration="top,right,down,left")]
 		public function get direction() : String {
@@ -82,6 +82,8 @@ package org.goverla.controls.display {
 
 			graphics.endFill();
 		}
+		
+		private var _direction : String = RIGHT;
 
 	}
 

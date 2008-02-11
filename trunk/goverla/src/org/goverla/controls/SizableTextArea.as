@@ -1,5 +1,5 @@
-package org.goverla.controls.text
-{
+package org.goverla.controls {
+	
 	import org.goverla.utils.Strings;
 	
 	import flash.events.Event;
@@ -8,26 +8,28 @@ package org.goverla.controls.text
 	import mx.controls.TextArea;
 	import mx.events.FlexEvent;
 
-	public class SizableTextArea extends TextArea
-	{
+	public class SizableTextArea extends TextArea {
+		
 		private static const OFF : String = "off";
+		
 		public function SizableTextArea() {
+			super();
 			addEventListener(Event.CHANGE, onChange);
 			addEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 			verticalScrollPolicy = OFF;
 		}
 		
-		override public function set minHeight(value:Number):void {
+		override public function set minHeight(value : Number):void {
 			super.minHeight = value;
 			refershHeight();
 		}
 		
-		override public function set htmlText(value:String):void {
+		override public function set htmlText(value : String):void {
 			super.htmlText = value;
 		}
 		
-		override public function set text(value:String):void {
-			if(Strings.isBlank(value)) {
+		override public function set text(value : String):void {
+			if (Strings.isBlank(value)) {
 				trace("`");
 			}
 			super.text = value;
@@ -46,4 +48,5 @@ package org.goverla.controls.text
 		}
 		
 	}
+	
 }

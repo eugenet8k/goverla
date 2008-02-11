@@ -1,10 +1,7 @@
-package org.goverla.controls.creditCard {
+package org.goverla.constants {
 
 	import mx.utils.StringUtil;
 	
-	/**
-	 * @author Maxym Hryniv
-	 */
 	public class CreditCardNames {
 	
 		public static const VISA : String = "Visa";
