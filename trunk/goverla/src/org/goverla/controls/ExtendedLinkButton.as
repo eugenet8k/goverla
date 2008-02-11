@@ -8,6 +8,7 @@ package org.goverla.controls {
 	import org.goverla.utils.common.PairEntry;
 
 	[Style(name="upBackgroundColor", type="uint", format="Color", inherit="yes")]
+	
 	[Style(name="upBackgroundAlpha", type="Number", inherit="yes")]
 
 	[Style(name="rollOverAlpha", type="Number", inherit="yes")]
@@ -15,6 +16,7 @@ package org.goverla.controls {
 	[Style(name="selectionAlpha", type="Number", inherit="yes")]
 
 	[Style(name="disabledBackgroundColor", type="uint", format="Color", inherit="yes")]
+	
 	[Style(name="disabledBackgroundAlpha", type="Number", inherit="yes")]
 
 	public class ExtendedLinkButton extends LinkButton {

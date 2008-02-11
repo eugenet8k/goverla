@@ -1,13 +1,13 @@
 package org.goverla.css {
 
-	import org.goverla.constants.StyleConstants;
-	import org.goverla.constants.StyleNames;
-	import org.goverla.text.FontDescription;
-	import org.goverla.utils.common.PairEntry;
-	
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.IStyleClient;
 	import mx.styles.StyleManager;
+	
+	import org.goverla.constants.StyleConstants;
+	import org.goverla.constants.StyleNames;
+	import org.goverla.utils.FontDescription;
+	import org.goverla.utils.common.PairEntry;
 
 	public class CSSUtils {
 		
@@ -30,19 +30,19 @@ package org.goverla.css {
 			component.setStyle(StyleNames.COLOR, font.color);
 			component.setStyle(StyleNames.TEXT_ALIGN, font.align);
 			
-			if(font.isBold) {
+			if (font.isBold) {
 				component.setStyle(StyleNames.FONT_WEIGHT, StyleConstants.BOLD_FONT);
 			} else {
 				component.setStyle(StyleNames.FONT_WEIGHT, StyleConstants.NORMAL_FONT);
 			}
 
-			if(font.isItalic) {
+			if (font.isItalic) {
 				component.setStyle(StyleNames.FONT_STYLE, StyleConstants.ITALIC_FONT);
 			} else {
 				component.setStyle(StyleNames.FONT_STYLE, StyleConstants.NORMAL_FONT);
 			}
 
-			if(font.isUnderline) {
+			if (font.isUnderline) {
 				component.setStyle(StyleNames.TEXT_DECORATION, StyleConstants.UNDERLINE_FONT);
 			} else {
 				component.setStyle(StyleNames.TEXT_DECORATION, StyleConstants.NONE);
