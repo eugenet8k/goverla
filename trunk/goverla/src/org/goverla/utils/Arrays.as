@@ -11,10 +11,10 @@ package org.goverla.utils {
 	import org.goverla.interfaces.IMap;
 	import org.goverla.interfaces.IRequirement;
 	import org.goverla.reflection.Overload;
-	import org.goverla.sorting.QuickSorter;
 	import org.goverla.utils.comparing.ComparingResult;
 	import org.goverla.utils.comparing.RequirementsCollection;
 	import org.goverla.utils.comparing.ValueComparer;
+	import org.goverla.utils.sorting.QuickSorter;
 	
 	public class Arrays {
 		

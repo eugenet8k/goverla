@@ -1,18 +1,14 @@
-package org.goverla.sorting
-{
+package org.goverla.utils.sorting {
+	
 	import mx.collections.ListCollectionView;
 	
 	import org.goverla.interfaces.IComparer;
-	import org.goverla.sorting.interfaces.ISorter;
+	import org.goverla.interfaces.ISorter;
 	import org.goverla.utils.comparing.ComparingResult;
 
-	public class QuickSorter implements ISorter
-	{
-		private var _list : ListCollectionView;
-		private var _comparer : IComparer;
+	public class QuickSorter implements ISorter {
 		
-		public function sort(list:ListCollectionView, comparer:IComparer):void
-		{
+		public function sort(list : ListCollectionView, comparer : IComparer) : void {
 			_list = list;
 			_comparer = comparer;
 			executeSort(0, list.length);
@@ -43,5 +39,10 @@ package org.goverla.sorting
 			  if ( begin + length > i ) executeSort(i, begin + length - i);
 		}
 		
+		private var _list : ListCollectionView;
+		
+		private var _comparer : IComparer;
+		
 	}
+	
 }

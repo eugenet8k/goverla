@@ -1,17 +1,15 @@
-package org.goverla.sorting
-{
+package org.goverla.utils.sorting {
+	
 	import mx.collections.ListCollectionView;
 	
 	import org.goverla.interfaces.IComparer;
-	import org.goverla.sorting.interfaces.ISorter;
+	import org.goverla.interfaces.ISorter;
 	import org.goverla.utils.comparing.ComparingResult;
 
-	public class NormalSorter implements ISorter
-	{
-		public function sort(list:ListCollectionView, comparer:IComparer):void
-		{
-			
-			for(var i : uint = 0; i < list.length; i++) {
+	public class NormalSorter implements ISorter {
+		
+		public function sort(list : ListCollectionView, comparer : IComparer) : void {
+			for (var i : uint = 0; i < list.length; i++) {
 				var minimum : Object = list.getItemAt(i);
 				var minimumIndex : uint = i;
 				
@@ -22,7 +20,7 @@ package org.goverla.sorting
 					} 
 				}
 				
-				if(i != minimumIndex) {
+				if (i != minimumIndex) {
 					list.setItemAt(list.getItemAt(i), minimumIndex);
 					list.setItemAt(minimum, i);
 				}
@@ -30,4 +28,5 @@ package org.goverla.sorting
 		}
 		
 	}
+	
 }
