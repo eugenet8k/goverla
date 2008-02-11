@@ -1,4 +1,4 @@
-package org.goverla.controls.date {
+package org.goverla.controls {
 
 	import mx.containers.HBox;
 	import mx.controls.ComboBox;
@@ -21,10 +21,6 @@ package org.goverla.controls.date {
 		public var monthComboBox : ComboBox;
 		
 		public var yearComboBox : ComboBox;
-
-		public function DateSelectorBase() {
-			super();
-		}
 		
 		override public function setFocus() : void {
 			switch (currentState) {

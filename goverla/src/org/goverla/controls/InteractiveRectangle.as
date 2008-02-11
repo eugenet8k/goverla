@@ -1,23 +1,24 @@
-package org.goverla.controls.display {
+package org.goverla.controls {
 
 	import mx.core.UIComponent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 
 	[Style(name="borderStyle", type="String", enumeration="none,solid")]
+	
 	[Style(name="borderThickness", type="Number", format="Length")]
+	
 	[Style(name="borderColor", type="uint", format="Color")]
+	
 	[Style(name="backgroundColor", type="uint", format="Color")]
+	
 	[Style(name="backgroundAlpha", type="Number")]
+	
 	public class InteractiveRectangle extends UIComponent {
 		
 		private static const CLASS_NAME : String = "InteractiveRectangle";
 		
 		private static var classContructed : Boolean = staticConstructor();
-		
-		public function InteractiveRectangle() {
-			super();
-		}
 		
         private static function staticConstructor() : Boolean {
             if (!StyleManager.getStyleDeclaration(CLASS_NAME)) {

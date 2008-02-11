@@ -1,9 +1,9 @@
 package org.goverla.controls.validators {
 	
-	import org.goverla.controls.creditCard.CreditCardNames;
-	import org.goverla.controls.creditCard.events.CreditCardTypeChangedEvent;
+	import org.goverla.constants.CreditCardNames;
 	import org.goverla.controls.validators.common.ErrorMessages;
 	import org.goverla.errors.IllegalArgumentError;
+	import org.goverla.events.CreditCardTypeChangedEvent;
 	import org.goverla.utils.Strings;
 
 	/**
