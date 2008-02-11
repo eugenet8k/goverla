@@ -1,6 +1,5 @@
-package org.goverla.net {
+package org.goverla.remoting {
 	
-	import flash.errors.IllegalOperationError;
 	import flash.net.NetConnection;
 	import flash.net.ObjectEncoding;
 	
@@ -11,7 +10,7 @@ package org.goverla.net {
 			if (url != null) {
 				connect(url);
 			} else {
-				throw new IllegalOperationError("Can't connect to '" + url +  "' - gateway!");
+				throw new Error("Can't connect to '" + url +  "' - gateway!");
 			}
 		}
 		

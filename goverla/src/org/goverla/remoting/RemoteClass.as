@@ -1,4 +1,4 @@
-package org.goverla.net {
+package org.goverla.remoting {
 
 	import flash.errors.IllegalOperationError;
 	import flash.net.Responder;
