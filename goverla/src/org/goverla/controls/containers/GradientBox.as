@@ -11,7 +11,7 @@ package org.goverla.controls.containers {
 	import mx.styles.StyleManager;
 	
 	import org.goverla.constants.StyleNames;
-	import org.goverla.graphics.GraphicsUtil;
+	import org.goverla.utils.GraphicsUtil;
 	import org.goverla.utils.Objects;
 	
 	[Style(name="fillColors",type="Array",format="Color",inherit="no")]
