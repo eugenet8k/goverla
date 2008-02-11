@@ -1,4 +1,4 @@
-package org.goverla.graphics {
+package org.goverla.utils {
 
 	import flash.display.Graphics;
 	import flash.geom.Rectangle;
