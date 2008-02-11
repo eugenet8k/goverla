@@ -1,4 +1,4 @@
-package org.goverla.controls.validators.events {
+package org.goverla.events {
 
 	import flash.events.Event;
 
