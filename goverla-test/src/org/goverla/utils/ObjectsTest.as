@@ -3,7 +3,7 @@ package org.goverla.utils
 	import flash.text.TextFormat;
 	
 	import org.flex2unit.framework.TestCase;
-	import org.goverla.converting.ObjectCopyConverter;
+	import org.goverla.utils.converting.ObjectCopyConverter;
 
 	public class ObjectsTest extends TestCase
 	{

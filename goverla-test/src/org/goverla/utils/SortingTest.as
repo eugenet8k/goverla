@@ -2,8 +2,8 @@ package org.goverla.utils
 {
 	import org.flex2unit.framework.TestCase;
 	import org.goverla.collections.ArrayList;
-	import org.goverla.comparing.ValueComparer;
-	import org.goverla.sorting.QuickSorter;
+	import org.goverla.utils.comparing.ValueComparer;
+	import org.goverla.utils.sorting.QuickSorter;
 
 	public class SortingTest extends TestCase
 	{
