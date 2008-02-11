@@ -6,10 +6,10 @@ package org.goverla.utils
 	import org.flex2unit.framework.TestCase;
 	import org.goverla.collections.ArrayList;
 	import org.goverla.collections.ListCollectionViewIterator;
-	import org.goverla.comparing.ValueComparer;
-	import org.goverla.sorting.NormalSorter;
 	import org.goverla.utils.comparing.PropertyCompareRequirement;
+	import org.goverla.utils.comparing.ValueComparer;
 	import org.goverla.utils.converting.StringToBooleanConverter;
+	import org.goverla.utils.sorting.NormalSorter;
 
 	public class ArraysTest extends TestCase
 	{
