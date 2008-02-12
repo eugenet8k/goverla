@@ -3,9 +3,11 @@ package org.goverla.containers {
 	import flash.events.MouseEvent;
 	
 	import mx.containers.TitleWindow;
+	import mx.effects.Resize;
 	import mx.events.StateChangeEvent;
 	import mx.states.SetProperty;
 	import mx.states.State;
+	import mx.states.Transition;
 	
 	import org.goverla.constants.Icons;
 	import org.goverla.constants.StyleConstants;
@@ -38,6 +40,8 @@ package org.goverla.containers {
 		
 		public function CollapsablePanel() {
 			super();
+			
+			titleIcon = RESTORED_ICON;
 			
 			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGE, onCurrentStateChange);
 			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGING, onCurrentStateChanging);
@@ -137,9 +141,6 @@ package org.goverla.containers {
 			super.createChildren();
 
 			createCollapsedState();
-			
-			setOppositeState();
-			setOppositeState();
 
 			titleBar.addEventListener(MouseEvent.CLICK, onTitleBarClick);
 		}
@@ -227,6 +228,10 @@ package org.goverla.containers {
 			collapsedState.overrides = overrides;
 			
 			states.push(collapsedState);
+			
+			var transition : Transition = new Transition();
+			transition.effect = new Resize(this);
+			transitions.push(transition);
 		}
 
 		private var _collapsable : Boolean = true;
