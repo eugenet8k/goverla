@@ -15,9 +15,9 @@ package org.goverla.containers {
 	import org.goverla.interfaces.IEditableGroup;
 	import org.goverla.interfaces.IValidatable;
 
-	[Event(name="submitEditedValue", type="com.sonopia.sonoportal.controls.editable.events.EditableControlEvent")]
+	[Event(name="submitEditedValue", type="org.goverla.events.EditableControlEvent")]
 	
-	[Event(name="cancelEditedValue", type="com.sonopia.sonoportal.controls.editable.events.EditableControlEvent")]
+	[Event(name="cancelEditedValue", type="org.goverla.events.EditableControlEvent")]
 	
 	public class EditableViewStack extends ViewStack implements IEditableGroup, IValidatable {
 		
