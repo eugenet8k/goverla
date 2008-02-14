@@ -40,6 +40,13 @@ package org.goverla.utils {
 			return result;
 		}
 		
+		public static function roundPoint(point : Point) : Point {
+			var result : Point = new Point();
+			result.x = Math.round(point.x);
+			result.y = Math.round(point.y);
+			return result;
+		}
+		
 		public static function isMouseOut(component : DisplayObject) : Boolean {
 			if (component.mouseX < 0)
 				return true;
