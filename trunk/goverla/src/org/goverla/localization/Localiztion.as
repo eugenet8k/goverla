@@ -2,6 +2,7 @@ package org.goverla.localization
 {
 	import mx.utils.StringUtil;
 	
+	// Deprecated. Use Flex 3 localization
 	public class Localiztion
 	{
 		public static var messagesObject : Object = new Object();

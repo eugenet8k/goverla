@@ -2,27 +2,13 @@ package org.goverla.command {
 
 	import flash.events.EventDispatcher;
 	
-	import mx.controls.Alert;
-	
 	import org.goverla.collections.Stack;
 	import org.goverla.command.events.CommandHistoryChangeEvent;
-	import org.goverla.command.interfaces.IUndoableCommand;
 	import org.goverla.errors.IllegalStateError;
+	import org.goverla.interfaces.IUndoableCommand;
 
-	/**
-	 * @author Maxym Hryniv
-	 */
-	public class CommandHistory extends EventDispatcher{
-		
-		private var _executedCommands : Stack;
+	public class CommandHistory extends EventDispatcher {
 
-		private var _undoneCommands : Stack;
-		
-		public function CommandHistory() {
-			_executedCommands = new Stack();
-			_undoneCommands = new Stack();
-		}
-	
 		[Bindable(event="commandHistoryChange")]
 		public function get canUndo() : Boolean {
 			return !_executedCommands.isEmpty();
@@ -31,6 +17,11 @@ package org.goverla.command {
 		[Bindable(event="commandHistoryChange")]
 		public function get canRedo() : Boolean {
 			return !_undoneCommands.isEmpty();
+		}
+		
+		public function CommandHistory() {
+			_executedCommands = new Stack();
+			_undoneCommands = new Stack();
 		}
 		
 		public function execute(command : IUndoableCommand) : void {
@@ -70,6 +61,10 @@ package org.goverla.command {
 			command.execute();
 			_executedCommands.enqueue(command);
 		}
+		
+		private var _executedCommands : Stack;
+
+		private var _undoneCommands : Stack;
 		
 	}
 
