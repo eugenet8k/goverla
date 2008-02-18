@@ -1,14 +1,14 @@
-package org.goverla.localization
-{
-	import org.goverla.command.interfaces.ICommand;
+package org.goverla.localization {
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	
+	import org.goverla.interfaces.ICommand;
 
-	public class LoadMessagesAction implements ICommand
-	{
+	public class LoadMessagesAction implements ICommand {
+		
 		private var _url : String;
 		private var _messagesObject : Object;
 		private var _loader : URLLoader;

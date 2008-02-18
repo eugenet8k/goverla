@@ -1,8 +1,8 @@
 package org.goverla.command
 {
-	import org.goverla.command.interfaces.IAsynchronousCommand;
 	import org.goverla.events.DefaultEvent;
 	import org.goverla.events.EventSender;
+	import org.goverla.interfaces.IAsynchronousCommand;
 
 	public class AsynchronousTestCommand extends UndoableTestCommand implements IAsynchronousCommand
 	{

@@ -1,6 +1,6 @@
 package org.goverla.command
 {
-	import org.goverla.command.interfaces.IUndoableCommand;
+	import org.goverla.interfaces.IUndoableCommand;
 
 	public class UndoableTestCommand implements IUndoableCommand
 	{

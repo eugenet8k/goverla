@@ -1,12 +1,12 @@
-package org.goverla.utils.timers
-{
-	import org.goverla.command.interfaces.ICommand;
+package org.goverla.utils.timers {
 	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	
+	import org.goverla.interfaces.ICommand;
 
-	public class CallFunctionAction implements ICommand
-	{
+	public class CallFunctionAction implements ICommand	{
+		
 		private var _timer : Timer;
 		private var _function : Function;
 		private var _args : Array;
