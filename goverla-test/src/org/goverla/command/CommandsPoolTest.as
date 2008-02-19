@@ -2,7 +2,7 @@ package org.goverla.command
 {
 	import org.flex2unit.framework.TestCase;
 	import org.goverla.collections.ArrayList;
-	import org.goverla.command.events.ProgressEvent;
+	import org.goverla.events.ProgressEvent;
 	
 	public class CommandsPoolTest extends TestCase
 	{

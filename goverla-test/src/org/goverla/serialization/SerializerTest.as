@@ -1,13 +1,8 @@
 package org.goverla.serialization {
-	import org.goverla.collections.ArrayList;
-	import org.goverla.utils.ui.UIComponentSize;
-	
-	import flash.utils.getQualifiedClassName;
-	
 	import mx.collections.ArrayCollection;
 	
 	import org.flex2unit.framework.TestCase;
-	import org.goverla.geom.Point;
+	import org.goverla.flash.geom.Point;
 
 	public class SerializerTest extends TestCase {
 		

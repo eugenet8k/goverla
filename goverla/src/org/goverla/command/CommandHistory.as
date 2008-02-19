@@ -3,8 +3,8 @@ package org.goverla.command {
 	import flash.events.EventDispatcher;
 	
 	import org.goverla.collections.Stack;
-	import org.goverla.command.events.CommandHistoryChangeEvent;
 	import org.goverla.errors.IllegalStateError;
+	import org.goverla.events.CommandHistoryChangeEvent;
 	import org.goverla.interfaces.IUndoableCommand;
 
 	public class CommandHistory extends EventDispatcher {
