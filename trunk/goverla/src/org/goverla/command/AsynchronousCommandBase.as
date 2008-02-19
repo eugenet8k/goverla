@@ -2,8 +2,8 @@ package org.goverla.command {
 	
 	import flash.events.EventDispatcher;
 	
-	import org.goverla.command.events.ProgressEvent;
 	import org.goverla.events.EventSender;
+	import org.goverla.events.ProgressEvent;
 	import org.goverla.interfaces.IAsynchronousCommand;
 
 	public class AsynchronousCommandBase extends EventDispatcher implements IAsynchronousCommand {

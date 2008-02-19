@@ -4,9 +4,9 @@ package org.goverla.command {
 	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.collections.ListCollectionViewIterator;
-	import org.goverla.command.events.ProgressEvent;
 	import org.goverla.errors.IllegalStateError;
 	import org.goverla.events.DefaultEvent;
+	import org.goverla.events.ProgressEvent;
 	import org.goverla.interfaces.IAsynchronousCommand;
 
 	public class CommandsPool extends AsynchronousCommandBase {
