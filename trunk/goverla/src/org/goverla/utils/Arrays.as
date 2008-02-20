@@ -18,6 +18,16 @@ package org.goverla.utils {
 	
 	public class Arrays {
 		
+		public static function mix(source : ListCollectionView) : ListCollectionView
+		{
+			for(var i : uint = 0; i < source.length; i++)
+			{
+				replaceItems(source, int(Math.random() * source.length), int(Math.random() * source.length));
+			}
+			
+			return source;
+		}
+		
 		public static function replaceItems(source : ListCollectionView, firstIndex : int, secondIndex : int) : void {
 			var firstItem : Object = source.getItemAt(firstIndex);
 			var secondItem : Object = source.setItemAt(firstItem, secondIndex);
