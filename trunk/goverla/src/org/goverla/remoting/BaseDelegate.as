@@ -10,6 +10,8 @@ package org.goverla.remoting
 	
 	public class BaseDelegate
 	{
+		public static var defaultFaultHandler : Function;
+		
 		protected var connectionUrl : String;
 		
 		private var _resultHandler : Function;
@@ -18,7 +20,7 @@ package org.goverla.remoting
 		public function BaseDelegate(resultHandler : Function, faultHandler : Function)
 		{
 			_resultHandler = resultHandler;
-			_faultHandler = faultHandler;
+			_faultHandler = faultHandler == null ? defaultFaultHandler : faultHandler;
 			
 		}
 		
