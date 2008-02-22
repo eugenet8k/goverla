@@ -185,6 +185,12 @@ package org.goverla.utils {
 			target.y += globalStartPoint.y - globalEndPoint.y;
 		}
 		
+		public static function setComponentsVisibility(components : ArrayCollection, visible : Boolean) : void {
+			for each (var component : UIComponent in components) {
+				component.visible = visible;
+			}
+		}
+		
 		private static function updateAnchor(component : UIComponent, anchorSet : Boolean, styleName : String, 
 				value : Number) : void {
 			if (anchorSet) {
