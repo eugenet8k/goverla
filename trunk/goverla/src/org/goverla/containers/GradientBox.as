@@ -8,6 +8,8 @@ package org.goverla.containers {
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	
+	import org.goverla.constants.StyleNames;
+	
 	[Style(name="backgroundGradientColors",type="Array",format="Color",inherit="no")]
 	
 	[Style(name="backgroundGradientRatios",type="Array",format="Number",inherit="no")]
@@ -19,16 +21,6 @@ package org.goverla.containers {
 	public class GradientBox extends Box {
 
 		protected static const CLASS_NAME : String = "GradientBox";
-
-		protected static const BACKGROUND_GRADIENT_COLORS : String = "backgroundGradientColors";
-		
-		protected static const BACKGROUND_GRADIENT_RATIOS : String = "backgroundGradientRatios";
-		
-		protected static const BACKGROUND_GRADIENT_ALPHAS : String = "backgroundGradientAlphas";
-		
-		protected static const BACKGROUND_GRADIENT_ANGLE : String = "backgroundGradientAngle";
-		
-		protected static const CORNER_RADIUS : String = "cornerRadius";
 		
         private static var classConstructed : Boolean = staticConstructor();
 
@@ -39,10 +31,10 @@ package org.goverla.containers {
         private static function staticConstructor():Boolean {
             if (!StyleManager.getStyleDeclaration(CLASS_NAME)) {
                 var newStyleDeclaration : CSSStyleDeclaration = new CSSStyleDeclaration();
-                newStyleDeclaration.setStyle(BACKGROUND_GRADIENT_COLORS, [0xFFFFFF, 0x000000]);
-                newStyleDeclaration.setStyle(BACKGROUND_GRADIENT_RATIOS, [0, 1]);
-                newStyleDeclaration.setStyle(BACKGROUND_GRADIENT_ALPHAS, [1, 1]);
-                newStyleDeclaration.setStyle(BACKGROUND_GRADIENT_ANGLE, 90);
+                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_COLORS, [0xFFFFFF, 0x000000]);
+                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_RATIOS, [0, 1]);
+                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_ALPHAS, [1, 1]);
+                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_ANGLE, 90);
                 StyleManager.setStyleDeclaration(CLASS_NAME, newStyleDeclaration, true);
             }
             return true;
@@ -50,13 +42,14 @@ package org.goverla.containers {
     
         public override function styleChanged(styleProp : String) : void {
 			switch(styleProp) {
-				case BACKGROUND_GRADIENT_COLORS :
-				case BACKGROUND_GRADIENT_RATIOS :
-				case BACKGROUND_GRADIENT_ALPHAS :
-				case BACKGROUND_GRADIENT_ANGLE :
+				case StyleNames.BACKGROUND_GRADIENT_COLORS :
+				case StyleNames.BACKGROUND_GRADIENT_RATIOS :
+				case StyleNames.BACKGROUND_GRADIENT_ALPHAS :
+				case StyleNames.BACKGROUND_GRADIENT_ANGLE :
 		            super.styleChanged(styleProp);
 	                invalidateDisplayList();
 	                break;
+	                
 				default :
             }
         }
@@ -71,11 +64,11 @@ package org.goverla.containers {
 
 		    var rectangle : Rectangle = new Rectangle(0, 0, w, h);
 
-            var backgroundGradientColors : Array = (getStyle(BACKGROUND_GRADIENT_COLORS) as Array);
-            var backgroundGradientRatios : Array = (getStyle(BACKGROUND_GRADIENT_RATIOS) as Array);
-            var backgroundGradientAlphas : Array = (getStyle(BACKGROUND_GRADIENT_ALPHAS) as Array);
-            var backgroundGradientAngle : Number = (getStyle(BACKGROUND_GRADIENT_ANGLE) as Number);
-            var cornerRadius : Number = (getStyle(CORNER_RADIUS) as Number);
+            var backgroundGradientColors : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_COLORS) as Array);
+            var backgroundGradientRatios : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_RATIOS) as Array);
+            var backgroundGradientAlphas : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_ALPHAS) as Array);
+            var backgroundGradientAngle : Number = (getStyle(StyleNames.BACKGROUND_GRADIENT_ANGLE) as Number);
+            var cornerRadius : Number = (getStyle(StyleNames.CORNER_RADIUS) as Number);
 
 			var gradientEntries : Array = [];
             for (var i : int = 0; i < (backgroundGradientColors != null ? backgroundGradientColors.length : 0); i++) {
