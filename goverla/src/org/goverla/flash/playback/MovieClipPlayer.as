@@ -11,7 +11,7 @@ package org.goverla.flash.playback {
 		
 		public function MovieClipPlayer(movie : MovieClip) {
 			_movie = movie;
-			_timer.addEventListener(TimerEvent.TIMER, onTimer);
+			_timer.tick.addListener(onTimer);
 		}
 		
 		public function get intervalEnd() : EventSender {
