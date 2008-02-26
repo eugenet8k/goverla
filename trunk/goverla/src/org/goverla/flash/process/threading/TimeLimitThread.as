@@ -14,7 +14,7 @@ package org.goverla.flash.process.threading {
 		public function TimeLimitThread(timeLimit : uint) {
 			_timeLimit = timeLimit;
 			_timer = new EnterFrameTimer(1);
-			_timer.addEventListener(TimerEvent.TIMER, onTimer);
+			_timer.tick.addListener(onTimer);
 		}
 		
 		public function get ignoreTimeLimit() : Boolean {

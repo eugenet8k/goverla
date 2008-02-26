@@ -1,37 +1,59 @@
 package org.goverla.flash.process {
 	
+	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.TimerEvent;
 	
 	import mx.core.Application;
 	
-	public class EnterFrameTimer extends EventDispatcher {
+	import org.goverla.events.EventSender;
+	
+	public class EnterFrameTimer {
 		
-		public function EnterFrameTimer(framesPerTick : uint) {
+		private var _tick : EventSender = new EventSender();
+		private var _dispatcher : EventDispatcher;
+		private var _framesPerTick : uint;
+		private var _frameNumber : uint = 0;
+		
+		public function EnterFrameTimer(framesPerTick : uint = 1, dispatcher : DisplayObject = null) {
 			_framesPerTick = framesPerTick;
+			_dispatcher = dispatcher == null ? EventDispatcher(Application.application) : dispatcher;
+			
+		}
+		
+		public function get framesPerTick() : uint
+		{
+			return _framesPerTick
+		}
+		
+		public function set framesPerTick(value : uint) : void
+		{
+			_framesPerTick = value;
+		}
+		
+		
+		public function get tick() : EventSender
+		{
+			return _tick;
 		}
 		
 		public function start() : void {
-			Application.application.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			_dispatcher.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
 		public function stop() : void {
-			Application.application.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			_dispatcher.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
 		private function onEnterFrame(event : Event) : void {
 			_frameNumber++;
 			if (_framesPerTick == _frameNumber) {
 				_frameNumber = 0;
-				dispatchEvent(new TimerEvent(TimerEvent.TIMER));
+				tick.sendEvent();
 			}
 			
 		}
 		
-		private var _framesPerTick : uint;
-		
-		private var _frameNumber : uint = 0;
 
 	}
 	
