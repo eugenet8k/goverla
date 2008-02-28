@@ -24,6 +24,13 @@ package org.goverla.remoting
 			
 		}
 		
+		protected function createConnection() : NetConnection
+		{
+			var connection : NetConnection = new NetConnection();
+			connection.connect(connectionUrl);
+			return connection;
+		}
+		
 		protected function getServiceName(methodName : String) : String
 		{
 			var className : String = ReflectUtil.getFullTypeName(this);
@@ -38,8 +45,7 @@ package org.goverla.remoting
 		
 		protected function doCall(methodName : String, args : Array) : void
 		{
-			var connection : NetConnection = new NetConnection();
-			connection.connect(connectionUrl);
+			var connection : NetConnection = createConnection();
 			
 			var flashResponder : Responder = new Responder(_resultHandler, _faultHandler);
 			var newArguments : ArrayList = new ArrayList([getServiceName(methodName), flashResponder]);
