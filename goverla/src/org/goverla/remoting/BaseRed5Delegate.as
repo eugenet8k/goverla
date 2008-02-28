@@ -1,5 +1,8 @@
 package org.goverla.remoting
 {
+	import flash.net.NetConnection;
+	import flash.net.ObjectEncoding;
+	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.utils.ReflectUtil;
 	
@@ -9,11 +12,27 @@ package org.goverla.remoting
 		
 		public static var defaultConnectionUrl : String;
 		
+		private static var _netConnection : NetConnection;
+		
+		public static function get netConnection() : NetConnection
+		{
+			if(_netConnection == null)
+			{
+				_netConnection = new NetConnection();
+			}
+			return _netConnection;
+		}
 
+		
 		public function BaseRed5Delegate(resultHandler:Function, faultHandler:Function)
 		{
 			super(resultHandler, faultHandler);
 			connectionUrl = defaultConnectionUrl;
+		}
+		
+		override protected function createConnection():NetConnection
+		{
+			return netConnection;
 		}
 		
 		override protected function getServiceName(methodName : String) : String
