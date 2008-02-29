@@ -29,11 +29,11 @@ package org.goverla.remoting
 			super(resultHandler, faultHandler);
 			connectionUrl = defaultConnectionUrl;
 		}
-		
-		override protected function createConnection():NetConnection
-		{
-			return netConnection;
-		}
+		//TODO:Remove comments when red5 6.4 will be published.		
+//		override protected function createConnection():NetConnection
+//		{
+//			return netConnection;
+//		}
 		
 		override protected function getServiceName(methodName : String) : String
 		{
