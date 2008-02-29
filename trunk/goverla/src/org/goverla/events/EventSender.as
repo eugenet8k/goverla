@@ -52,6 +52,10 @@ package org.goverla.events
 			}
 		}
 
+		public function hasListeners() : Boolean {
+			return _listeners.length > 0;
+		}
+		
 		public function hasListener(func : Function) : Boolean {
 			return _listeners.contains(func);
 		}
