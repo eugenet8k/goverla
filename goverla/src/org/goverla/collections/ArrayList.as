@@ -20,32 +20,24 @@ package org.goverla.collections {
 			registerClassAlias("org.goverla.collections.ArrayList", ArrayList);
 		}
 		
-		public function ArrayList(list : Object = null) {
-			super();
-			var overload : Overload = new Overload(this);
-			overload.addHandler([Array], initializeByArray);
-			overload.addHandler([ArrayCollection], initializeByArrayCollection);
-			overload.forward([list]);
-		}
-		
-		public function get ignoredProperties() : ArrayList {
-			return new ArrayList(["ignoredProperties", "first", "last", "source"]);
-		}
-
-		protected function initializeByArray(source : Array) : void {
-			this.source = source;
-		} 
-
-		protected function initializeByArrayCollection(source : ArrayCollection) : void {
-			this.source = source.source;
-		}
-		
 		public function get last() : Object {
 			return getItemAt(length - 1);
 		}
 		
 		public function get first() : Object {
 			return getItemAt(0);
+		}
+
+		public function get ignoredProperties() : ArrayList {
+			return new ArrayList(["ignoredProperties", "first", "last", "source"]);
+		}
+		
+		public function ArrayList(list : Object = null) {
+			super();
+			var overload : Overload = new Overload(this);
+			overload.addHandler([Array], initializeByArray);
+			overload.addHandler([ArrayCollection], initializeByArrayCollection);
+			overload.forward([list]);
 		}
 		
 		public function getItemIndices(item : Object) : ArrayList {
@@ -84,7 +76,7 @@ package org.goverla.collections {
 			return new ListCollectionViewIterator(this);
 		}
 		
-		public function addItems(source : ListCollectionView) : void {
+		public function addItems(source : Object) : void {
 			Arrays.insertAll(this, source);
 		}
 		
@@ -108,7 +100,7 @@ package org.goverla.collections {
 			return removeItemAt(this.length - 1);
 		}
 		
-		public function removeItems(items : ListCollectionView) : void {
+		public function removeItems(items : Object) : void {
 			Arrays.removeAll(this, items); 
 		}
 
@@ -171,6 +163,14 @@ package org.goverla.collections {
 		
 		public function toArrayCollection() : ArrayCollection {
 			return new ArrayCollection(source);
+		}
+		
+		protected function initializeByArray(source : Array) : void {
+			this.source = source;
+		} 
+
+		protected function initializeByArrayCollection(source : ArrayCollection) : void {
+			this.source = source.source;
 		}
 		
 	}
