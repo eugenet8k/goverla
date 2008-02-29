@@ -134,9 +134,15 @@ package org.goverla.utils {
 			}
 		}
 
-		public static function removeAll(source : ListCollectionView, items : ListCollectionView) : void {
-			for (var i : Number = 0; i < items.length; i++) {
-				source.removeItemAt(source.getItemIndex(items.getItemAt(i))); 
+		public static function removeAll(source : ListCollectionView, list : Object) : void {
+			if (list is ListCollectionView) {
+				for (var i : uint = 0; i < ListCollectionView(list).length; i++) {
+					source.removeItemAt(source.getItemIndex(ListCollectionView(list).getItemAt(i))); 
+				}
+			} else if (list is Array) {
+				for (i = 0; i < (list as Array).length; i++) {
+					source.removeItemAt(source.getItemIndex((list as Array)[i])); 
+				}
 			}
 		}
 		
