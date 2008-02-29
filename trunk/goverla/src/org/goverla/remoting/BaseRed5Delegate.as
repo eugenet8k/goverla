@@ -18,7 +18,10 @@ package org.goverla.remoting
 		{
 			if(_netConnection == null)
 			{
+				
 				_netConnection = new NetConnection();
+				//TODO:Remove comments when red5 6.4 will be published.
+				_netConnection.objectEncoding = ObjectEncoding.AMF0;		
 			}
 			return _netConnection;
 		}
@@ -29,11 +32,10 @@ package org.goverla.remoting
 			super(resultHandler, faultHandler);
 			connectionUrl = defaultConnectionUrl;
 		}
-		//TODO:Remove comments when red5 6.4 will be published.		
-//		override protected function createConnection():NetConnection
-//		{
-//			return netConnection;
-//		}
+		override protected function createConnection():NetConnection
+		{
+			return netConnection;
+		}
 		
 		override protected function getServiceName(methodName : String) : String
 		{
