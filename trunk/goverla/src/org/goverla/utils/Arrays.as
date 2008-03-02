@@ -18,13 +18,10 @@ package org.goverla.utils {
 	
 	public class Arrays {
 		
-		public static function mix(source : ListCollectionView) : ListCollectionView
-		{
-			for(var i : uint = 0; i < source.length; i++)
-			{
+		public static function mix(source : ListCollectionView) : ListCollectionView {
+			for (var i : uint = 0; i < source.length; i++) {
 				replaceItems(source, int(Math.random() * source.length), int(Math.random() * source.length));
 			}
-			
 			return source;
 		}
 		
@@ -80,6 +77,7 @@ package org.goverla.utils {
 			}
 			return result;
 		}
+		
 		public static function removeItem(item : Object, list : Object) : Object {
 			var o : Overload = new Overload(Arrays);
 			o.addHandler([Object, Array], removeItemForArray);
@@ -109,11 +107,11 @@ package org.goverla.utils {
 	
 		public static function insertAll(target : ListCollectionView, list : Object) : ListCollectionView {
 			if (list is ListCollectionView) {
-				for(var i : uint = 0; i < ListCollectionView(list).length; i++) {
+				for (var i : uint = 0; i < ListCollectionView(list).length; i++) {
 					target.addItem(ListCollectionView(list).getItemAt(i)); 
 				}
 			} else if (list is Array) {
-				for(i = 0; i < (list as Array).length; i++) {
+				for (i = 0; i < (list as Array).length; i++) {
 					target.addItem((list as Array)[i]); 
 				}
 			}
@@ -276,6 +274,20 @@ package org.goverla.utils {
 				result.push(source[property]);
 			}
 			return result;
+		}
+		
+		public static function updateByList(target : ListCollectionView, list : ListCollectionView) : void {
+			for each (var item : Object in target) {
+				if (!list.contains(item)) {
+					target.removeItemAt(target.getItemIndex(item));
+				}
+			}
+			
+			for each (item in list) {
+				if (!target.contains(item)) {
+					target.addItem(item);
+				}
+			}
 		}
 		
 		private static function getByRequirementForArray(array : Array, requirement : IRequirement) : ArrayList {
