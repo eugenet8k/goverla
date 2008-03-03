@@ -9,9 +9,7 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
-  <applications>
-    <application path="goverlatest.mxml"/>
-  </applications>
+  <applications/>
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
