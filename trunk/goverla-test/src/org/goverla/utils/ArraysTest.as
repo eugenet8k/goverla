@@ -1,5 +1,5 @@
-package org.goverla.utils
-{
+package org.goverla.utils {
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
@@ -11,8 +11,7 @@ package org.goverla.utils
 	import org.goverla.utils.converting.StringToBooleanConverter;
 	import org.goverla.utils.sorting.NormalSorter;
 
-	public class ArraysTest extends TestCase
-	{
+	public class ArraysTest extends TestCase {
 		
 		public function testSort() : void {
 			var sorter : NormalSorter = new NormalSorter();
@@ -340,6 +339,19 @@ package org.goverla.utils
 			
 			assertEquals(resultList, itemIndex);
 			assertEquals(resultArray, itemIndex);
+   		}
+   		
+   		public function testUpdateByList() : void {
+   			var list1 : ArrayCollection = new ArrayCollection([1, 2, 3, 4, 5]);
+   			var list2 : ArrayCollection = new ArrayCollection([3, 4, 5, 6, 7]);
+   			
+   			Arrays.updateByList(list1, list2);
+   			
+   			assertEquals(list1.getItemAt(0), 3);
+   			assertEquals(list1.getItemAt(1), 4);
+   			assertEquals(list1.getItemAt(2), 5);
+   			assertEquals(list1.getItemAt(3), 6);
+   			assertEquals(list1.getItemAt(4), 7);
    		}
    		
    	}
