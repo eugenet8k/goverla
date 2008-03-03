@@ -277,7 +277,7 @@ package org.goverla.utils {
 		}
 		
 		public static function updateByList(target : ListCollectionView, list : ListCollectionView) : void {
-			for each (var item : Object in target) {
+			for each (var item : Object in target.toArray()) {
 				if (!list.contains(item)) {
 					target.removeItemAt(target.getItemIndex(item));
 				}
