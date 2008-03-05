@@ -45,11 +45,16 @@ package org.goverla.flash.process {
 			_dispatcher.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
+		protected function sendTick() : void
+		{
+			tick.sendEvent();
+		}
+		
 		private function onEnterFrame(event : Event) : void {
 			_frameNumber++;
 			if (_framesPerTick == _frameNumber) {
 				_frameNumber = 0;
-				tick.sendEvent();
+				sendTick();
 			}
 			
 		}
