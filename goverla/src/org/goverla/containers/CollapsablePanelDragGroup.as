@@ -26,8 +26,8 @@ package org.goverla.containers {
 		public function addInstance(panel : CollapsablePanel) : void {
 			if (!collapsablePanels.contains(panel)) {
 				if (panel.dragable) {
-					panel.addEventListener(MouseEvent.CLICK, onClick);
 					panel.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+					panel.addEventListener(MouseEvent.MOUSE_UP, onPanelMouseUp);
 					panel.addEventListener(CollapsablePanelEvent.STATE_CHANGE, onStateChange);
 				}
 				collapsablePanels.addItem(panel);
@@ -37,15 +37,18 @@ package org.goverla.containers {
 		public function removeInstance(panel : CollapsablePanel) : void {
 			if (collapsablePanels.contains(panel)) {
 				panel.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				panel.removeEventListener(MouseEvent.MOUSE_UP, onPanelMouseUp);
 				panel.removeEventListener(CollapsablePanelEvent.STATE_CHANGE, onStateChange);
 				collapsablePanels.removeItemAt(collapsablePanels.getItemIndex(panel));
 			}
 		}
 		
-		protected function onClick(event : MouseEvent) : void {
+		protected function onPanelMouseUp(event : MouseEvent) : void {
 			var panel : CollapsablePanel = CollapsablePanel(event.currentTarget);
+			var shift : Point = UIUtil.getApplicationMouseShift(_startMousePosition);
 			if ((event.target is UITextField) && 
-					(UITextField(event.target).parent == panel.titleComponent)) {
+					(UITextField(event.target).parent == panel.titleComponent) && 
+					shift.x == 0 && shift.y == 0) {
 				if (panel.collapsed) {
 					panel.restore();
 				} else {
@@ -56,11 +59,11 @@ package org.goverla.containers {
 		}
 		
 		protected function onMouseDown(event : MouseEvent) : void {
+			_mousePosition = UIUtil.getApplicationMousePosition();
+			_startMousePosition = _mousePosition;
 			_draggingPanel = CollapsablePanel(event.currentTarget);
 			if (!_draggingPanel.collapsed && (event.target is UITextField) && 
 					(UITextField(event.target).parent == _draggingPanel.titleComponent)) {
-				_mousePosition = UIUtil.getApplicationMousePosition();
-				
 				Application.application.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 				Application.application.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);				
 			}
@@ -110,6 +113,8 @@ package org.goverla.containers {
 		}
 		
 		private var _draggingPanel : CollapsablePanel;
+		
+		private var _startMousePosition : Point;
 				
 		private var _mousePosition : Point;
 		
