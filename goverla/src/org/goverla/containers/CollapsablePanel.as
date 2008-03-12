@@ -1,8 +1,10 @@
 package org.goverla.containers {
 
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	import mx.containers.TitleWindow;
+	import mx.core.UIComponent;
 	import mx.effects.Resize;
 	import mx.events.StateChangeEvent;
 	import mx.states.SetProperty;
@@ -38,13 +40,8 @@ package org.goverla.containers {
 		
 		protected var setHeight : SetProperty;
 		
-		public function CollapsablePanel() {
-			super();
-			
-			titleIcon = RESTORED_ICON;
-			
-			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGE, onCurrentStateChange);
-			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGING, onCurrentStateChanging);
+		public function get titleComponent() : UIComponent {
+			return titleBar;
 		}
 		
 		public function get collapsable() : Boolean {
@@ -61,14 +58,26 @@ package org.goverla.containers {
 			return _collapsablePanelGroup;
 		}
 		
-		public function set collapsablePanelGroup(collapsablePanelGroup : CollapsablePanelGroup) : void {
+		public function set collapsablePanelGroup(value : CollapsablePanelGroup) : void {
 			if (_collapsablePanelGroup != null) {
 				_collapsablePanelGroup.removeInstance(this);
 			}
-			_collapsablePanelGroup = collapsablePanelGroup;
+			_collapsablePanelGroup = value;
 			_collapsablePanelGroup.addInstance(this);
 			_collapsablePanelGroupChanged = true;
 			invalidateProperties();
+		}
+
+		public function get collapsablePanelDragGroup() : CollapsablePanelDragGroup {
+			return _collapsablePanelDragGroup;
+		}
+		
+		public function set collapsablePanelDragGroup(value : CollapsablePanelDragGroup) : void {
+			if (_collapsablePanelDragGroup != null) {
+				_collapsablePanelDragGroup.removeInstance(this);
+			}
+			_collapsablePanelDragGroup = value;
+			_collapsablePanelDragGroup.addInstance(this);
 		}
 		
 		public function get autoScrollManager() : AutoScrollManager {
@@ -115,11 +124,28 @@ package org.goverla.containers {
 			}
 		}
 		
+		public function get dragable() : Boolean {
+			return _dragable;
+		}
+		
+		public function set dragable(value : Boolean) : void {
+			_dragable = value;
+		}
+		
 		protected function get oppositeState() : String {
 			return (collapsed ? RESTORED_STATE : COLLAPSED_STATE);
 		}
 		
-		override public function styleChanged(styleProp : String) : void {
+		public function CollapsablePanel() {
+			super();
+			
+			titleIcon = RESTORED_ICON;
+			
+			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGE, onCurrentStateChange);
+			addEventListener(StateChangeEvent.CURRENT_STATE_CHANGING, onCurrentStateChanging);
+		}
+		
+		public override function styleChanged(styleProp : String) : void {
 			super.styleChanged(styleProp);
 			
 			var allStyles : Boolean = (styleProp == null || styleProp == "styleName");
@@ -137,7 +163,7 @@ package org.goverla.containers {
 			changeCurrentState(RESTORED_STATE, false);
 		}
 		
-		override protected function createChildren() : void {
+		protected override function createChildren() : void {
 			super.createChildren();
 
 			createCollapsedState();
@@ -145,7 +171,7 @@ package org.goverla.containers {
 			titleBar.addEventListener(MouseEvent.CLICK, onTitleBarClick);
 		}
 		
-		override protected function commitProperties() : void {
+		protected override function commitProperties() : void {
 			super.commitProperties();
 			
 			if (_collapsableChanged || _collapsedIconSourceChanged || _restoredIconSourceChanged) {
@@ -176,7 +202,9 @@ package org.goverla.containers {
 		}
 
 		protected function onTitleBarClick(event : MouseEvent) : void {
-			setOppositeState();
+			if (!dragable) {
+				setOppositeState();
+			}
 		}
 		
 		protected function onCurrentStateChange(event : StateChangeEvent) : void {
@@ -220,12 +248,10 @@ package org.goverla.containers {
 		
 		private function createCollapsedState() : void {
 			setHeight = new SetProperty(this, "height");
-			
-			var overrides : Array = new Array(setHeight);
 
 			var collapsedState : State = new State();
 			collapsedState.name = COLLAPSED_STATE;
-			collapsedState.overrides = overrides;
+			collapsedState.overrides = [setHeight];
 			
 			states.push(collapsedState);
 			
@@ -238,9 +264,13 @@ package org.goverla.containers {
 		
 		private var _collapsableChanged : Boolean;
 		
+		private var _dragable : Boolean;
+		
 		private var _collapsablePanelGroup : CollapsablePanelGroup;
 		
 		private var _collapsablePanelGroupChanged : Boolean;
+		
+		private var _collapsablePanelDragGroup : CollapsablePanelDragGroup;
 		
 		private var _autoScrollManager : AutoScrollManager;
 		
@@ -250,7 +280,7 @@ package org.goverla.containers {
 		
 		private var _restoredIconSource : Class = RESTORED_ICON;
 		
-		private var _restoredIconSourceChanged : Boolean = true;;
+		private var _restoredIconSourceChanged : Boolean = true;
 		
 	}
 

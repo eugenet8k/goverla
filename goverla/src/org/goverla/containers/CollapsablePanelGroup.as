@@ -11,7 +11,7 @@ package org.goverla.containers {
 
 	public class CollapsablePanelGroup extends EventDispatcher implements IMXMLObject {
 		
-		protected var collapsablePanels : ArrayCollection /* of CollapsablePanel */ = new ArrayCollection();
+		protected var collapsablePanels : ArrayCollection = new ArrayCollection();
 		
 		public function CollapsablePanelGroup(document : IFlexDisplayObject = null) {
 			super();
