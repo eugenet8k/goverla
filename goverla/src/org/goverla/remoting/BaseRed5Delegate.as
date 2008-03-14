@@ -20,8 +20,6 @@ package org.goverla.remoting
 			{
 				
 				_netConnection = new NetConnection();
-				//TODO:Remove comments when red5 6.4 will be published.
-				_netConnection.objectEncoding = ObjectEncoding.AMF0;		
 			}
 			return _netConnection;
 		}
