@@ -4,7 +4,6 @@ package org.goverla.containers {
 	import flash.geom.Point;
 	
 	import mx.containers.TitleWindow;
-	import mx.core.UIComponent;
 	import mx.effects.Resize;
 	import mx.events.StateChangeEvent;
 	import mx.states.SetProperty;
@@ -15,12 +14,15 @@ package org.goverla.containers {
 	import org.goverla.constants.StyleConstants;
 	import org.goverla.constants.StyleNames;
 	import org.goverla.events.CollapsablePanelEvent;
+	import org.goverla.events.ResizeableLayoutEvent;
+	import org.goverla.interfaces.IResizableLayoutChild;
+	import org.goverla.utils.UIUtil;
 
 	[Style(name="restoredStyleName", type="String", inherit="no")]
 	
 	[Style(name="collapsedStyleName", type="String", inherit="no")]
 	
-	public class CollapsablePanel extends TitleWindow {
+	public class CollapsablePanel extends TitleWindow implements IResizableLayoutChild {
 		
 		protected static const RESTORED_STATE : String = "";
 		
@@ -39,10 +41,6 @@ package org.goverla.containers {
 		protected static const COLLAPSED_ICON : Class = Icons.ICON_10X6_CLOSED_UP;
 		
 		protected var setHeight : SetProperty;
-		
-		public function get titleComponent() : UIComponent {
-			return titleBar;
-		}
 		
 		public function get collapsable() : Boolean {
 			return _collapsable;
@@ -66,18 +64,6 @@ package org.goverla.containers {
 			_collapsablePanelGroup.addInstance(this);
 			_collapsablePanelGroupChanged = true;
 			invalidateProperties();
-		}
-
-		public function get collapsablePanelDragGroup() : CollapsablePanelDragGroup {
-			return _collapsablePanelDragGroup;
-		}
-		
-		public function set collapsablePanelDragGroup(value : CollapsablePanelDragGroup) : void {
-			if (_collapsablePanelDragGroup != null) {
-				_collapsablePanelDragGroup.removeInstance(this);
-			}
-			_collapsablePanelDragGroup = value;
-			_collapsablePanelDragGroup.addInstance(this);
 		}
 		
 		public function get autoScrollManager() : AutoScrollManager {
@@ -124,12 +110,8 @@ package org.goverla.containers {
 			}
 		}
 		
-		public function get dragable() : Boolean {
-			return _dragable;
-		}
-		
-		public function set dragable(value : Boolean) : void {
-			_dragable = value;
+		public function get resizeable() : Boolean {
+			return !collapsed;
 		}
 		
 		protected function get oppositeState() : String {
@@ -168,7 +150,8 @@ package org.goverla.containers {
 
 			createCollapsedState();
 
-			titleBar.addEventListener(MouseEvent.CLICK, onTitleBarClick);
+			titleBar.addEventListener(MouseEvent.MOUSE_DOWN, onTitleBarMouseDown);
+			titleBar.addEventListener(MouseEvent.MOUSE_UP, onTitleBarMouseUp);
 		}
 		
 		protected override function commitProperties() : void {
@@ -200,9 +183,19 @@ package org.goverla.containers {
 				dispatchEvent(new CollapsablePanelEvent(CollapsablePanelEvent.STATE_CHANGE));
 			}
 		}
-
-		protected function onTitleBarClick(event : MouseEvent) : void {
-			if (!dragable) {
+		
+		protected function onTitleBarMouseDown(event : MouseEvent) : void {
+			_mousePosition = UIUtil.getApplicationMousePosition();
+			if (!collapsed) {
+				dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.START_RESIZE, event.bubbles, event.cancelable,
+					event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
+			}
+		}
+		
+		// bugfix: titleBar always dispatches both click and mouseDown events
+		protected function onTitleBarMouseUp(event : MouseEvent) : void {
+			var shift : Point = UIUtil.getApplicationMouseShift(_mousePosition);
+			if (shift.x == 0 && shift.y == 0) {
 				setOppositeState();
 			}
 		}
@@ -264,13 +257,9 @@ package org.goverla.containers {
 		
 		private var _collapsableChanged : Boolean;
 		
-		private var _dragable : Boolean;
-		
 		private var _collapsablePanelGroup : CollapsablePanelGroup;
 		
 		private var _collapsablePanelGroupChanged : Boolean;
-		
-		private var _collapsablePanelDragGroup : CollapsablePanelDragGroup;
 		
 		private var _autoScrollManager : AutoScrollManager;
 		
@@ -281,6 +270,8 @@ package org.goverla.containers {
 		private var _restoredIconSource : Class = RESTORED_ICON;
 		
 		private var _restoredIconSourceChanged : Boolean = true;
+		
+		private var _mousePosition : Point;
 		
 	}
 
