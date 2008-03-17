@@ -4,6 +4,7 @@ package org.goverla.containers {
 	import flash.geom.Point;
 	
 	import mx.containers.TitleWindow;
+	import mx.core.Application;
 	import mx.effects.Resize;
 	import mx.events.StateChangeEvent;
 	import mx.states.SetProperty;
@@ -152,6 +153,8 @@ package org.goverla.containers {
 
 			titleBar.addEventListener(MouseEvent.MOUSE_DOWN, onTitleBarMouseDown);
 			titleBar.addEventListener(MouseEvent.MOUSE_UP, onTitleBarMouseUp);
+			titleBar.addEventListener(MouseEvent.MOUSE_OUT, onTitleBarMouseOut);
+			titleBar.addEventListener(MouseEvent.MOUSE_OVER, onTitleBarMouseOver);
 		}
 		
 		protected override function commitProperties() : void {
@@ -178,6 +181,11 @@ package org.goverla.containers {
 		}
 		
 		protected function changeCurrentState(state : String, fireChange : Boolean = true) : void {
+			if (state == RESTORED_STATE) {
+				dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.OPEN));
+			} else {
+				dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.CLOSE));
+			}
 			currentState = state;
 			if (fireChange) {
 				dispatchEvent(new CollapsablePanelEvent(CollapsablePanelEvent.STATE_CHANGE));
@@ -187,17 +195,36 @@ package org.goverla.containers {
 		protected function onTitleBarMouseDown(event : MouseEvent) : void {
 			_mousePosition = UIUtil.getApplicationMousePosition();
 			if (!collapsed) {
-				dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.START_RESIZE, event.bubbles, event.cancelable,
-					event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
+				Application.application.addEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
 			}
+		}
+		
+		protected function onApplicationMouseMove(event : MouseEvent) : void {
+			Application.application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
+			dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.START_RESIZE, event.bubbles, event.cancelable,
+				event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
 		}
 		
 		// bugfix: titleBar always dispatches both click and mouseDown events
 		protected function onTitleBarMouseUp(event : MouseEvent) : void {
+			Application.application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
 			var shift : Point = UIUtil.getApplicationMouseShift(_mousePosition);
 			if (shift.x == 0 && shift.y == 0) {
 				setOppositeState();
+			} else {
+				dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.END_RESIZE, event.bubbles, event.cancelable,
+					event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));				
 			}
+		}
+		
+		protected function onTitleBarMouseOut(event : MouseEvent) : void {
+			dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.RESIZE_MOUSE_OUT, event.bubbles, event.cancelable,
+				event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
+		}
+		
+		protected function onTitleBarMouseOver(event : MouseEvent) : void {
+			dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.RESIZE_MOUSE_OVER, event.bubbles, event.cancelable,
+				event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
 		}
 		
 		protected function onCurrentStateChange(event : StateChangeEvent) : void {
