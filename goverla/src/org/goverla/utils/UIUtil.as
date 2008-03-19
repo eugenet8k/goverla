@@ -16,6 +16,12 @@ package org.goverla.utils {
 
 	public class UIUtil {
 		
+		public static function removeChildren(parent : DisplayObjectContainer) : void {
+			while(parent.numChildren > 0)
+			{
+				parent.removeChildAt(0);
+			}
+		}
 		public static function getApplicationMousePosition() : Point {
 			return new Point(Application.application.mouseX,
 				Application.application.mouseY);
