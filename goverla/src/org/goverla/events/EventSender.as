@@ -1,12 +1,9 @@
 package org.goverla.events 
 {
 	
-	import org.goverla.events.DefaultEvent;
-	import org.goverla.utils.Objects;
-	
-	import flash.events.Event;
-	
 	import mx.collections.ArrayCollection;
+	
+	import org.goverla.utils.Objects;
 	
 	/**
 	 * @author Maxym Hryniv
@@ -38,14 +35,21 @@ package org.goverla.events
 			_listeners.removeItemAt(_listeners.getItemIndex(listener));
 		}
 
-		public function sendEvent(eventObject : Event = null) : void {
+		public function sendEvent(eventObject : Object = null) : void {
 			if(eventObject == null) {
 				eventObject = new DefaultEvent();
 			}
 			if (_type == null || (_type != null && eventObject is _type)) {
 				for(var index : int = 0; index < _listeners.length; index++) {
 					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
-					listener(eventObject);
+					try
+					{
+						listener(eventObject);
+					}
+					catch(e : ArgumentError)
+					{
+						listener();
+					}
 				}
 			} else {
 				throw new TypeError("The eventObject has incorrect event type!");
