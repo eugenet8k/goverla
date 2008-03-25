@@ -28,10 +28,14 @@ package org.goverla.utils
 			
 			eventSender.addListener(listener1);
 			eventSender.addListener(listener2);
+			eventSender.addListener(listener3);
 			
 			eventSender.sendEvent(event);
 		}
 		
+		private function listener3() : void {
+			
+		}
 		private function listener1(e:Event) : void {
 			
 			assertEquals(e.type, "TestEvent");
