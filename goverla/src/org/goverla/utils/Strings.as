@@ -76,6 +76,10 @@
 			return result;
 		}
 	
+		public static function startsWidth(source : String, sought : String) : Boolean {
+			return source.length >= sought.length && source.indexOf(sought) == 0;
+		}
+		
 		public static function contains(source : String, sought : String) : Boolean {
 			return (source.indexOf(sought) != -1);
 		}
