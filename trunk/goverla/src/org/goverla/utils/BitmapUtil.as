@@ -1,5 +1,6 @@
 package org.goverla.utils {
 	
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
@@ -10,7 +11,7 @@ package org.goverla.utils {
 	
 	public class BitmapUtil {
 
-		public static function capture(source : UIComponent,
+		public static function captureBitmapData(source : UIComponent,
 			captureWidth : Number,
 			captureHeight : Number,
 			maintainAspectRatio : Boolean = true,
@@ -18,7 +19,7 @@ package org.goverla.utils {
 			blendMode : String = null,
 			clipRect : Rectangle = null,
 			smoothing : Boolean = false) : BitmapData {
-			
+
 			if (maintainAspectRatio) {
 				if (captureHeight / source.height > captureWidth / source.width) {
 					captureHeight = source.height * (captureWidth / source.width);
@@ -26,12 +27,26 @@ package org.goverla.utils {
 					captureWidth = source.width * (captureHeight / source.height);
 				}
 			}
-			
 			var result : BitmapData = new BitmapData(captureWidth, captureHeight);
 			var matrix : Matrix = new Matrix();
 			matrix.scale(captureWidth / source.width, captureHeight / source.height);
 			result.draw(source, matrix, colorTransform, blendMode, clipRect, smoothing);
-			
+
+			return result;
+		}
+		
+		public static function captureComponent(source : UIComponent,
+			captureWidth : Number,
+			captureHeight : Number) : UIComponent {
+
+			var captureBitmapData : BitmapData = captureBitmapData(source, captureWidth, captureHeight);
+			var captureBitmap : Bitmap = new Bitmap(captureBitmapData);
+
+			var result : UIComponent = new UIComponent();
+			result.width = captureBitmap.width;
+			result.height = captureBitmap.height;
+			result.addChild(captureBitmap);
+
 			return result;
 		}
 		
@@ -55,8 +70,6 @@ package org.goverla.utils {
 					}
 				}
 			}
-		}	
-
+		}
 	}
-	
 }
