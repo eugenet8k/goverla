@@ -1,7 +1,5 @@
 package org.goverla.containers {
 	
-	import mx.binding.utils.BindingUtils;
-	import mx.binding.utils.ChangeWatcher;
 	import mx.containers.Canvas;
 	import mx.core.UIComponent;
 	import mx.events.ResizeEvent;
