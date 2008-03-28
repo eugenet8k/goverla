@@ -1,52 +1,66 @@
 package org.goverla.containers {
 	
-	import mx.binding.utils.BindingUtils;
-	import mx.binding.utils.ChangeWatcher;
 	import mx.containers.Box;
 	import mx.core.UIComponent;
-	
-	import org.goverla.collections.ArrayList;
+	import mx.events.ResizeEvent;
 
 	public class BoxWithChild extends Box {
 		
-		public var widthByContent : Boolean = false;
+		public var sizeByContent : Boolean = false;
 		
-		public var heightByContent : Boolean = false;
-		
-		public function set child(value : UIComponent) : void {
-			removeChildElement();
-			if (value != null) {
-				addChild(value);
-				bindSize(heightByContent, value, "height");
-				bindSize(widthByContent, value, "width");
-			}
-			_child = value;
+		public function BoxWithChild() {
+			super();
+			
+			addEventListener(ResizeEvent.RESIZE, onResize);
 		}
-		
+
 		public function get child() : UIComponent {
 			return _child;
 		}
-		
-		private function bindSize(bindDirection : Boolean, child : UIComponent, property : String) : void {
-			var host : UIComponent = bindDirection ? child : this;
-			var site : UIComponent = bindDirection ? this : child;
-			_watchers.addItem(BindingUtils.bindProperty(site, property, host, property));
+
+		public function set child(child : UIComponent) : void {
+			if (_child != null) {
+				_child.removeEventListener(ResizeEvent.RESIZE, onChildResize);
+			}
+			_child = child;
+			if (_child != null) {
+				_child.addEventListener(ResizeEvent.RESIZE, onChildResize);
+			}
+			_childChanged = true;
+			invalidateProperties();
 		}
 		
-		private function removeChildElement() : void {
-			if (_child != null) {
-				removeChild(_child);
-				for each(var watcher : ChangeWatcher in _watchers) {
-					watcher.unwatch();
+		override protected function commitProperties() : void {
+			super.commitProperties();
+
+			if (_childChanged) {
+				removeAllChildren();
+				if (_child != null) {
+					addChild(_child);
 				}
-				_watchers.removeAll();
+			}
+		}
+		
+		private function onResize(event : ResizeEvent) : void {
+			adjustSize();
+		}
+		
+		private function onChildResize(event : ResizeEvent) : void {
+			adjustSize();
+		}
+		
+		private function adjustSize() : void {
+			if (sizeByContent) {
+				width = _child.width;
+				height = _child.height;
+			} else {
+				_child.width = width;
+				_child.height = height;
 			}
 		}
 		
 		private var _child : UIComponent;
-		
-		private var _watchers : ArrayList = new ArrayList();
-		
+
+		private var _childChanged : Boolean;
 	}
-	
 }
