@@ -4,40 +4,65 @@ package org.goverla.containers {
 	import mx.binding.utils.ChangeWatcher;
 	import mx.containers.Canvas;
 	import mx.core.UIComponent;
+	import mx.events.ResizeEvent;
 
 	public class CanvasWithChild extends Canvas {
 		
 		public var sizeByContent : Boolean = false;
 		
-		public function set child(value : UIComponent) : void {
-			removeChildElement();
-			if (value != null) {
-				addChild(value);
-				var host : UIComponent = sizeByContent ? value : this;
-				var site : UIComponent = sizeByContent ? this : value;
-				_widthWatcher = BindingUtils.bindProperty(site, "width", host, "width");
-				_heightWatcher = BindingUtils.bindProperty(site, "height", host, "height");
-			}
-			_child = value;
+		public function CanvasWithChild() {
+			super();
+			
+			addEventListener(ResizeEvent.RESIZE, onResize);
 		}
-		
+
 		public function get child() : UIComponent {
 			return _child;
 		}
-		
-		private function removeChildElement() : void {
+
+		public function set child(child : UIComponent) : void {
 			if (_child != null) {
-				removeChild(_child);
-				_widthWatcher.unwatch();
-				_heightWatcher.unwatch();
+				_child.removeEventListener(ResizeEvent.RESIZE, onChildResize);
+			}
+			_child = child;
+			if (_child != null) {
+				_child.addEventListener(ResizeEvent.RESIZE, onChildResize);
+			}
+			_childChanged = true;
+			invalidateProperties();
+		}
+		
+		override protected function commitProperties() : void {
+			super.commitProperties();
+
+			if (_childChanged) {
+				removeAllChildren();
+				if (_child != null) {
+					addChild(_child);
+				}
+			}
+		}
+		
+		private function onResize(event : ResizeEvent) : void {
+			adjustSize();
+		}
+		
+		private function onChildResize(event : ResizeEvent) : void {
+			adjustSize();
+		}
+		
+		private function adjustSize() : void {
+			if (sizeByContent) {
+				width = _child.width;
+				height = _child.height;
+			} else {
+				_child.width = width;
+				_child.height = height;
 			}
 		}
 		
 		private var _child : UIComponent;
-		
-		private var _widthWatcher : ChangeWatcher;
-		
-		private var _heightWatcher : ChangeWatcher;
 
+		private var _childChanged : Boolean;
 	}
 }
