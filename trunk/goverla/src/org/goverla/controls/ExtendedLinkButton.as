@@ -3,8 +3,8 @@ package org.goverla.controls {
 	import mx.controls.LinkButton;
 	
 	import org.goverla.constants.StyleNames;
-	import org.goverla.css.CSSUtils;
 	import org.goverla.skins.ExtendedLinkButtonSkin;
+	import org.goverla.utils.CSSUtils;
 	import org.goverla.utils.common.Pair;
 
 	[Style(name="upBackgroundColor", type="uint", format="Color", inherit="yes")]
