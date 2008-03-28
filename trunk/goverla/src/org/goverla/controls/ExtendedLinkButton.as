@@ -5,7 +5,7 @@ package org.goverla.controls {
 	import org.goverla.constants.StyleNames;
 	import org.goverla.css.CSSUtils;
 	import org.goverla.skins.ExtendedLinkButtonSkin;
-	import org.goverla.utils.common.PairEntry;
+	import org.goverla.utils.common.Pair;
 
 	[Style(name="upBackgroundColor", type="uint", format="Color", inherit="yes")]
 	
@@ -31,16 +31,16 @@ package org.goverla.controls {
 		
         private static function staticConstructor() : Boolean {
         	CSSUtils.setDefaultStyles(CLASS_NAME,
-        		new PairEntry(StyleNames.UP_SKIN, ExtendedLinkButtonSkin),
-	            new PairEntry(StyleNames.OVER_SKIN, ExtendedLinkButtonSkin),
-	            new PairEntry(StyleNames.DOWN_SKIN, ExtendedLinkButtonSkin),
-	            new PairEntry(StyleNames.DISABLED_SKIN, ExtendedLinkButtonSkin),
-                new PairEntry(StyleNames.UP_BACKGROUND_COLOR, 0x000000),
-                new PairEntry(StyleNames.UP_BACKGROUND_ALPHA, 0),
-                new PairEntry(StyleNames.ROLL_OVER_ALPHA, 0),
-                new PairEntry(StyleNames.SELECTION_ALPHA, 0),
-                new PairEntry(StyleNames.DISABLED_BACKGROUND_COLOR, 0x000000),
-                new PairEntry(StyleNames.DISABLED_BACKGROUND_ALPHA, 0));
+        		new Pair(StyleNames.UP_SKIN, ExtendedLinkButtonSkin),
+	            new Pair(StyleNames.OVER_SKIN, ExtendedLinkButtonSkin),
+	            new Pair(StyleNames.DOWN_SKIN, ExtendedLinkButtonSkin),
+	            new Pair(StyleNames.DISABLED_SKIN, ExtendedLinkButtonSkin),
+                new Pair(StyleNames.UP_BACKGROUND_COLOR, 0x000000),
+                new Pair(StyleNames.UP_BACKGROUND_ALPHA, 0),
+                new Pair(StyleNames.ROLL_OVER_ALPHA, 0),
+                new Pair(StyleNames.SELECTION_ALPHA, 0),
+                new Pair(StyleNames.DISABLED_BACKGROUND_COLOR, 0x000000),
+                new Pair(StyleNames.DISABLED_BACKGROUND_ALPHA, 0));
         	
             return true;
         }

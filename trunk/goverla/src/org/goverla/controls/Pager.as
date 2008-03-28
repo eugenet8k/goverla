@@ -17,7 +17,7 @@ package org.goverla.controls {
 	import org.goverla.interfaces.IMultipage;
 	import org.goverla.interfaces.INavigator;
 	import org.goverla.utils.TextFormatter;
-	import org.goverla.utils.common.PairEntry;
+	import org.goverla.utils.common.Pair;
 
 	[Style(name="itemsTotalColor", type="uint", format="Color")]
 
@@ -65,8 +65,8 @@ package org.goverla.controls {
 		
 		private static function staticConstructor() : Boolean {
         	CSSUtils.setDefaultStyles(CLASS_NAME,
-        		new PairEntry(StyleNames.HORIZONTAL_GAP, 0),
-        		new PairEntry(StyleNames.VERTICAL_ALIGN, "middle"));
+        		new Pair(StyleNames.HORIZONTAL_GAP, 0),
+        		new Pair(StyleNames.VERTICAL_ALIGN, "middle"));
 
 			return true;
 		}

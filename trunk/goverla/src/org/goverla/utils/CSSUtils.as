@@ -3,8 +3,8 @@ package org.goverla.utils {
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	
-	import org.goverla.utils.common.PairEntry;
-
+	import org.goverla.utils.common.Pair;
+	
 	public class CSSUtils {	
 		
 		public static function getStyleDeclaration(className : String) : CSSStyleDeclaration {
@@ -15,7 +15,7 @@ package org.goverla.utils {
         public static function setDefaultStyles(className : String, ...defaultStyles) : void {
         	var defaultStyleDeclaration : CSSStyleDeclaration = getStyleDeclaration(className);
         				
-        	for each (var defaultStyle : PairEntry in defaultStyles) {
+        	for each (var defaultStyle : Pair in defaultStyles) {
         		if (defaultStyleDeclaration.getStyle(defaultStyle.name) == null) {
 	        		defaultStyleDeclaration.setStyle(defaultStyle.name, defaultStyle.value);
         		}
