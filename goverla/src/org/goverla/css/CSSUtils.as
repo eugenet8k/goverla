@@ -7,7 +7,7 @@ package org.goverla.css {
 	import org.goverla.constants.StyleConstants;
 	import org.goverla.constants.StyleNames;
 	import org.goverla.utils.FontDescription;
-	import org.goverla.utils.common.PairEntry;
+	import org.goverla.utils.common.Pair;
 
 	public class CSSUtils {
 		
@@ -16,7 +16,7 @@ package org.goverla.css {
         		(StyleManager.getStyleDeclaration(className) != null ?
         			StyleManager.getStyleDeclaration(className) :
         				new CSSStyleDeclaration());
-        	for each (var defaultStyle : PairEntry in defaultStyles) {
+        	for each (var defaultStyle : Pair in defaultStyles) {
         		if (defaultStyleDeclaration.getStyle(defaultStyle.name) == null) {
 	        		defaultStyleDeclaration.setStyle(defaultStyle.name, defaultStyle.value);
         		}
