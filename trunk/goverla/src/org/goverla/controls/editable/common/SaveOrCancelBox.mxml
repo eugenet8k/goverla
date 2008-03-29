@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SaveOrCancelBoxBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns="org.goverla.controls.editable.common.*"
-	xmlns:controls="org.goverla.controls.*">
+	xmlns:controls="org.goverla.controls.*"
+	currentState="{BUTTON_STATE}">
+	
+	<mx:Metadata>
+		
+	</mx:Metadata>
+
+	<mx:Script>
+		<![CDATA[
+			import org.goverla.constants.Icons;
+			import org.goverla.events.SaveOrCancelBoxEvent;
+
+			public static const BUTTON_STATE : String = "buttonState";
+
+			public static const BUTTON_WITH_ICON_STATE : String = "buttonWithIconState";
+
+			public static const LINK_BUTTON_STATE : String = "linkButtonState";
+
+			public static const LINK_BUTTON_WITH_ICON_STATE : String = "linkButtonWithIconState";
+
+			public static const ICON_STATE : String = "iconState";
+
+			private static const SAVE_ICON : Class = Icons.ICON_16X16_ACCEPT_UP;
+
+			private static const CANCEL_ICON : Class = Icons.ICON_16X16_DECLINE_UP;
+
+			private function onSaveButtonClick() : void {
+				dispatchEvent(new SaveOrCancelBoxEvent(SaveOrCancelBoxEvent.SAVE));
+			}
+	
+			private function onCancelButtonClick() : void {
+				dispatchEvent(new SaveOrCancelBoxEvent(SaveOrCancelBoxEvent.CANCEL));
+			}
+		]]>
+	</mx:Script>
+
 	<states>
 		<mx:State name="{BUTTON_STATE}">
 			<mx:AddChild>
@@ -39,4 +74,4 @@
 			<mx:SetProperty name="defaultButton" value="{saveImage}" />
 		</mx:State>
 	</states>
-</SaveOrCancelBoxBase>
+</mx:HBox>

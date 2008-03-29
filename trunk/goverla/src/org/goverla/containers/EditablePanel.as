@@ -11,10 +11,8 @@ package org.goverla.containers {
 	
 	import org.goverla.constants.Icons;
 	import org.goverla.constants.StyleNames;
-	import org.goverla.containers.CollapsablePanel;
 	import org.goverla.controls.ExtendedLinkButton;
 	import org.goverla.controls.editable.common.SaveOrCancelBox;
-	import org.goverla.controls.editable.common.SaveOrCancelBoxBase;
 	import org.goverla.events.EditableControlEvent;
 	import org.goverla.events.RemoteValidationResultEvent;
 	import org.goverla.events.SaveOrCancelBoxEvent;
@@ -94,11 +92,11 @@ package org.goverla.containers {
 		}
 		
 		public function set saveOrCancelBoxState(saveOrCancelBoxState : String) : void {
-			if (saveOrCancelBoxState == SaveOrCancelBoxBase.BUTTON_STATE ||
-			saveOrCancelBoxState == SaveOrCancelBoxBase.BUTTON_WITH_ICON_STATE ||
-			saveOrCancelBoxState == SaveOrCancelBoxBase.LINK_BUTTON_STATE ||
-			saveOrCancelBoxState == SaveOrCancelBoxBase.LINK_BUTTON_WITH_ICON_STATE ||
-			saveOrCancelBoxState == SaveOrCancelBoxBase.ICON_STATE) {
+			if (saveOrCancelBoxState == SaveOrCancelBox.BUTTON_STATE ||
+			saveOrCancelBoxState == SaveOrCancelBox.BUTTON_WITH_ICON_STATE ||
+			saveOrCancelBoxState == SaveOrCancelBox.LINK_BUTTON_STATE ||
+			saveOrCancelBoxState == SaveOrCancelBox.LINK_BUTTON_WITH_ICON_STATE ||
+			saveOrCancelBoxState == SaveOrCancelBox.ICON_STATE) {
 				_saveOrCancelBoxState = saveOrCancelBoxState;
 				_saveOrCancelBoxStateChanged = true;
 				invalidateProperties();
