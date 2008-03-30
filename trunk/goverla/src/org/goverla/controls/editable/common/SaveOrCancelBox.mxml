@@ -5,7 +5,8 @@
 	currentState="{BUTTON_STATE}">
 	
 	<mx:Metadata>
-		
+		[Event(name="save", type="org.goverla.events.SaveOrCancelBoxEvent")]
+		[Event(name="cancel", type="org.goverla.events.SaveOrCancelBoxEvent")]
 	</mx:Metadata>
 
 	<mx:Script>
