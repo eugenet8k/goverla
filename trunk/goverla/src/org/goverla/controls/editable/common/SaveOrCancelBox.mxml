@@ -38,7 +38,7 @@
 		]]>
 	</mx:Script>
 
-	<states>
+	<mx:states>
 		<mx:State name="{BUTTON_STATE}">
 			<mx:AddChild>
 				<mx:Button id="saveButton" label="Save" width="100%" click="onSaveButtonClick()" />
@@ -74,5 +74,5 @@
 			</mx:AddChild>
 			<mx:SetProperty name="defaultButton" value="{saveImage}" />
 		</mx:State>
-	</states>
+	</mx:states>
 </mx:HBox>
