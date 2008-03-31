@@ -62,10 +62,15 @@ package org.goverla.utils {
 		
 		public static function copyFieldsAndProperties(source : Object, target : Object) : void {
 			var sourceMembers : ArrayCollection = getFieldsAndPropertiesByInstance(source);
-			var targetMembers : ArrayCollection = getFieldsAndPropertiesByInstance(target);
+			//var targetMembers : ArrayCollection = getFieldsAndPropertiesByInstance(target);
 			for each (var property : String in sourceMembers) {
-				if (targetMembers.contains(property)) {
+				try 
+				{
 					target[property] = source[property];
+				}
+				catch(e : Error)
+				{
+					//OK
 				}
 			}
 			
