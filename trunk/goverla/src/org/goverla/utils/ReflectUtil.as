@@ -120,7 +120,7 @@ package org.goverla.utils {
 		public static function getFullTypeName(instance : Object) : String {
 			var description : XML = describeType(instance);
 			var nameWithContext : String = description.@name;
-			return nameWithContext;
+			return normalizeTypeName(nameWithContext);
 		}
 		
 		public static function hasFieldByInstance(instance : Object, name : String) : Boolean {
