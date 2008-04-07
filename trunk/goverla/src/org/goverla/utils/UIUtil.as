@@ -16,6 +16,12 @@ package org.goverla.utils {
 
 	public class UIUtil {
 		
+		public static function scale(component : DisplayObject, maxHeight: Number, maxWidth : Number) : Number {
+			var scale : Number = Math.min(maxHeight / component.height, maxWidth / component.width);
+			component.height *= scale;
+			component.width *= scale;
+			return scale;
+		}
 		public static function removeChildren(parent : DisplayObjectContainer) : void {
 			while(parent.numChildren > 0)
 			{
