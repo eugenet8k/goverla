@@ -34,7 +34,16 @@ package org.goverla.events
 			}
 			_listeners.removeItemAt(_listeners.getItemIndex(listener));
 		}
+		
+		public function removeListeners() : void {
+			_listeners = new ArrayCollection();
+		}
 
+		public function setListener(listener : Function) : void {
+			removeListeners();
+			_listeners.addItem(listener);
+		}
+		
 		public function sendEvent(eventObject : Object = null) : void {
 			if(eventObject == null) {
 				eventObject = new DefaultEvent();
