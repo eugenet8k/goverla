@@ -18,7 +18,6 @@ package org.goverla.hotkey {
 		private var _hotkeyListeners : ArrayList = new ArrayList();
 		
 		public function HotkeyManagerInstance() {
-			var a : Application = Application(Application.application);
 			Application(Application.application).addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
 		

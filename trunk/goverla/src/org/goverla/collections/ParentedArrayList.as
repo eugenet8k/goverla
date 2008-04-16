@@ -7,7 +7,7 @@ package org.goverla.collections
 		private var _parent : Object;
 		private var _parentFiled : String;
 		
-		public function ParentedArrayList(parent : Object = null, parentField : String = null, list:Object=null)
+		public function ParentedArrayList(parent : Object = null, parentField : String = "parent", list:Object=null)
 		{
 			super(list);
 			_parent = parent;
