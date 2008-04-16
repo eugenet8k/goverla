@@ -10,7 +10,7 @@ package org.goverla.collections
 		public function ParentedArrayList(parent : Object = null, parentField : String = "parent", list:Object=null)
 		{
 			super(list);
-			_parent = parent;
+			_parent = parent == null ? this : parent;
 			_parentFiled = parentField;
 			if(list != null) {
 				refreshParent();
@@ -51,7 +51,7 @@ package org.goverla.collections
 			if(_parentFiled == null)
 				return;
 				
-			for each(var child : Object in list) {
+			for each(var child : Object in this) {
 				setParent(child);
 			}
 		}
