@@ -16,7 +16,8 @@ package org.goverla.utils
 				?
 				StringUtil.substitute("{1}:{2}", hours, getTimeSubstring(minutes), getTimeSubstring(seconds))
 				: StringUtil.substitute("{0}:{1}:{2}", hours, getTimeSubstring(minutes), getTimeSubstring(seconds));
-			if(result.match(/0\d.*/))
+			var match : Array = result.match(/0\d.*/);
+			if(match != null && match[0] == result)
 			{
 				result = result.substr(1, result.length - 1);
 			}
