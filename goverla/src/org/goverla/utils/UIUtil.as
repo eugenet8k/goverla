@@ -51,6 +51,13 @@ package org.goverla.utils {
 			result.y = (point.y * 100) / zoom;
 			return result;
 		}
+
+		public static function getZoomDelta(relative : Point, zoom : Number) : Point {
+			var deltaX : Number = (relative.x  * (zoom - 100)) / 100;
+			var deltaY : Number = (relative.y * (zoom - 100)) / 100;
+			var result : Point = convertToZoom(new Point(deltaX, deltaY), zoom);
+			return result;
+		}
 		
 		public static function roundPoint(point : Point) : Point {
 			var result : Point = new Point();
