@@ -1,5 +1,4 @@
-package org.goverla.remoting.errors 
-{
+package org.goverla.errors {
 
 	public class ResponderError extends Error {
 		

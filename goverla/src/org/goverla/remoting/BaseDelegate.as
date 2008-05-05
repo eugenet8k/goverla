@@ -1,5 +1,5 @@
-package org.goverla.remoting
-{
+package org.goverla.remoting {
+	
 	import flash.net.NetConnection;
 	import flash.net.Responder;
 	
@@ -8,43 +8,34 @@ package org.goverla.remoting
 	import org.goverla.collections.ArrayList;
 	import org.goverla.utils.ReflectUtil;
 	
-	public class BaseDelegate
-	{
+	public class BaseDelegate {
+		
 		public static var defaultFaultHandler : Function;
 		
 		protected var connectionUrl : String;
 		
-		private var _resultHandler : Function;
-		private var _faultHandler : Function;
-		
-		public function BaseDelegate(resultHandler : Function, faultHandler : Function)
-		{
+		public function BaseDelegate(resultHandler : Function, faultHandler : Function) {
 			_resultHandler = resultHandler;
-			_faultHandler = faultHandler == null ? defaultFaultHandler : faultHandler;
-			
+			_faultHandler = faultHandler == null ? defaultFaultHandler : faultHandler;	
 		}
 		
-		protected function createConnection() : NetConnection
-		{
+		protected function createConnection() : NetConnection {
 			var connection : NetConnection = new NetConnection();
 			connection.connect(connectionUrl);
 			return connection;
 		}
 		
-		protected function getServiceName(methodName : String) : String
-		{
+		protected function getServiceName(methodName : String) : String {
 			var className : String = ReflectUtil.getFullTypeName(this);
 			className = ReflectUtil.normalizeTypeName(className);
 			return StringUtil.substitute("{0}.{1}", className, methodName);
 		}
 		
-		protected function processArguments(methodName : String, args : ArrayList) : ArrayList
-		{
+		protected function processArguments(methodName : String, args : ArrayList) : ArrayList {
 			return args;
 		}
 		
-		protected function doCall(methodName : String, args : Array) : void
-		{
+		protected function doCall(methodName : String, args : Array) : void	{
 			var connection : NetConnection = createConnection();
 			
 			var flashResponder : Responder = new Responder(_resultHandler, _faultHandler);
@@ -53,7 +44,11 @@ package org.goverla.remoting
 			
 			connection.call.apply(connection, newArguments.toArray());
 		}
+
+		private var _resultHandler : Function;
 		
+		private var _faultHandler : Function;		
 
 	}
+	
 }
