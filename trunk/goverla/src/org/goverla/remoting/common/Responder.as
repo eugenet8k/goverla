@@ -1,9 +1,8 @@
-package org.goverla.remoting.common
-{
+package org.goverla.remoting.common {
 
 	import mx.rpc.IResponder;
 	
-	import org.goverla.remoting.errors.ResponderError;
+	import org.goverla.errors.ResponderError;
 	
 	public class Responder implements IResponder {
 		
