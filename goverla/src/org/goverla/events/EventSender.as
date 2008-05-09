@@ -45,19 +45,24 @@ package org.goverla.events
 		}
 		
 		public function sendEvent(eventObject : Object = null) : void {
-			if(eventObject == null) {
-				eventObject = new DefaultEvent();
-			}
 			if (_type == null || (_type != null && eventObject is _type)) {
 				for(var index : int = 0; index < _listeners.length; index++) {
 					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
-					try
+					if(eventObject == null)
+					{
+						try
+						{
+							listener();
+						}
+						catch(e:ArgumentError)
+						{
+							//If someone wants to send null as parameter
+							listener(eventObject);
+						}
+					}
+					else
 					{
 						listener(eventObject);
-					}
-					catch(e : ArgumentError)
-					{
-						listener();
 					}
 				}
 			} else {
