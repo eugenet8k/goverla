@@ -100,7 +100,7 @@ package org.goverla.collections {
 			return removeItemAt(this.length - 1);
 		}
 		
-		public function removeItems(items : ListCollectionView) : void {
+		public function removeItems(items : Object) : void {
 			Arrays.removeAll(this, items); 
 		}
 
