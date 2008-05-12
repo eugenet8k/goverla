@@ -45,6 +45,10 @@ package org.goverla.utils {
 			return new Point(point1.x - point2.x, point1.y - point2.y);
 		}
 		
+		public static function getPointByObject(object : DisplayObject) : Point {
+			return new Point(object.x, object.y);
+		}
+		
 		public static function convertToZoom(point : Point, zoom : Number) : Point {
 			var result : Point = new Point();
 			result.x = (point.x * 100) / zoom;
