@@ -24,6 +24,7 @@ package org.goverla {
  	import org.goverla.utils.SortingTest;
  	import org.goverla.utils.StackTest;
  	import org.goverla.utils.StringsTest;
+ 	import org.goverla.utils.WeakReferenceTest;
  	import org.goverla.utils.comparing.ArrayMapValueCompareRequirementTest;
  	import org.goverla.utils.comparing.DateComparerTest;
  	import org.goverla.utils.comparing.MethodResultCompareRequirementTest;
@@ -74,6 +75,7 @@ package org.goverla {
    			suite.addTest(EventSenderTest);
    			suite.addTest(ReflectUtilTest);
   			suite.addTest(StringsTest);
+  			suite.addTest(WeakReferenceTest);
    			suite.addTest(LevenshteinTest);
    			suite.addTest(CSSParserTest);
    			
