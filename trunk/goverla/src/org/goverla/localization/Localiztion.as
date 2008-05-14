@@ -36,7 +36,7 @@ package org.goverla.localization
 
 		public static function getBundle(id : String) : ResourceBundle
 		{
-			if(bundles.id != null)
+			if(bundles[id] != null)
 			{
 				return bundles[id];
 			}
