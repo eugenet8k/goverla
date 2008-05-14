@@ -28,9 +28,12 @@ package org.goverla.utils
 			
 			eventSender.addListener(listener1);
 			eventSender.addListener(listener2);
-			eventSender.addListener(listener3);
 			
 			eventSender.sendEvent(event);
+			
+			eventSender = new EventSender();
+			eventSender.addListener(listener3);
+			eventSender.sendEvent();
 		}
 		
 		private function listener3() : void {
