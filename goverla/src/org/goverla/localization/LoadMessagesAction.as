@@ -5,6 +5,7 @@ package org.goverla.localization {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
+	import org.goverla.events.EventSender;
 	import org.goverla.interfaces.ICommand;
 
 	public class LoadMessagesAction implements ICommand {
@@ -13,12 +14,20 @@ package org.goverla.localization {
 		private var _messagesObject : Object;
 		private var _loader : URLLoader;
 		
+	
+		private var _loaded:EventSender = new EventSender();
+
 		public function LoadMessagesAction(url : String, messagesObject : Object)
 		{
 			_url = url;
 			_messagesObject = messagesObject;
 		}
 		
+		public function get loaded():EventSender
+		{
+			return _loaded;
+		}
+
 		public function execute():void
 		{
 			_loader = new URLLoader(new URLRequest(_url));
@@ -33,11 +42,12 @@ package org.goverla.localization {
 			{
 				_messagesObject[child.name()] = String(child.text());
 			}
+			_loaded.sendEvent();
 		}
 		
 		private function onIOError(event : IOErrorEvent) : void
 		{
-			
+			throw new Error("Error loading localization from " + _url);
 		}
 		
 	}

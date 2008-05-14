@@ -8,9 +8,14 @@ package org.goverla.utils
 	{
 		private var _dictionary : Dictionary = new Dictionary(true);
 		
-		public function WeakReference(value : Object)
+		public function WeakReference(value : Object, data : Object = true)
 		{
-			_dictionary[value] = true;
+			_dictionary[value] = data;
+		}
+		
+		public function get data() : Object
+		{
+			return _dictionary[value];
 		}
 		
 		public function get value() : Object
