@@ -109,7 +109,7 @@ package org.goverla.utils {
 		
 		public static function getTypeName(instance : Object) : String {
 			var nameWithContext : String = getFullTypeName(instance);
-			return nameWithContext.substr(nameWithContext.lastIndexOf(":") + 1);
+			return nameWithContext.substr(nameWithContext.lastIndexOf(".") + 1);
 		}
 		
 		public static function normalizeTypeName(typeName : String) : String {
