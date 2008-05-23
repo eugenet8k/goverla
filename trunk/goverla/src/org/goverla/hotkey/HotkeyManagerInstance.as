@@ -1,4 +1,5 @@
 package org.goverla.hotkey {
+	
 	import flash.events.KeyboardEvent;
 	
 	import mx.collections.ArrayCollection;
@@ -11,28 +12,11 @@ package org.goverla.hotkey {
 	import org.goverla.utils.Arrays;
 	import org.goverla.utils.comparing.ComparerRequirement;
 	import org.goverla.utils.comparing.ComparingResult;
-	
 
 	internal class HotkeyManagerInstance {
-
-		private var _hotkeyListeners : ArrayList = new ArrayList();
 		
 		public function HotkeyManagerInstance() {
 			Application(Application.application).addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-		}
-		
-		private function onKeyDown(event : KeyboardEvent) : void {
-			var comparer : IComparer = new HotkeyListenerComparer(false);
-			var hotkey : Hotkey = new Hotkey(event.keyCode, event.shiftKey, event.ctrlKey);
-			var requirement : IRequirement 
-				= new ComparerRequirement(comparer
-					, new HotkeyListener(hotkey, null)
-					, [ComparingResult.EQUALS]);
-			var listeners : ArrayCollection = Arrays.getByRequirement(_hotkeyListeners, requirement);
-			
-			for each(var listener : HotkeyListener in listeners) {
-				listener.handler(event);
-			}
 		}
 	
 		public function addListener(hotkey : Hotkey, handler : Function) : void {
@@ -46,12 +30,29 @@ package org.goverla.hotkey {
 					, new HotkeyListener(hotkey, handler)
 					, [ComparingResult.EQUALS]);
 			var listeners : ArrayCollection = Arrays.getByRequirement(_hotkeyListeners, requirement);
-			if(listeners.length > 0) {
+			if (listeners.length > 0) {
 				_hotkeyListeners.removeItem(listeners.getItemAt(0));
 			} else {
 				throw new IllegalArgumentError("Cannot remove listener cause such listener doesn't exist");
 			}
 		}
+		
+		private function onKeyDown(event : KeyboardEvent) : void {
+			var comparer : IComparer = new HotkeyListenerComparer(false);
+			var hotkey : Hotkey = new Hotkey(event.keyCode, event.shiftKey, event.ctrlKey);
+			var requirement : IRequirement 
+				= new ComparerRequirement(comparer
+					, new HotkeyListener(hotkey, null)
+					, [ComparingResult.EQUALS]);
+			var listeners : ArrayCollection = Arrays.getByRequirement(_hotkeyListeners, requirement);
+			
+			for each (var listener : HotkeyListener in listeners) {
+				listener.handler(event);
+			}
+		}
+		
+		private var _hotkeyListeners : ArrayList = new ArrayList();
 	
 	}
+
 }

@@ -1,12 +1,8 @@
-package org.goverla.hotkey
-{
-	import org.goverla.errors.IllegalStateError;
+package org.goverla.hotkey {
 	
+	import org.goverla.errors.IllegalStateError;
 
 	internal class HotkeyListener {
-		
-		private var _hotkey : Hotkey;
-		private var _handler : Function;
 
 		public function HotkeyListener(hotkey : Hotkey, handler : Function) {
 			_hotkey = hotkey;
@@ -21,5 +17,10 @@ package org.goverla.hotkey
 			return _hotkey;
 		}
 		
+		private var _hotkey : Hotkey;
+		
+		private var _handler : Function;
+		
 	}
+	
 }
