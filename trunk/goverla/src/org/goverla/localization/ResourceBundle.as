@@ -117,7 +117,7 @@ package org.goverla.localization
 		}
 		private function update(messageId : String, object : Object, property : String) : void
 		{
-			object[property] = messages[messageId];
+			object[property] = messages[messageId] == null ? messageId : messages[messageId];
 		}
 		
 	}

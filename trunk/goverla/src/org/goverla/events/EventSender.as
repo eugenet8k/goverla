@@ -44,21 +44,13 @@ package org.goverla.events
 			_listeners.addItem(listener);
 		}
 		
-		public function sendEvent(eventObject : Object = null) : void {
+		public function sendEvent(eventObject : Object = undefined) : void {
 			if (_type == null || (_type != null && eventObject is _type)) {
 				for(var index : int = 0; index < _listeners.length; index++) {
 					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
-					if(eventObject == null)
+					if(eventObject == undefined)
 					{
-						try
-						{
-							listener();
-						}
-						catch(e:ArgumentError)
-						{
-							//If someone wants to send null as parameter
-							listener(eventObject);
-						}
+						listener();
 					}
 					else
 					{
