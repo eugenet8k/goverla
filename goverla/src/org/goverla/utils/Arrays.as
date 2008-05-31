@@ -197,17 +197,12 @@ package org.goverla.utils {
 			return ArrayList(o.forward(arguments));
 		}
 		
-		public static function firstByRequirements(collection : Object, requirements : ArrayCollection) : Object {
+		public static function firstByRequirements(collection : Object, requirements : Array) : Object {
 			return getByRequirements(collection, requirements).getItemAt(0);
 		}
 		
-		public static function getByRequirements(collection : Object, requirements : ArrayCollection) : ArrayCollection {
-			var o : Overload = new Overload(Arrays);
-			o.addHandler([ListCollectionView, ArrayCollection], getByRequirementsForListCollectionView);
-			o.addHandler([IMap, ArrayCollection], getByRequirementsForMap);
-			o.addHandler([IIterator, ArrayCollection], getByRequirementsForIIterator);
-			o.addHandler([Array, ArrayCollection], getByRequirementsForArray);
-			return ArrayCollection(o.forward(arguments));		
+		public static function getByRequirements(collection : Object, requirements : Array) : ArrayList {
+			return getByRequirement(collection, new RequirementsCollection(requirements));		
 		}
 	
 		public static function containsByRequirements(collection : Object, requirements : Array) : Boolean {
@@ -313,37 +308,6 @@ package org.goverla.utils {
 			return result;
 		}
 		
-		private static function getByRequirementsForListCollectionView(list : ListCollectionView, requirements : ArrayCollection) : ArrayCollection {
-			return getByRequirements(new ListCollectionViewIterator(list), requirements);
-		}
-		
-		private static function getByRequirementsForMap(map : IMap, requirements : ArrayCollection) : ArrayCollection {
-			return getByRequirements(map.valueIterator(), requirements);
-		}
-
-		private static function getByRequirementsForArray(array : Array, requirements : ArrayCollection) : ArrayCollection {
-			return getByRequirements(new ArrayCollection(array), requirements);
-		}
-		
-		private static function getByRequirementsForIIterator(iterator : IIterator, requirements : ArrayCollection) : ArrayCollection {
-			var result : ArrayCollection = new ArrayCollection();		
-			while (iterator.hasNext()) {
-				var obj : Object = iterator.next();
-				var allSatisfied : Boolean = true;
-				for (var i : uint = 0; i < requirements.length; i++) {
-					var requirement : IRequirement = IRequirement(requirements.getItemAt(i));
-					if (!requirement.meet(obj)) {
-						allSatisfied = false;
-						break;
-					}
-				}
-				if (allSatisfied) {
-					result.addItem(obj);
-				}
-			}
-			return result;	
-		}
-	
 		private static function containsByRequirementForArray(list : Array, requirement : IRequirement) : Boolean {
 			return containsByRequirement(new ArrayCollection(list), requirement);
 		}
