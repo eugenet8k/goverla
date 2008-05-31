@@ -48,7 +48,7 @@ package org.goverla.events
 			if (_type == null || (_type != null && eventObject is _type)) {
 				for(var index : int = 0; index < _listeners.length; index++) {
 					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
-					if(eventObject == undefined)
+					if(eventObject == null)
 					{
 						listener();
 					}
