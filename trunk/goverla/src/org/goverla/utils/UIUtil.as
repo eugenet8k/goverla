@@ -16,6 +16,28 @@ package org.goverla.utils {
 
 	public class UIUtil {
 		
+		public static function findInstance(container:DisplayObjectContainer, instanceClass:Class):DisplayObject
+		{
+			var result:DisplayObject = null;
+			
+			for (var i:int = 0; i < container.numChildren; i++)
+			{
+				result = container.getChildAt(i);
+				
+				if (result is instanceClass)
+					break;
+				
+				if (result is DisplayObjectContainer)
+				{
+					result = findInstance(DisplayObjectContainer(result), instanceClass);
+					if (result is instanceClass)
+						break;
+				}
+			}
+			
+			return result;
+		}
+
 		public static function scale(component : DisplayObject, maxHeight: Number, maxWidth : Number) : Number {
 			var scale : Number = Math.min(maxHeight / component.height, maxWidth / component.width);
 			component.height *= scale;

@@ -1,10 +1,13 @@
 package org.goverla.localization
 {
+	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.text.TextField;
 	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.events.EventSender;
 	import org.goverla.utils.Objects;
+	import org.goverla.utils.UIUtil;
 	import org.goverla.utils.WeakReference;
 	
 	public class ResourceBundle
@@ -45,6 +48,17 @@ package org.goverla.localization
 			}
 		}
 		
+		public function registerButton(button : SimpleButton, messageId : String = null) : void
+		{
+			var states : Array = [button.upState, button.downState, button.overState];
+			for each(var state : Sprite in states)
+			{
+				var textField : TextField = TextField(UIUtil.findInstance(state, TextField));
+				if(textField != null)
+					registerTextField(textField, messageId);
+			}
+			
+		}
 		public function registerTextField(field : TextField, messageId : String = null) : void
 		{
 			if(messageId == null)
