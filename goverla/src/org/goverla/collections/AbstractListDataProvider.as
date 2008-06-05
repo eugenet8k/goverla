@@ -188,7 +188,7 @@ package org.goverla.collections {
                 }
 			}
 
-   			initializeByArrayCollection(FramedListResult(result).frame);
+   			initializeByArray(FramedListResult(result).frame);
    			
 			dispatchEvent(new ListDataProviderEvent(_currentEventType));
 			_currentEventType = ListDataProviderEvent.REFRESH;
