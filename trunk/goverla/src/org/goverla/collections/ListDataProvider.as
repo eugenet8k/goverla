@@ -35,13 +35,13 @@ package org.goverla.collections {
 				frame = FramedListResult(result);
 				
 				if (converter != null) {
-					frame.frame = Arrays.getConverted(frame.frame, converter);	
+					frame.frame = Arrays.getConverted(new ArrayCollection(frame.frame), converter).toArray();	
 				}
 			} else if (result is ArrayCollection) {
 				if (converter != null) {
-					frame.frame = Arrays.getConverted(ArrayCollection(result), converter);
+					frame.frame = Arrays.getConverted(ArrayCollection(result), converter).toArray();
 				} else {
-					frame.frame = ArrayCollection(result);
+					frame.frame = ArrayCollection(result).toArray();
 				}
 				
 				frame.totalCount = frame.frame.length;
