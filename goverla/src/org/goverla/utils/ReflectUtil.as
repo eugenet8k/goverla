@@ -35,7 +35,7 @@ package org.goverla.utils {
 			}
 		}
 		
-		public static function createInstance(type : Class, arguments : Array) : Object {
+		public static function createInstance(type : Class, arguments : Array = null) : Object {
 			if (arguments == null || arguments.length == 0) {
 				return new type();
 			} else if (arguments.length == 1) {
