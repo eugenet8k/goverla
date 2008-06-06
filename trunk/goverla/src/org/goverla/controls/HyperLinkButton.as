@@ -65,11 +65,10 @@ package org.goverla.controls {
 				_urlChanged = false;
 				toolTip = url;
 				
-				if (url == null) {
+				if (url == null || url == "") {
 					styleName = "LinkBlank";
 					buttonMode = false;
 				} else {
-					_cyrillicChanged = true;
 					buttonMode = true;
 				}
 			}
@@ -86,12 +85,16 @@ package org.goverla.controls {
 		}
 		
 		private function onOver(event : MouseEvent) : void {
-			_originalMenu = Application.application.contextMenu;
-			Application.application.contextMenu = _menu;
+			if (buttonMode) {
+				_originalMenu = Application.application.contextMenu;
+				Application.application.contextMenu = _menu;
+			}
 		}
 		
 		private function onOut(event : MouseEvent) : void {
-			Application.application.contextMenu = _originalMenu;
+			if (buttonMode) {
+				Application.application.contextMenu = _originalMenu;
+			}
 		}
 		
 		private function onOpenSelect(event : ContextMenuEvent) : void {
@@ -117,10 +120,6 @@ package org.goverla.controls {
 		private var _url : String;
 		
 		private var _urlChanged : Boolean;
-		
-		private var _cyrillic : Boolean;
-		
-		private var _cyrillicChanged : Boolean = true;
 		
 		private var _menu : ContextMenu;
 		
