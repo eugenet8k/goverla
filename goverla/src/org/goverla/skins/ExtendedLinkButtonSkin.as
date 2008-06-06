@@ -36,7 +36,7 @@ package org.goverla.skins {
 			}
 			
 			graphics.clear();
-			drawRoundRect(4, 5, w - 8, h - 10, cornerRadius, backgroundColor, backgroundAlpha);
+			drawRoundRect(2, 3, w - 4, h - 6, cornerRadius, backgroundColor, backgroundAlpha);
 		}
 
 	}
