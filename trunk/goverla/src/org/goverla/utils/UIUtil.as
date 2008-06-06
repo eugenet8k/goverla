@@ -25,17 +25,17 @@ package org.goverla.utils {
 				result = container.getChildAt(i);
 				
 				if (result is instanceClass)
-					break;
+					return result;
 				
 				if (result is DisplayObjectContainer)
 				{
 					result = findInstance(DisplayObjectContainer(result), instanceClass);
-					if (result is instanceClass)
-						break;
+					if (result != null)
+						return result;
 				}
 			}
 			
-			return result;
+			return null;
 		}
 
 		public static function scale(component : DisplayObject, maxHeight: Number, maxWidth : Number) : Number {
