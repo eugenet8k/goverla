@@ -150,7 +150,7 @@ package org.goverla.utils {
 			return result;
 		}
 		
-		public static function getFieldsAndPropertiesByInstance(instance : Object) : ArrayCollection {
+		public static function getFieldsAndPropertiesByInstance(instance : Object) : ArrayList {
 			var result : ArrayList = new ArrayList();
 			result.addItems(getFieldsByInstance(instance));
 			result.addItems(getPropertiesByInstance(instance));
