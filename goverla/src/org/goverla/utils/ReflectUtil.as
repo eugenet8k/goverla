@@ -203,6 +203,18 @@ package org.goverla.utils {
 			return result;
 		}
 		
+		public static function getClassMetadata(obj : Object) : Object {
+			var result : Object = {};
+			var classInfo : XML = mx.utils.DescribeTypeCache.describeType(obj).typeDescription;
+			for each (var metadata : XML in XMLList(classInfo.metadata)) {
+				result[metadata.@name] = {};
+				for each (var arg : XML in XMLList(metadata.arg)) {
+					result[metadata.@name][arg.@key] = String(arg.@value);
+				}
+			}
+			return result;
+		}
+		
 		public static function getMetadata(obj : Object, propName : String, metadataName : String) : ArrayCollection {
 			var result : ArrayCollection = new ArrayCollection();
 			
