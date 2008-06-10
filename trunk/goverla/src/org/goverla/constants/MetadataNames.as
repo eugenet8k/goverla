@@ -4,7 +4,6 @@ package org.goverla.constants {
       
       	public static var METADATA : String = "metadata";
       	
-      	
       	// Flex SDK declared
       
       	public static var BINDABLE : String = "Bindable";
@@ -12,6 +11,8 @@ package org.goverla.constants {
 		public static var MANAGED : String = "Managed";
 		
 		public static var CHANGEEVENT : String = "ChangeEvent";
+		
+		public static var INSPECTABLE : String = "Inspectable";
 		
 		public static var NON_COMMITTING_CHANGE_EVENT : String = "NonCommittingChangeEvent";
 		
