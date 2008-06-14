@@ -41,7 +41,7 @@ package org.goverla.utils {
 			return null;
 		}
 
-		public function setButtonText(button : SimpleButton, text : String = null) : void
+		public static function setButtonText(button : SimpleButton, text : String = null) : void
 		{
 			var states : Array = [button.upState, button.downState, button.overState];
 			for each(var state : Sprite in states)
