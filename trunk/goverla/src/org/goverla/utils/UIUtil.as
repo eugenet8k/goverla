@@ -2,7 +2,10 @@ package org.goverla.utils {
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.text.TextField;
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.Application;
@@ -37,6 +40,18 @@ package org.goverla.utils {
 			
 			return null;
 		}
+
+		public function setButtonText(button : SimpleButton, text : String = null) : void
+		{
+			var states : Array = [button.upState, button.downState, button.overState];
+			for each(var state : Sprite in states)
+			{
+				var textField : TextField = TextField(findInstance(state, TextField));
+				if(textField != null)
+					textField.text = text;
+			}
+			
+		}		
 
 		public static function scale(component : DisplayObject, maxHeight: Number, maxWidth : Number) : Number {
 			var scale : Number = Math.min(maxHeight / component.height, maxWidth / component.width);
