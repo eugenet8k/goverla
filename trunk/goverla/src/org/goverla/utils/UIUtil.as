@@ -44,11 +44,17 @@ package org.goverla.utils {
 		public static function setButtonText(button : SimpleButton, text : String = null) : void
 		{
 			var states : Array = [button.upState, button.downState, button.overState];
-			for each(var state : Sprite in states)
+			for each(var state : DisplayObject in states)
 			{
-				var textField : TextField = TextField(findInstance(state, TextField));
-				if(textField != null)
-					textField.text = text;
+				if(state is Sprite)
+				{
+					var textField : TextField = TextField(findInstance(Sprite(state), TextField));
+					if(textField != null)
+						textField.text = text;
+				} else if(state is TextField)
+				{
+					TextField(state).text = text;
+				}
 			}
 			
 		}		
