@@ -11,6 +11,7 @@ package org.goverla.flash.playback {
 		
 		public function MovieClipPlayer(movie : MovieClip) {
 			_movie = movie;
+			_timer = new EnterFrameTimer(1, movie);
 			_timer.tick.addListener(onTimer);
 		}
 		
@@ -26,7 +27,7 @@ package org.goverla.flash.playback {
 			_timer.start();
 		}
 		
-		private function onTimer(event : TimerEvent) : void {
+		private function onTimer() : void {
 			if (_movie.currentFrame != _currentFrame || _currentFrame == _end) {
 				_timer.stop();
 				intervalEnd.sendEvent(new IntervalEndEvent());
@@ -40,7 +41,7 @@ package org.goverla.flash.playback {
 		
 		private var _movie : MovieClip;
 		
-		private var _timer : EnterFrameTimer = new EnterFrameTimer(1);
+		private var _timer : EnterFrameTimer;
 		
 		private var _difference : int;
 		
