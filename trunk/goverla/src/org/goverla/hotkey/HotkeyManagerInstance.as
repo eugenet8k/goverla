@@ -39,7 +39,7 @@ package org.goverla.hotkey {
 		
 		private function onKeyDown(event : KeyboardEvent) : void {
 			var comparer : IComparer = new HotkeyListenerComparer(false);
-			var hotkey : Hotkey = new Hotkey(event.keyCode, event.shiftKey, event.ctrlKey);
+			var hotkey : Hotkey = new Hotkey(event.keyCode, event.shiftKey, event.ctrlKey, event.altKey);
 			var requirement : IRequirement 
 				= new ComparerRequirement(comparer
 					, new HotkeyListener(hotkey, null)
