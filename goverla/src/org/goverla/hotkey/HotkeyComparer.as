@@ -11,7 +11,8 @@ package org.goverla.hotkey {
 			var secondHotkey : Hotkey = Hotkey(object2);
 			if (firstHotkey.key == secondHotkey.key
 				&& firstHotkey.isCtrlPressed == secondHotkey.isCtrlPressed
-				&& firstHotkey.isShiftPressed == secondHotkey.isShiftPressed) {
+				&& firstHotkey.isShiftPressed == secondHotkey.isShiftPressed
+				&& firstHotkey.isAltPressed == secondHotkey.isAltPressed) {
 					result = ComparingResult.EQUALS;
 			}
 			return result;
