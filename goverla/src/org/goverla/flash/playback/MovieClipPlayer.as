@@ -30,7 +30,7 @@ package org.goverla.flash.playback {
 		private function onTimer() : void {
 			if (_movie.currentFrame != _currentFrame || _currentFrame == _end) {
 				_timer.stop();
-				intervalEnd.sendEvent(new IntervalEndEvent());
+				intervalEnd.sendEvent();
 			} else {
 				_currentFrame += _difference;
 				_movie.gotoAndStop(_currentFrame);
