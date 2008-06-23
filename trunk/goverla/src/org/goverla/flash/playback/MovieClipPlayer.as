@@ -37,7 +37,7 @@ package org.goverla.flash.playback {
 			}
 		}
 		
-		private var _intervaleEnd : EventSender = new EventSender(IntervalEndEvent);
+		private var _intervaleEnd : EventSender = new EventSender();
 		
 		private var _movie : MovieClip;
 		
