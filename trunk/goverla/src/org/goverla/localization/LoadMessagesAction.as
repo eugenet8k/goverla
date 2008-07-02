@@ -47,7 +47,7 @@ package org.goverla.localization {
 		
 		private function onIOError(event : IOErrorEvent) : void
 		{
-			throw new Error("Error loading localization from " + _url);
+			//throw new Error("Error loading localization from " + _url);
 		}
 		
 	}
