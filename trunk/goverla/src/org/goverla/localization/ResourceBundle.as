@@ -7,6 +7,7 @@ package org.goverla.localization
 	import org.goverla.collections.ArrayList;
 	import org.goverla.events.EventSender;
 	import org.goverla.utils.Objects;
+	import org.goverla.utils.Strings;
 	import org.goverla.utils.UIUtil;
 	import org.goverla.utils.WeakReference;
 	
@@ -63,7 +64,7 @@ package org.goverla.localization
 		{
 			if(messageId == null)
 			{
-				messageId = field.text;
+				messageId = field.text.replace('\r', '');
 				field.text = "";
 			}
 			registerMessage(field, "text", messageId);
