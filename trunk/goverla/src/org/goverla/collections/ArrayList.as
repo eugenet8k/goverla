@@ -10,6 +10,7 @@ package org.goverla.collections {
 	import org.goverla.reflection.Overload;
 	import org.goverla.serialization.interfaces.ISerializableBean;
 	import org.goverla.utils.Arrays;
+	import org.goverla.utils.Maths;
 	import org.goverla.utils.comparing.ValueComparer;
 	import org.goverla.utils.sorting.QuickSorter;
 
@@ -20,11 +21,15 @@ package org.goverla.collections {
 			registerClassAlias("org.goverla.collections.ArrayList", ArrayList);
 		}
 		
-		public function get last() : Object {
+		public function get last() : * {
 			return getItemAt(length - 1);
 		}
 		
-		public function get first() : Object {
+		public function get random() : * {
+			return getItemAt(Maths.random(length));
+		}
+		
+		public function get first() : * {
 			return getItemAt(0);
 		}
 
@@ -92,11 +97,11 @@ package org.goverla.collections {
 			addItem(item);
 		}
 		
-		public function removeFirst() : Object {
+		public function removeFirst() : * {
 			return removeItemAt(0);
 		}
 
-		public function removeLast() : Object {
+		public function removeLast() : * {
 			return removeItemAt(this.length - 1);
 		}
 		
