@@ -7,12 +7,12 @@ package org.goverla.collections {
 	
 	public class HashMap implements IMap {
 		
-		public function get keys() : Array {
-			return _keys.toArray();
+		public function get keys() : ArrayCollection {
+			return _keys;
 		}
 
-		public function get values() : Array {
-			return _values.toArray();
+		public function get values() : ArrayCollection {
+			return _values;
 		}
 		
 		public function addItem(key : Object, value : Object) : void {

@@ -1,6 +1,12 @@
 package org.goverla.interfaces {
+	
+	import mx.collections.ArrayCollection;
 
 	public interface IMap {
+		
+		function get keys() : ArrayCollection;
+
+		function get values() : ArrayCollection;
 		
 		function addItem(key : Object, value : Object) : void;
 
@@ -15,10 +21,6 @@ package org.goverla.interfaces {
 		function keyIterator() : IIterator;
 		
 		function containsKey(key : Object) : Boolean;
-
-		function get keys() : Array;
-
-		function get values() : Array;
 		
 	}
 	
