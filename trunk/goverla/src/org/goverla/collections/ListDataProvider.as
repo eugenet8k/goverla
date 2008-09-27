@@ -37,16 +37,15 @@ package org.goverla.collections {
 				if (converter != null) {
 					frame.frame = Arrays.getConverted(new ArrayCollection(frame.frame), converter).toArray();	
 				}
-			} else if (result is ArrayCollection) {
+			} else if (result is ArrayCollection || result is Array) {
 				if (converter != null) {
-					frame.frame = Arrays.getConverted(ArrayCollection(result), converter).toArray();
+					frame.frame = Arrays.getConverted(new ArrayList(result), converter).toArray();
 				} else {
-					frame.frame = ArrayCollection(result).toArray();
+					frame.frame = result as Array || ArrayCollection(result).toArray();
 				}
-				
 				frame.totalCount = frame.frame.length;
 			} else {
-				throw new Error("Method onRefreshItems needs in FramedResult, FramedListResult or ArrayCollection types!"); 
+				throw new Error("Method onRefreshItems needs FramedListResult, ArrayCollection or Array types!"); 
 			}
 
 			super.onRefreshItems(frame);
