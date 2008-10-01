@@ -1,92 +1,124 @@
 package org.goverla.containers {
 
+	import flash.display.GradientType;
 	import flash.geom.Rectangle;
 	
 	import mx.containers.Box;
 	import mx.graphics.GradientEntry;
+	import mx.graphics.IFill;
 	import mx.graphics.LinearGradient;
+	import mx.graphics.RadialGradient;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
-	
-	import org.goverla.constants.StyleNames;
-	
-	[Style(name="backgroundGradientColors",type="Array",format="Color",inherit="no")]
-	
-	[Style(name="backgroundGradientRatios",type="Array",format="Number",inherit="no")]
-	
-	[Style(name="backgroundGradientAlphas",type="Array",format="Number",inherit="no")]
-	
-	[Style(name="backgroundGradientAngle",type="Number",inherit="no")]
 
+	[Style(name="fillType", type="String", enumeration="linear,radial", inherit="no")]
+	[Style(name="fillColors", type="Array", format="Color", inherit="no")]
+	[Style(name="fillAlphas", type="Array", format="Number", inherit="no")]
+	[Style(name="fillRatios", type="Array", format="Number", inherit="no")]
+	[Style(name="fillAngle", type="Number", inherit="no")]
+	[Style(name="fillFocalPointRatio", type="Number", inherit="no")]
 	public class GradientBox extends Box {
 
-		protected static const CLASS_NAME : String = "GradientBox";
-		
-        private static var classConstructed : Boolean = staticConstructor();
+		private static const CLASS_NAME : String = "GradientBox";
 
+		private static var classConstructed : Boolean = staticConstructor();
+		
 		public function GradientBox() {
 			super();
 		}
     
-        private static function staticConstructor():Boolean {
-            if (!StyleManager.getStyleDeclaration(CLASS_NAME)) {
-                var newStyleDeclaration : CSSStyleDeclaration = new CSSStyleDeclaration();
-                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_COLORS, [0xFFFFFF, 0x000000]);
-                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_RATIOS, [0, 1]);
-                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_ALPHAS, [1, 1]);
-                newStyleDeclaration.setStyle(StyleNames.BACKGROUND_GRADIENT_ANGLE, 90);
-                StyleManager.setStyleDeclaration(CLASS_NAME, newStyleDeclaration, true);
-            }
-            return true;
+        private static function staticConstructor() : Boolean {
+			var styleDeclaration : CSSStyleDeclaration =
+				StyleManager.getStyleDeclaration(CLASS_NAME);
+			if (!styleDeclaration) {
+				styleDeclaration = new CSSStyleDeclaration();
+			}
+			styleDeclaration.defaultFactory = function() : void {
+				this.fillType = GradientType.LINEAR;
+				this.fillColors = null;
+				this.fillAlphas = null;
+				this.fillRatios = null;
+				this.fillAngle = 90;
+				this.fillFocalPointRatio = 0;
+			}
+			StyleManager.setStyleDeclaration(CLASS_NAME, styleDeclaration, false);
+			return true;
+        }
+        
+        override public function styleChanged(styleProp : String) : void {
+			super.styleChanged(styleProp);
+
+			var allStyles : Boolean = (styleProp == null || styleProp == "styleName");
+			
+			if (allStyles ||
+				styleProp == "fillType" ||
+				styleProp == "fillColors" ||
+				styleProp == "fillAlphas" ||
+				styleProp == "fillRatios" ||
+				styleProp == "fillAngle" ||
+				styleProp == "fillFocalPointRatio") {
+				
+				invalidateDisplayList();
+			}
         }
     
-        public override function styleChanged(styleProp : String) : void {
-			switch(styleProp) {
-				case StyleNames.BACKGROUND_GRADIENT_COLORS :
-				case StyleNames.BACKGROUND_GRADIENT_RATIOS :
-				case StyleNames.BACKGROUND_GRADIENT_ALPHAS :
-				case StyleNames.BACKGROUND_GRADIENT_ANGLE :
-		            super.styleChanged(styleProp);
-	                invalidateDisplayList();
-	                break;
-	                
-				default :
-            }
+        override protected function updateDisplayList(w : Number, h : Number) : void {
+			super.updateDisplayList(w, h);
+			
+			graphics.clear();
+			
+			var fillType : String = (getStyle("fillType"));
+			var fillColors : Array = (getStyle("fillColors") as Array);
+			var fillAlphas : Array = (getStyle("fillAlphas") as Array);
+			var fillRatios : Array = (getStyle("fillRatios") as Array);
+			var fillAngle : Number = getStyle("fillAngle");
+			var fillFocalPointRatio : Number = getStyle("fillFocalPointRatio");
+			var cornerRadius : Number = getStyle("cornerRadius");
+			
+			if (fillColors != null) {
+				if (fillAlphas == null) {
+					fillAlphas = [];
+				}
+				
+				if (fillRatios == null) {
+					fillRatios = [];
+				}
+				
+				for (var i : int = fillAlphas.length; i < fillColors.length; i++) {
+					fillAlphas.push(1);
+				}
+				
+				var lastFillRatioIndex : int = fillRatios.length - 1;
+				var lastFillRatio : Number = fillRatios[lastFillRatioIndex];
+				for (i = fillRatios.length; i < fillColors.length; i++) {
+					fillRatios.push(lastFillRatio + (1 - lastFillRatio) * (i - lastFillRatioIndex) / (fillColors.length - lastFillRatioIndex));
+				}
+				
+				var fillEntries : Array = [];
+				for (i = 0; i < fillColors.length; i++) {
+					fillEntries.push(new GradientEntry(fillColors[i], fillRatios[i], fillAlphas[i]));
+				}
+	
+				var fill : IFill;
+				switch (fillType) {
+					case GradientType.LINEAR :
+						fill = new LinearGradient();
+						LinearGradient(fill).angle = fillAngle;
+						LinearGradient(fill).entries = fillEntries;
+						break;
+					case GradientType.RADIAL :
+						fill = new RadialGradient();
+						RadialGradient(fill).angle = fillAngle;
+						RadialGradient(fill).entries = fillEntries;
+						RadialGradient(fill).focalPointRatio = fillFocalPointRatio;
+						break;
+				}
+				fill.begin(graphics, new Rectangle(0, 0, w, h));
+				graphics.drawRoundRect(0, 0, w, h, cornerRadius * 2, cornerRadius * 2);
+				fill.end(graphics);
+			}			
         }
-    
-        protected override function updateDisplayList(unscaledWidth : Number, unscaledHeight:Number):void {
-        	var w : Number = unscaledWidth;
-        	var h : Number = unscaledHeight;
 
-            super.updateDisplayList(w, h);
-
-        	graphics.clear();
-
-		    var rectangle : Rectangle = new Rectangle(0, 0, w, h);
-
-            var backgroundGradientColors : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_COLORS) as Array);
-            var backgroundGradientRatios : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_RATIOS) as Array);
-            var backgroundGradientAlphas : Array = (getStyle(StyleNames.BACKGROUND_GRADIENT_ALPHAS) as Array);
-            var backgroundGradientAngle : Number = (getStyle(StyleNames.BACKGROUND_GRADIENT_ANGLE) as Number);
-            var cornerRadius : Number = (getStyle(StyleNames.CORNER_RADIUS) as Number);
-
-			var gradientEntries : Array = [];
-            for (var i : int = 0; i < (backgroundGradientColors != null ? backgroundGradientColors.length : 0); i++) {
-            	var gradientEntry : GradientEntry =
-            		new GradientEntry(backgroundGradientColors[i],
-            			backgroundGradientRatios[i],
-            			backgroundGradientAlphas[i]);
-            	gradientEntries.push(gradientEntry);
-            }
-            var linearGradient : LinearGradient = new LinearGradient();
-            linearGradient.angle = backgroundGradientAngle;
-		    linearGradient.entries = gradientEntries;
-		    
-			linearGradient.begin(graphics, rectangle);
-			graphics.drawRoundRect(rectangle.left, rectangle.top, rectangle.width, rectangle.height, cornerRadius * 2);
-			linearGradient.end(graphics);
-        }
-		
 	}
 
 }
