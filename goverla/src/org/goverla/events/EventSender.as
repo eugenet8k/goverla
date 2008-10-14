@@ -10,6 +10,8 @@ package org.goverla.events
 	 */
 	public class EventSender {
 
+		public static var errorHandler:Function;
+		
 		private var _listeners : ArrayCollection = new ArrayCollection();
 		
 		private var _type : Class;
@@ -46,15 +48,31 @@ package org.goverla.events
 		
 		public function sendEvent(eventObject : * = undefined) : void {
 			if (_type == null || (_type != null && eventObject is _type)) {
-				for(var index : int = 0; index < _listeners.length; index++) {
-					var listener : Function = Objects.castToFunction(_listeners.getItemAt(index));
+				for(var Index : int = 0; Index < _listeners.length; Index++) {
+					var listener : Function = Objects.castToFunction(_listeners.getItemAt(Index));
 					if(eventObject == undefined)
 					{
-						listener();
+						if (errorHandler != null) {
+							try {
+								listener();
+							} catch (e:Error) {
+								errorHandler(e);
+							}
+						} else {
+								listener();
+						}
 					}
 					else
 					{
-						listener(eventObject);
+						if (errorHandler != null) {
+							try {
+								listener(eventObject);
+							} catch (e:Error) {
+								errorHandler(e);
+							}
+						} else {
+							listener(eventObject);
+						}
 					}
 				}
 			} else {
