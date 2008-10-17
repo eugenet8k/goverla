@@ -17,6 +17,7 @@ package org.goverla.localization {
 		
 	
 		private var _loaded:EventSender = new EventSender();
+		private var _failed:EventSender = new EventSender();
 		private var _status:String;
 
 		public function LoadMessagesAction(url : String, messagesObject : Object)
@@ -30,6 +31,11 @@ package org.goverla.localization {
 			return _loaded;
 		}
 
+		public function get failed():EventSender
+		{
+			return _failed;
+		}
+		
 		public function execute():void
 		{
 			_loader = new URLLoader(new URLRequest(_url));
@@ -55,6 +61,7 @@ package org.goverla.localization {
 		private function onIOError(event : IOErrorEvent) : void
 		{
 			trace(event.text + " " + _status);
+			_failed.sendEvent();
 			//throw new Error("Error loading localization from " + _url);
 		}
 		

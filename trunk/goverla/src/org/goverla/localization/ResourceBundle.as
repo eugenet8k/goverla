@@ -7,7 +7,6 @@ package org.goverla.localization
 	import org.goverla.collections.ArrayList;
 	import org.goverla.events.EventSender;
 	import org.goverla.utils.Objects;
-	import org.goverla.utils.Strings;
 	import org.goverla.utils.UIUtil;
 	import org.goverla.utils.WeakReference;
 	
@@ -21,6 +20,7 @@ package org.goverla.localization
 		private var _loaded : Boolean;
 	
 		private var _load:EventSender = new EventSender();
+		private var _loadError:EventSender = new EventSender();
 
 		public var messages : Object = new Object();
 		
@@ -34,6 +34,11 @@ package org.goverla.localization
 			return _load;
 		}
 	
+		public function get loadError():EventSender
+		{
+			return _loadError;
+		}
+		
 		public function get locale():String
 		{
 			return _locale;
@@ -98,6 +103,7 @@ package org.goverla.localization
 		{
 			var action : LoadMessagesAction = new LoadMessagesAction(url, messages);
 			action.loaded.addListener(onLoaded);
+			action.failed.addListener(_loadError.sendEvent);
 			action.execute();
 		}
 		
@@ -133,6 +139,11 @@ package org.goverla.localization
 		private function update(messageId : String, object : Object, property : String) : void
 		{
 			object[property] = messages[messageId] == null ? messageId : messages[messageId];
+		}
+		
+		public function get loaded():Boolean
+		{
+			 return _loaded;
 		}
 		
 	}
