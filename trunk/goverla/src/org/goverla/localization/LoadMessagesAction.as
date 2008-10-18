@@ -52,6 +52,7 @@ package org.goverla.localization {
 				_messagesObject[child.name()] = String(child.text());
 			}
 			_loaded.sendEvent();
+			trace("resource bundle loaded: " + _url);
 		}
 		
 		private function onHttpStatus(event : HTTPStatusEvent) : void
