@@ -103,10 +103,15 @@ package org.goverla.localization
 		{
 			var action : LoadMessagesAction = new LoadMessagesAction(url, messages);
 			action.loaded.addListener(onLoaded);
-			action.failed.addListener(_loadError.sendEvent);
+			action.failed.addListener(onLoadError);
 			action.execute();
 		}
 		
+		private function onLoadError() : void
+		{
+			_loaded = true;
+			loadError.sendEvent();
+		}
 		private function onLoaded() : void
 		{
 			_loaded = true;
