@@ -116,7 +116,7 @@ package org.goverla.utils {
 			// Analyze each group
 			for (i = 0; i < formatd.length; i++) {
 				// pass non-format chars directly to output string
-				if (!Util.isCharLatinAt(formatd[i] as String, 0)) {
+				if (!isCharLatinAt(formatd[i] as String, 0)) {
 					sout += (formatd[i] as String);
 				} else {
 					switch((formatd[i] as String).charAt(0)) {
@@ -129,7 +129,7 @@ package org.goverla.utils {
 						case 'y' :
 							if ((formatd[i] as String).length >= 4)
 								// full form
-								sout += Util.leadingZero(date.getFullYear().toString(), (formatd[i] as String).length);
+								sout += leadingZero(date.getFullYear().toString(), (formatd[i] as String).length);
 							else
 								// short form
 								sout += date.getFullYear().toString().substr(date.getFullYear().toString().length - 2, 2);
@@ -144,7 +144,7 @@ package org.goverla.utils {
 						case 'M' :
 							// 1 or 2 digits
 			                if (formatd[i].length <= 2) 
-			                	sout += Util.leadingZero((date.getMonth() + 1).toString(), formatd[i].length);
+			                	sout += leadingZero((date.getMonth() + 1).toString(), formatd[i].length);
 							if (formatd[i].length == 3) 
 								sout += MONTH_SHORT[date.getMonth()]; 
 							if (formatd[i].length > 3) 
@@ -166,19 +166,19 @@ package org.goverla.utils {
 								dd.setDate(dd.getDate() - 1);
 								itmp++;
 							}
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// d  Day in month  Number  10
 						case 'd' :
 							itmp = date.getDate();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// F  Day of week in month  Number  2
 						case 'F' :
 							itmp = date.getDay();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// E  Day in week  Text  Tuesday; Tue
@@ -202,44 +202,44 @@ package org.goverla.utils {
 						// H  Hour in day (0-23)  Number  0
 						case 'H' :
 							itmp = date.getHours();
-							stmp = Util.leadingZero(itmp.toString(), formatd[i].length);
+							stmp = leadingZero(itmp.toString(), formatd[i].length);
 							sout += stmp;
 							break;
 				
 						// k  Hour in day (1-24)  Number  24
 						case 'k' :
 							itmp = (date.getHours() == 0) ? 24 : date.getHours();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// K  Hour in am/pm (0-11)  Number  0
 						case 'K' :
 							itmp = date.getHours() % 12;
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// h  Hour in am/pm (1-12)  Number  12
 						case 'h' :
 							itmp = (date.getHours() % 12 == 0)  ? 12 : date.getHours() % 12;
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// m  Minute in hour  Number  30
 						case 'm' :
 							itmp = date.getMinutes();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// s  Second in minute  Number  55
 						case 's' :
 							itmp = date.getSeconds();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// S  Millisecond  Number  978
 						case 'S' :
 							itmp = date.getMilliseconds();
-							sout += Util.leadingZero(itmp.toString(), formatd[i].length);
+							sout += leadingZero(itmp.toString(), formatd[i].length);
 							break;
 				
 						// U  seconds since the Unix Epoch (January 1 1970 00:00:00 GMT) <- my extension 
@@ -299,17 +299,17 @@ package org.goverla.utils {
 				switch (formatd[i].charAt(0)) {
 					// y  Year  Year  1996; 96
 					case 'y' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.yL = date.substring(curpos, ix);
 						
 						// expand 1-2 digits year (-80, +20 years)
 						if (formatd[i].length <= 2) {
 							var curDate : Date = new Date();
-							if ((curDate.getFullYear() - Number("19" + Util.leadingZero(pObj.yL, 2))) > 80)
-								pObj.yL = Number("20" + Util.leadingZero(pObj.yL, 2));
+							if ((curDate.getFullYear() - Number("19" + leadingZero(pObj.yL, 2))) > 80)
+								pObj.yL = Number("20" + leadingZero(pObj.yL, 2));
 							else
-								pObj.yL = Number("19" + Util.leadingZero(pObj.yL, 2))
+								pObj.yL = Number("19" + leadingZero(pObj.yL, 2))
 						}
 						else 
 							pObj.yL = Number(pObj.yL);
@@ -321,7 +321,7 @@ package org.goverla.utils {
 					case 'M' :
 						// month parsed as a number
 						if (formatd[i].length < 3) {
-							ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+							ix = indexOfChange(date, isCharDigitAt, curpos, false);
 							len = ix - curpos;
 							pObj.mU = Number(date.substring(curpos, ix));
 							curpos += len;
@@ -353,7 +353,7 @@ package org.goverla.utils {
 			
 					// d  Day in month  Number  10
 					case 'd' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.dL = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -361,7 +361,7 @@ package org.goverla.utils {
 			
 					// a  Am/pm marker  Text  pm
 					case 'a' :
-						ix = Util.indexOfChange(date, Util.isCharLatinAt, curpos, false);
+						ix = indexOfChange(date, isCharLatinAt, curpos, false);
 						len = ix - curpos;
 						pObj.a = date.substring(curpos, ix).toLowerCase();
 						curpos += len;
@@ -369,7 +369,7 @@ package org.goverla.utils {
 			
 					// A  Am/pm marker  Text  PM
 					case 'A' :
-						ix = Util.indexOfChange(date, Util.isCharLatinAt, curpos, false);
+						ix = indexOfChange(date, isCharLatinAt, curpos, false);
 						len = ix - curpos;
 						pObj.a = date.substring(curpos, ix).toLowerCase();
 						curpos += len;
@@ -377,7 +377,7 @@ package org.goverla.utils {
 			
 					// H  Hour in day (0-23)  Number  0
 					case 'H' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.hU = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -385,7 +385,7 @@ package org.goverla.utils {
 			
 					// k  Hour in day (1-24)  Number  24
 					case 'k' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.kL = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -393,7 +393,7 @@ package org.goverla.utils {
 			
 					// K  Hour in am/pm (0-11)  Number  0
 					case 'K' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.kU = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -401,7 +401,7 @@ package org.goverla.utils {
 			
 					// h  Hour in am/pm (1-12)  Number  12
 					case 'h' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.hL = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -409,7 +409,7 @@ package org.goverla.utils {
 			
 					// m  Minute in hour  Number  30
 					case 'm' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.mL = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -417,7 +417,7 @@ package org.goverla.utils {
 			
 					// s  Second in minute  Number  55
 					case 's' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.sL = Number(date.substring(curpos,ix));
 						curpos+=len;
@@ -425,7 +425,7 @@ package org.goverla.utils {
 			
 					// S  Millisecond  Number  978
 					case 'S' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.sU = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -434,7 +434,7 @@ package org.goverla.utils {
 					// U  seconds since the Unix Epoch (January 1 1970 00:00:00 GMT) <- my extension 
 					// to the JavaSimpleDateDataFormat
 					case 'U' :
-						ix = Util.indexOfChange(date, Util.isCharDigitAt, curpos, false);
+						ix = indexOfChange(date, isCharDigitAt, curpos, false);
 						len = ix - curpos;
 						pObj.uU = Number(date.substring(curpos, ix));
 						curpos += len;
@@ -507,6 +507,43 @@ package org.goverla.utils {
 		public static function isLeapYear(date : Date) : Boolean {
 			var y : Number = date.getFullYear();
 			return (y % 4 ==0) && !((y % 100 == 0) && (y % 400 != 0));
+		}
+		
+		public static function indexOfChange(str : String, func : Function, startIndex : int, flag : Boolean) : int {
+			if (flag)
+				for (var i : int = startIndex; i < str.length; i++) {
+					if (func(str, i) as Boolean) return i;
+				}
+			else
+				for (i = startIndex; i < str.length; i++) {
+					if (!(func(str, i) as Boolean)) return i;
+				}
+			
+			return str.length;
+		}
+		
+		public static function isCharDigitAt(str : String, index : int) : Boolean {
+			if ((str.charCodeAt(index) >= 48) && (str.charCodeAt(index) <= 57)) 
+				return true; 
+			else 
+				return false;
+		}
+		
+		public static function isCharLatinAt(str : String, index : int) : Boolean {
+			if ((str.charCodeAt(index) >= 65 &&
+					str.charCodeAt(index) <= 90) ||
+				(str.charCodeAt(index) >= 97 &&
+					str.charCodeAt(index) <= 122)) 
+				return true; 
+			else 
+				return false;
+		}
+		
+		public static function leadingZero(str : String, num : Number) : String {
+			var raw : String = "";
+			for (var i : int = 0; i < (num - str.length); i++) 
+				raw += "0";
+			return raw + str;
 		}
 		
 	}
