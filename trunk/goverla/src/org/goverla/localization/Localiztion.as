@@ -7,7 +7,7 @@ package org.goverla.localization
 	// Deprecated. Use Flex 3 localization
 	public class Localiztion
 	{
-		public static var urlPrefix : String = "";
+		public static var urlFormat : String = "{0}.{1}.xml";
 
 		public static var messagesObject : Object = new Object();
 
@@ -51,7 +51,7 @@ package org.goverla.localization
 		}
 		public static function getUrl(bundleId : String, locale : String) : String
 		{
-			return StringUtil.substitute("{0}{1}.{2}.xml", urlPrefix, bundleId, locale);
+			return StringUtil.substitute(urlFormat, bundleId, locale);
 		}
 		
 		public static function loadMessages(url : String = "messages.enUS.xml", messagesObject : Object = null) : void
