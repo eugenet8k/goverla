@@ -12,18 +12,20 @@ package org.goverla.localization {
 	public class LoadMessagesAction implements ICommand {
 		
 		private var _url : String;
-		private var _messagesObject : Object;
+		private var _bundle : ResourceBundle;
 		private var _loader : URLLoader;
 		
 	
 		private var _loaded:EventSender = new EventSender();
 		private var _failed:EventSender = new EventSender();
 		private var _status:String;
+		private var _locale:String;
 
-		public function LoadMessagesAction(url : String, messagesObject : Object)
+		public function LoadMessagesAction(url : String, bundle : ResourceBundle)
 		{
 			_url = url;
-			_messagesObject = messagesObject;
+			_bundle = bundle;
+			_locale = bundle.locale;
 		}
 		
 		public function get loaded():EventSender
@@ -46,10 +48,13 @@ package org.goverla.localization {
 		
 		private function onLoadComplete(event : Event) : void
 		{
+			if(_locale != _bundle.locale)
+				return; //locale has changed while loading
+				
 			var xml : XML = new XML(_loader.data);
 			for each(var child : XML in xml.children())
 			{
-				_messagesObject[child.name()] = String(child.text());
+				_bundle.messages[child.name()] = String(child.text());
 			}
 			_loaded.sendEvent();
 			trace("resource bundle loaded: " + _url);

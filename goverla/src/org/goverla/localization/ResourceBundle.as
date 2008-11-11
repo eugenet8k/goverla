@@ -101,7 +101,7 @@ package org.goverla.localization
 		
 		protected function loadFromUrl(url : String) : void
 		{
-			var action : LoadMessagesAction = new LoadMessagesAction(url, messages);
+			var action : LoadMessagesAction = new LoadMessagesAction(url, this);
 			action.loaded.addListener(onLoaded);
 			action.failed.addListener(onLoadError);
 			action.execute();
