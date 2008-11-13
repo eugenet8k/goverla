@@ -19,6 +19,11 @@ package org.goverla.flash.playback {
 			return _intervaleEnd;
 		}
 		
+		public function stop() : void
+		{
+			_timer.stop();
+		}
+		
 		public function playInterval(start : uint, end : uint) : void {
 			_currentFrame = start;
 			_movie.gotoAndStop(start);
