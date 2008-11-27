@@ -1,4 +1,6 @@
 package org.goverla.utils {
+	import flash.utils.getQualifiedClassName;
+	
 	
 	public class Objects {
 		
@@ -111,8 +113,8 @@ package org.goverla.utils {
 			if (object is type || object == null) {
 				return object as type;
 			} else {
-				throw TypeError("[" + ReflectUtil.getTypeName(new type()) + "] was expected but [" + 
-					ReflectUtil.getTypeName(object) + "] was found");
+				throw TypeError("[" + getQualifiedClassName(new type()) + "] was expected but [" + 
+					getQualifiedClassName(object) + "] was found");
 			}
 		}
 		

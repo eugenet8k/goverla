@@ -1,13 +1,13 @@
 package org.goverla.localization
 {
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import org.goverla.collections.ArrayList;
 	import org.goverla.events.EventSender;
 	import org.goverla.utils.Objects;
-	import org.goverla.utils.UIUtil;
 	import org.goverla.utils.WeakReference;
 	
 	public class ResourceBundle
@@ -59,7 +59,7 @@ package org.goverla.localization
 			var states : Array = [button.upState, button.downState, button.overState];
 			for each(var state : Sprite in states)
 			{
-				var textField : TextField = TextField(UIUtil.findInstance(state, TextField));
+				var textField : TextField = TextField(findInstance(state, TextField));
 				if(textField != null)
 					registerTextField(textField, messageId);
 			}
@@ -78,11 +78,11 @@ package org.goverla.localization
 		{
 			if(_messageObjects[messageId] == null)
 			{
-				_messageObjects[messageId] = new ArrayList();
+				_messageObjects[messageId] = [];
 			}
-			var list : ArrayList = _messageObjects[messageId];
+			var list : Array = _messageObjects[messageId];
 			var reference : WeakReference = new WeakReference(obj, property);
-			list.addItem(reference);
+			list.push(reference);
 			if(_loaded)
 			{
 				update(messageId, obj, property);
@@ -123,7 +123,7 @@ package org.goverla.localization
 		{
 			for(var key : String in _messageObjects)
 			{
-				var list : ArrayList = _messageObjects[key];
+				var list : Array = _messageObjects[key];
 				for each(var reference : WeakReference in list)
 				{
 					if(!reference.alive)
@@ -151,6 +151,28 @@ package org.goverla.localization
 			 return _loaded;
 		}
 		
+		//Copypasted from UIUtil to optimize Localization weight
+		private static function findInstance(container:DisplayObjectContainer, instanceClass:Class):DisplayObject
+		{
+			var result:DisplayObject = null;
+			
+			for (var i:int = 0; i < container.numChildren; i++)
+			{
+				result = container.getChildAt(i);
+				
+				if (result is instanceClass)
+					return result;
+				
+				if (result is DisplayObjectContainer)
+				{
+					result = findInstance(DisplayObjectContainer(result), instanceClass);
+					if (result != null)
+						return result;
+				}
+			}
+			
+			return null;
+		}
 	}
 }
 

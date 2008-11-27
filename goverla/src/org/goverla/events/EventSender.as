@@ -1,8 +1,6 @@
 package org.goverla.events 
 {
 	
-	import mx.collections.ArrayCollection;
-	
 	import org.goverla.utils.Objects;
 	
 	/**
@@ -12,7 +10,7 @@ package org.goverla.events
 
 		public static var errorHandler:Function;
 		
-		private var _listeners : ArrayCollection = new ArrayCollection();
+		private var _listeners : Array = [];
 		
 		private var _type : Class;
 		
@@ -38,7 +36,7 @@ package org.goverla.events
 		}
 		
 		public function removeListeners() : void {
-			_listeners = new ArrayCollection();
+			_listeners = new Array();
 		}
 
 		public function setListener(listener : Function) : void {
