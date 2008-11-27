@@ -1,5 +1,4 @@
 ﻿package org.goverla.utils {
-	import mx.utils.StringUtil;
 	
 	import org.goverla.errors.IllegalArgumentError;
 	
@@ -12,7 +11,7 @@
 		private static const KB_SIZE : Number = 1024;
 
 		public static const DELIMITER : String = " `~!@#$%^&*()-_=+[]{};:\'\",<.>/?\\|";
-		
+		public static const WHITESPACE : String = " \t\r\n\f";
 		private static const ID_CHARS : String = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_";
 		protected static const RETURN_EXPRESSION : RegExp = /\r\n/gm;
 		
@@ -28,9 +27,35 @@
 		} 
 		
 		public static function addRandomParameter(url : String) : String {
-			return StringUtil.substitute("{0}?{1}", url, generateRandomId());
+			return substitute("{0}?{1}", url, generateRandomId());
 		}		
 		
+		public static function substitute(format : String, ...args) : String 
+		{
+			var result : String = format;
+			for(var i : int = 0; i < args.length; i++)
+				result = result.replace(new RegExp("\\{"+i+"\\}", "g"), args[i]);
+			return result;
+		}
+
+	    public static function trim(str:String):String
+	    {
+	        if (str == null) return '';
+	        
+	        var startIndex:int = 0;
+	        while (contains(WHITESPACE, str.charAt(startIndex)))
+	            startIndex++;
+	
+	        var endIndex:int = str.length - 1;
+	        while (contains(WHITESPACE, str.charAt(endIndex)))
+	            endIndex--;
+	
+	        if (endIndex >= startIndex)
+	            return str.slice(startIndex, endIndex + 1);
+	        else
+	            return "";
+	    }
+
 		public static function getFileSizeText(size : Number, precision : uint) : String 
 		{
 			var index : Number = 0;

@@ -1,8 +1,6 @@
 package org.goverla.localization
 {
-	import mx.utils.StringUtil;
-	
-	import org.goverla.localization.interfaces.IResourceBundleFactory;
+	import org.goverla.utils.Strings;
 	
 	// Deprecated. Use Flex 3 localization
 	public class Localiztion
@@ -11,7 +9,7 @@ package org.goverla.localization
 
 		private static var bundles : Object = new Object();
 		
-		private static var _bundlesFactory : IResourceBundleFactory;
+//		private static var _bundlesFactory : IResourceBundleFactory;
 		private static var _locale : String = "enUS";
 		
 	
@@ -49,7 +47,7 @@ package org.goverla.localization
 		}
 		public static function getUrl(bundleId : String, locale : String) : String
 		{
-			return StringUtil.substitute(urlFormat, bundleId, locale);
+			return Strings.substitute(urlFormat, bundleId, locale);
 		}
 		
 	}
