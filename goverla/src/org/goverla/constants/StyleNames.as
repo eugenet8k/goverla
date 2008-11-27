@@ -174,14 +174,6 @@ package org.goverla.constants {
 		public static const CONTROL_BOX_COLOR : String = "controlBoxColor";
 		
 		public static const	INDICATOR_ALIGN : String = "indicatorAlign";
-
-		public static const BACKGROUND_GRADIENT_COLORS : String = "backgroundGradientColors";
-		
-		public static const BACKGROUND_GRADIENT_RATIOS : String = "backgroundGradientRatios";
-		
-		public static const BACKGROUND_GRADIENT_ALPHAS : String = "backgroundGradientAlphas";
-		
-		public static const BACKGROUND_GRADIENT_ANGLE : String = "backgroundGradientAngle";
 		
 	}
 
