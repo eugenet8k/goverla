@@ -19,7 +19,7 @@ package org.goverla.events
 		}
 		
 		public function addListener(listener : Function) : void {
-			_listeners.addItem(listener);
+			_listeners.push(listener);
 		}
 		
 		public function addListenerIfHasNot(listener : Function) : void {
@@ -29,10 +29,10 @@ package org.goverla.events
 		}
 	
 		public function removeListener(listener : Function) : void {
-			if(!_listeners.contains(listener)) {
+			if(_listeners.indexOf(listener) == -1) {
 				throw new Error("List doesn't contain such listener");
 			}
-			_listeners.removeItemAt(_listeners.getItemIndex(listener));
+			_listeners.splice(_listeners.indexOf(listener), 1);
 		}
 		
 		public function removeListeners() : void {
@@ -41,13 +41,13 @@ package org.goverla.events
 
 		public function setListener(listener : Function) : void {
 			removeListeners();
-			_listeners.addItem(listener);
+			_listeners.push(listener);
 		}
 		
 		public function sendEvent(eventObject : * = undefined) : void {
 			if (_type == null || (_type != null && eventObject is _type)) {
-				for(var Index : int = 0; Index < _listeners.length; Index++) {
-					var listener : Function = Objects.castToFunction(_listeners.getItemAt(Index));
+				for(var i : int = 0; i < _listeners.length; i++) {
+					var listener : Function = Objects.castToFunction(_listeners[i]);
 					if(eventObject == undefined)
 					{
 						if (errorHandler != null) {
@@ -83,7 +83,7 @@ package org.goverla.events
 		}
 		
 		public function hasListener(func : Function) : Boolean {
-			return _listeners.contains(func);
+			return _listeners.indexOf(func) != -1;
 		}
 	}
 }
