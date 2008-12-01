@@ -96,6 +96,8 @@ package org.goverla.localization
 		
 		protected function loadLocale() : void
 		{
+			if(locale == null)
+				return;
 			loadFromUrl(Localiztion.getUrl(id, locale));
 		}
 		
