@@ -10,7 +10,7 @@ package org.goverla.localization
 		private static var bundles : Object = new Object();
 		
 //		private static var _bundlesFactory : IResourceBundleFactory;
-		private static var _locale : String = "enUS";
+		private static var _locale : String;
 		
 	
 		public static function get locale():String
