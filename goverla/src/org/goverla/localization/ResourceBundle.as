@@ -7,6 +7,7 @@ package org.goverla.localization
 	import flash.text.TextField;
 	
 	import org.goverla.events.EventSender;
+	import org.goverla.interfaces.IConverter;
 	import org.goverla.utils.Objects;
 	import org.goverla.utils.WeakReference;
 	
@@ -23,6 +24,8 @@ package org.goverla.localization
 		private var _loadError:EventSender = new EventSender();
 
 		public var messages : Object = new Object();
+		
+		public var textConverter : IConverter = new MessageConverter();
 		
 		public function ResourceBundle(id : String)
 		{

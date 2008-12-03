@@ -54,7 +54,10 @@ package org.goverla.localization {
 			var xml : XML = new XML(_loader.data);
 			for each(var child : XML in xml.children())
 			{
-				_bundle.messages[child.name()] = String(child.text());
+				var text : String = String(child.text());
+				if(_bundle.textConverter)
+					text = String(_bundle.textConverter.convert(text));
+				_bundle.messages[child.name()] = text;
 			}
 			_loaded.sendEvent();
 			trace("resource bundle loaded: " + _url);
