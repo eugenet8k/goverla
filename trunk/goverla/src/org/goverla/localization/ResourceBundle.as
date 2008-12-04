@@ -133,7 +133,7 @@ package org.goverla.localization
 				{
 					if(!reference.alive)
 					{
-						list.removeItem(reference);
+						list.splice(list.indexOf(reference), 1);
 					}
 					else
 					{
