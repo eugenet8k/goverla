@@ -33,6 +33,12 @@ package org.goverla.controls {
 			}
 		}
 		
+		public override function setActualSize(w : Number, h : Number) : void {
+			super.setActualSize(w, h);
+			simulateTextChange();
+			refreshHeight();
+		}
+		
 		public function SizableTextArea() {
 			super();
 			addEventListener(Event.CHANGE, onChange);
@@ -48,29 +54,39 @@ package org.goverla.controls {
 				_minHeightChanged = false;
 				_maxHeightChanged = false;
 				_textChanged = false;
-				refershHeight();
+				refreshHeight();
 			}
 		}
 		
-		private function onChange(event : Event) : void {
-			refershHeight();
-		}
-		
-		private function onCreationComplete(event : FlexEvent) : void {
-			_creationComplete = true;
-			if (_text != null) {
-				text = _text;
-			}
-		}
-		
-		private function refershHeight() : void {
-			var newHeight : Number = Math.max(textHeight + 10, minHeight);
+		public function refreshHeight() : void {
+			var newHeight : int = Math.max(textHeight + 10, minHeight);
 			if (!isNaN(maxHeight) && maxHeight != 0) {
 				height = Math.min(newHeight, maxHeight);
 			}
 			else
 			{
 				height = newHeight;
+			}
+		}
+		
+		public function simulateTextChange() : void {
+			if (text != "") {
+				if (text.charAt(text.length - 1) == " ") {
+					text = text.substr(0, text.length - 1);
+				} else {
+					text += " ";
+				}
+			}
+		}
+		
+		private function onChange(event : Event) : void {
+			refreshHeight();
+		}
+		
+		private function onCreationComplete(event : FlexEvent) : void {
+			_creationComplete = true;
+			if (_text != null) {
+				text = _text;
 			}
 		}
 		
