@@ -38,22 +38,27 @@
 			return result;
 		}
 
-	    public static function trim(str:String):String
+	    public static function trimSymbols(str:String, symbols : String):String
 	    {
 	        if (str == null) return '';
 	        
 	        var startIndex:int = 0;
-	        while (contains(WHITESPACE, str.charAt(startIndex)))
+	        while (contains(symbols, str.charAt(startIndex)))
 	            startIndex++;
 	
 	        var endIndex:int = str.length - 1;
-	        while (contains(WHITESPACE, str.charAt(endIndex)))
+	        while (contains(symbols, str.charAt(endIndex)))
 	            endIndex--;
 	
 	        if (endIndex >= startIndex)
 	            return str.slice(startIndex, endIndex + 1);
 	        else
 	            return "";
+	    }
+
+	    public static function trim(str:String):String
+	    {
+	    	return trimSymbols(str, WHITESPACE);
 	    }
 
 		public static function getFileSizeText(size : Number, precision : uint) : String 
