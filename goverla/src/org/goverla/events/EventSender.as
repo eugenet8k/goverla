@@ -45,9 +45,10 @@ package org.goverla.events
 		}
 		
 		public function sendEvent(eventObject : * = undefined) : void {
+			var listenersCopy:Array = _listeners.slice();
 			if (_type == null || (_type != null && eventObject is _type)) {
-				for(var i : int = 0; i < _listeners.length; i++) {
-					var listener : Function = Objects.castToFunction(_listeners[i]);
+				for(var i : int = 0; i < listenersCopy.length; i++) {
+					var listener : Function = Objects.castToFunction(listenersCopy[i]);
 					if(eventObject == undefined)
 					{
 						if (errorHandler != null) {
