@@ -3,6 +3,7 @@ package org.goverla.controls {
 	import flash.events.Event;
 	
 	import mx.controls.TextArea;
+	import mx.core.IUITextField;
 	import mx.core.ScrollPolicy;
 	import mx.events.FlexEvent;
 
@@ -37,6 +38,11 @@ package org.goverla.controls {
 			super.setActualSize(w, h);
 			simulateTextChange();
 			refreshHeight();
+		}
+		
+		public function get internalTextField() : IUITextField
+		{
+			return textField;
 		}
 		
 		public function SizableTextArea() {
