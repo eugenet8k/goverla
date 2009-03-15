@@ -5,6 +5,7 @@ package org.goverla.containers {
 	
 	import mx.containers.TitleWindow;
 	import mx.core.Application;
+	import mx.core.UIComponent;
 	import mx.effects.Resize;
 	import mx.events.StateChangeEvent;
 	import mx.states.SetProperty;
@@ -115,6 +116,14 @@ package org.goverla.containers {
 			return !collapsed;
 		}
 		
+		public function get application() : UIComponent {
+			return _application;
+		}
+		
+		public function set application(value : UIComponent) : void {
+			_application = value;
+		}
+		
 		protected function get oppositeState() : String {
 			return (collapsed ? RESTORED_STATE : COLLAPSED_STATE);
 		}
@@ -195,19 +204,19 @@ package org.goverla.containers {
 		protected function onTitleBarMouseDown(event : MouseEvent) : void {
 			_mousePosition = UIUtil.getApplicationMousePosition();
 			if (!collapsed) {
-				Application.application.addEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
+				application.addEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
 			}
 		}
 		
 		protected function onApplicationMouseMove(event : MouseEvent) : void {
-			Application.application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
+			application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
 			dispatchEvent(new ResizeableLayoutEvent(ResizeableLayoutEvent.START_RESIZE, event.bubbles, event.cancelable,
 				event.localX, event.localY, event.relatedObject, event.ctrlKey, event.altKey, event.shiftKey, event.buttonDown));
 		}
 		
 		// bugfix: titleBar always dispatches both click and mouseDown events
 		protected function onTitleBarMouseUp(event : MouseEvent) : void {
-			Application.application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
+			application.removeEventListener(MouseEvent.MOUSE_MOVE, onApplicationMouseMove);
 			var shift : Point = UIUtil.getApplicationMouseShift(_mousePosition);
 			if (shift.x == 0 && shift.y == 0) {
 				setOppositeState();
@@ -299,6 +308,8 @@ package org.goverla.containers {
 		private var _restoredIconSourceChanged : Boolean = true;
 		
 		private var _mousePosition : Point;
+		
+		private var _application : UIComponent = UIComponent(Application.application);
 		
 	}
 
