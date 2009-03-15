@@ -4,6 +4,7 @@ package org.goverla.hotkey {
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.Application;
+	import mx.core.UIComponent;
 	
 	import org.goverla.collections.ArrayList;
 	import org.goverla.errors.IllegalArgumentError;
@@ -15,8 +16,24 @@ package org.goverla.hotkey {
 
 	internal class HotkeyManagerInstance {
 		
+		public function get application() : UIComponent {
+			return _application;
+		}
+		
+		public function set application(value : UIComponent) : void {
+			if (_application != null) {
+				_application.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+			
+			_application = value;
+			
+			if (value != null) {
+				application.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+		}
+		
 		public function HotkeyManagerInstance() {
-			Application(Application.application).addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			application = UIComponent(Application.application);
 		}
 	
 		public function addListener(hotkey : Hotkey, handler : Function) : void {
@@ -52,6 +69,8 @@ package org.goverla.hotkey {
 		}
 		
 		private var _hotkeyListeners : ArrayList = new ArrayList();
+		
+		private var _application : UIComponent;
 	
 	}
 
