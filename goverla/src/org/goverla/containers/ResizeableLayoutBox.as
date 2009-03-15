@@ -16,6 +16,14 @@ package org.goverla.containers {
 
 	public class ResizeableLayoutBox extends Box {
 		
+		public function get application() : UIComponent {
+			return _application;
+		}
+		
+		public function set application(value : UIComponent) : void {
+			_application = value;
+		}
+		
 		public function ResizeableLayoutBox() {
 			super();
 			
@@ -49,8 +57,8 @@ package org.goverla.containers {
 	
 				_currentMousePosition = UIUtil.getApplicationMousePosition();
 	
-				Application.application.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-				Application.application.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				application.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				application.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			}
 		}
 		
@@ -62,8 +70,8 @@ package org.goverla.containers {
 			_childMouseOut = false;
 			_previousMoveDirection = false;
 			
-			Application.application.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			Application.application.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			application.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			application.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		}
 		
 		protected function onMouseMove(event : MouseEvent) : void {
@@ -189,6 +197,8 @@ package org.goverla.containers {
 				}
 			}
 		}
+		
+		private var _application : UIComponent = UIComponent(Application.application);
 		
 		private var _resizingChildIndex : int;
 		
