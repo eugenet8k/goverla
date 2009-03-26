@@ -34,6 +34,15 @@ package org.goverla.constants {
 		
 		[Embed(source="/resources/icons/icon_16x16_aim.png")]
 		public static const ICON_16x16_AIM : Class;
+		
+		[Embed(source="/resources/icons/icon-9x9-close.png")]
+		public static const ICON_9x9_CLOSE : Class;
+		
+		[Embed(source="/resources/icons/icon-9x9-minus.png")]
+		public static const ICON_9x9_MINUS : Class;
+		
+		[Embed(source="/resources/icons/icon-9x9-plus.png")]
+		public static const ICON_9x9_PLUS : Class;
 
     }
 
