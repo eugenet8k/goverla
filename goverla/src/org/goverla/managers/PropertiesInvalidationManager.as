@@ -40,8 +40,6 @@ package org.goverla.managers
 			_dispatcher = null;
 		}
 
-		private var _needInvalidation : Boolean;
-
 		private var _targets : Array = [];
 
 		private var _dispatcher : AsyncDispatcher;
