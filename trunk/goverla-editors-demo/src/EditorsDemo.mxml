@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:properties="org.goverla.controls.properties.*"
+	creationComplete="onCreationComplete(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import org.goverla.model.EditableObject;
+			import org.goverla.model.FileExtensionEntry;
+			import org.goverla.model.FileObject;
+			import org.goverla.model.FilterEntry;
+			import org.goverla.model.ImageFileObject;
+			import org.goverla.model.ImageFormatEntry;
+			import org.goverla.model.PageAliasEntry;
+			import org.goverla.model.PagesObject;
+			import org.goverla.model.SequencePagesObject;
+			
+			[Bindable]
+			protected var models : ArrayCollection;
+
+			protected function onCreationComplete(event : FlexEvent) : void
+			{
+				models = new ArrayCollection();
+				
+				var fileObject : FileObject = new FileObject();
+				fileObject.objectName = "FileObject";
+				models.addItem(fileObject);
+				
+				var imageFileObject : ImageFileObject = new ImageFileObject();
+				imageFileObject.objectName = "ImageFileObject";
+				models.addItem(imageFileObject);
+				
+				var pagesObject : PagesObject = new PagesObject();
+				pagesObject.objectName = "PagesObject";
+				models.addItem(pagesObject);
+				
+				var sequencePagesObject : SequencePagesObject = new SequencePagesObject();
+				sequencePagesObject.objectName = "SequencePagesObject";
+				models.addItem(sequencePagesObject);
+			}
+			
+			// We need to add links to classes (for compilation purporses) 
+			// because we haven't got strong ones in the classes
+			private var _link0 : ImageFormatEntry;
+			private var _link1 : FileExtensionEntry;
+			private var _link2 : PageAliasEntry;
+			private var _link3 : FilterEntry;
+
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" height="100%">
+		<mx:List id="modelsList" width="20%" height="100%" 
+				 dataProvider="{models}" labelField="objectName" />
+		<properties:PropertiesEditor width="80%" height="100%" minHeight="0" title="Properties"
+			 propertiesGroups="{EditableObject(modelsList.selectedItem).propertiesGroups}"/>
+	</mx:HBox>
+</mx:Application>
