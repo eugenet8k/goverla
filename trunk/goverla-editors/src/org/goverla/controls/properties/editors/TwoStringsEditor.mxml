@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TwoStringsEditorBase 
+	xmlns="org.goverla.controls.properties.editors.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	direction="horizontal"
+	horizontalGap="5">
+	<mx:Script>
+		<![CDATA[
+			import org.goverla.controls.properties.classes.PropertyDefinition;
+		]]>
+	</mx:Script>
+	<StringEditor
+		width="100%"
+		direction="vertical"
+		property="{new PropertyDefinition(itemField1, value, 
+			StringEditor, null, null, label1, null, 0, true)}" />
+	<StringEditor
+		width="100%"
+		direction="vertical"
+		property="{new PropertyDefinition(itemField2, value, 
+			StringEditor, null, null, label2, null, 0, true)}" />
+</TwoStringsEditorBase>

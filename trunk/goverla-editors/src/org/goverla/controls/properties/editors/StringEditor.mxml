@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StringEditorBase
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns="org.goverla.controls.properties.editors.*"
+	xmlns:controls="org.goverla.controls.*"
+	verticalGap="0"
+	direction="vertical">
+	<mx:Label
+		styleName="EditorLabel"
+		text="{label}"
+		visible="{label != null}"
+		includeInLayout="{label != null}" 
+		enabled="{enabled}" />
+	<mx:TextInput
+		id="textInput" 
+		width="100%"
+		height="20"
+		text="{textValue}"
+		visible="{!multiline}"
+		includeInLayout="{!multiline}"
+		enabled="{enabled}"
+		change="onTextInputChange()"
+		focusIn="onTextInputFocusIn()"
+		focusOut="onTextInputFocusOut()"
+		keyDown="onKeyDown(event)" />
+	<controls:SizableTextArea
+		id="sizeableTextArea"
+		width="100%"
+		text="{textValue}"
+		visible="{multiline}"
+		includeInLayout="{multiline}"
+		enabled="{enabled}" 
+		change="onTextInputChange()"
+		focusIn="onTextInputFocusIn()"
+		focusOut="onTextInputFocusOut()"
+		keyDown="onKeyDown(event)" />
+</StringEditorBase>

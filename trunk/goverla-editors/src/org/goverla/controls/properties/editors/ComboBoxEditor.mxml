@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComboBoxEditorBase 
+	xmlns="org.goverla.controls.properties.editors.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	verticalGap="0"
+	direction="vertical">
+	<mx:Label
+		styleName="EditorLabel"
+		text="{label}"
+		visible="{label != null}"
+		includeInLayout="{label != null}" />
+	<mx:ComboBox
+		id="comboBox" 
+		width="100%"
+		height="20"
+		dataProvider="{dataProvider}"
+		labelField="{itemField}"
+		change="onComboBoxChange()" />
+</ComboBoxEditorBase>

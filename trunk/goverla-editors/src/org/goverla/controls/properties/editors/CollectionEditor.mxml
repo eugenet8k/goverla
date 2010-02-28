@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CollectionEditorBase 
+	xmlns="org.goverla.controls.properties.editors.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:properties="org.goverla.controls.properties.*"
+	direction="vertical"
+	verticalGap="5">
+	<mx:Script>
+		<![CDATA[
+			import org.goverla.constants.Icons;
+		]]>
+	</mx:Script>
+	<mx:Label
+		styleName="EditorLabel"
+		text="{label}"
+		visible="{label != null}"
+		includeInLayout="{label != null}"
+		paddingBottom="-5" />
+	<mx:Repeater
+		id="itemsRepeater"
+		width="100%"
+		recycleChildren="true">
+		<mx:HBox
+			width="100%"
+			horizontalGap="3">
+			<mx:HBox
+				paddingTop="2"
+				horizontalGap="3">
+				<mx:Image
+					id="moveupButtonsArray"
+					source="{Icons.ICON_16X16_MOVEUP}"
+					buttonMode="true"
+					visible="{(itemsRepeater.currentIndex != 0) &amp;&amp; showMoveUpButton}"
+					includeInLayout="{showMoveUpButton}"
+					click="onMoveUpButtonClick(event)" />
+				<mx:Image
+					id="removeButtonsArray"
+					source="{Icons.ICON_16X16_REMOVE}"
+					buttonMode="true"
+					visible="{showRemoveButton}"
+					includeInLayout="{showRemoveButton}"
+					click="onRemoveButtonClick(event)" />				
+			</mx:HBox>
+			<properties:PropertyEditor
+				id="propertyEditorsArray"
+				width="100%"
+				property="{getItemProperty(itemsRepeater.currentItem)}" />
+		</mx:HBox>
+	</mx:Repeater>
+	<mx:Image
+		source="{Icons.ICON_16X16_ADD}"
+		buttonMode="true"
+		visible="{showAddButton}"
+		includeInLayout="{showAddButton}"
+		click="onAddButtonClick()" />
+</CollectionEditorBase>
