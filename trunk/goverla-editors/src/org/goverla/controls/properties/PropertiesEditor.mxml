@@ -10,8 +10,7 @@
 	roundedBottomCorners="false">
 	<mx:VBox
 		width="100%"
-		height="100%"
-		verticalGap="0">
+		height="100%">
 		<mx:Repeater
 			id="groupsRepeater"
 			width="100%"

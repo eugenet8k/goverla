@@ -3,7 +3,7 @@
   <includeClasses>
     <classEntry path="org.goverla.constants.CustomMetadataKeyNames"/>
     <classEntry path="org.goverla.constants.CustomMetadataNames"/>
-    <classEntry path="org.goverla.constants.Icons"/>
+    <classEntry path="org.goverla.constants.EditorIcons"/>
     <classEntry path="org.goverla.controls.properties.PropertiesEditor"/>
     <classEntry path="org.goverla.controls.properties.PropertiesEditorBase"/>
     <classEntry path="org.goverla.controls.properties.PropertiesGroupEditor"/>

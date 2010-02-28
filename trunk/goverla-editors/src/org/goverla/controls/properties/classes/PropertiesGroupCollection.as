@@ -11,6 +11,8 @@ package org.goverla.controls.properties.classes {
 		
 		public function PropertiesGroupCollection() {
 			super();
+			sort = new Sort();
+			sort.compareFunction = compareFunction;
 			filterFunction = groupFilterFunction;
 			refresh();
 		}
@@ -72,6 +74,11 @@ package org.goverla.controls.properties.classes {
 		
 		private function onPropertyWithDependentGroupChange(event : Event) : void {
 			setDependentGroupEnable(PropertyDefinition(event.target));
+		}
+		
+		private function compareFunction(a : Object, b : Object, fields : Array = null) : int {
+			// TODO: Implement sorting for groups
+			return 1; 
 		}
 		
 		private function groupFilterFunction(item : Object) : Boolean {

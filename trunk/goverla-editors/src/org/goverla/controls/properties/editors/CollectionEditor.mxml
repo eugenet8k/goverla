@@ -7,7 +7,7 @@
 	verticalGap="5">
 	<mx:Script>
 		<![CDATA[
-			import org.goverla.constants.Icons;
+			import org.goverla.constants.EditorIcons;
 		]]>
 	</mx:Script>
 	<mx:Label
@@ -28,14 +28,14 @@
 				horizontalGap="3">
 				<mx:Image
 					id="moveupButtonsArray"
-					source="{Icons.ICON_16X16_MOVEUP}"
+					source="{EditorIcons.ICON_16X16_MOVEUP}"
 					buttonMode="true"
 					visible="{(itemsRepeater.currentIndex != 0) &amp;&amp; showMoveUpButton}"
 					includeInLayout="{showMoveUpButton}"
 					click="onMoveUpButtonClick(event)" />
 				<mx:Image
 					id="removeButtonsArray"
-					source="{Icons.ICON_16X16_REMOVE}"
+					source="{EditorIcons.ICON_16X16_REMOVE}"
 					buttonMode="true"
 					visible="{showRemoveButton}"
 					includeInLayout="{showRemoveButton}"
@@ -48,7 +48,7 @@
 		</mx:HBox>
 	</mx:Repeater>
 	<mx:Image
-		source="{Icons.ICON_16X16_ADD}"
+		source="{EditorIcons.ICON_16X16_ADD}"
 		buttonMode="true"
 		visible="{showAddButton}"
 		includeInLayout="{showAddButton}"

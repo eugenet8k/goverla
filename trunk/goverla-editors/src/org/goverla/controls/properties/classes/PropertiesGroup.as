@@ -16,7 +16,7 @@ package org.goverla.controls.properties.classes {
 		
 		public var enabled : Boolean = true;
 		
-		public var collapsed : Boolean = true;
+		public var collapsed : Boolean;
 		
 		public function get name() : String {
 			return nameEntry.name;
