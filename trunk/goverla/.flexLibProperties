@@ -343,6 +343,23 @@
     <classEntry path="org.goverla.utils.ui.PopUpUtils"/>
     <classEntry path="org.goverla.utils.ui.UIComponentSize"/>
   </includeClasses>
-  <includeResources/>
+  <includeResources>
+    <resourceEntry destPath="resources/icons/icon-9x9-close.png" sourcePath="resources/icons/icon-9x9-close.png"/>
+    <resourceEntry destPath="resources/icons/icon-9x9-minus.png" sourcePath="resources/icons/icon-9x9-minus.png"/>
+    <resourceEntry destPath="resources/icons/icon-9x9-plus.png" sourcePath="resources/icons/icon-9x9-plus.png"/>
+    <resourceEntry destPath="resources/icons/icon_10x6_closed_up.png" sourcePath="resources/icons/icon_10x6_closed_up.png"/>
+    <resourceEntry destPath="resources/icons/icon_10x6_opened_up.png" sourcePath="resources/icons/icon_10x6_opened_up.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_accept_over.png" sourcePath="resources/icons/icon_16x16_accept_over.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_accept_up.png" sourcePath="resources/icons/icon_16x16_accept_up.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_aim.png" sourcePath="resources/icons/icon_16x16_aim.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_decline_up.png" sourcePath="resources/icons/icon_16x16_decline_up.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_edit_over.png" sourcePath="resources/icons/icon_16x16_edit_over.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_edit_up.png" sourcePath="resources/icons/icon_16x16_edit_up.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_google_talk.png" sourcePath="resources/icons/icon_16x16_google_talk.png"/>
+    <resourceEntry destPath="resources/icons/icon_16x16_windows_live_messenger.png" sourcePath="resources/icons/icon_16x16_windows_live_messenger.png"/>
+    <resourceEntry destPath="resources/icons/icon_18x18_target.png" sourcePath="resources/icons/icon_18x18_target.png"/>
+    <resourceEntry destPath="resources/images/left.png" sourcePath="resources/images/left.png"/>
+    <resourceEntry destPath="resources/images/right.png" sourcePath="resources/images/right.png"/>
+  </includeResources>
   <namespaceManifests/>
 </flexLibProperties>
