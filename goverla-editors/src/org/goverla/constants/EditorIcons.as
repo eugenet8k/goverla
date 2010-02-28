@@ -1,6 +1,6 @@
 package org.goverla.constants {
 	
-	public class Icons {
+	public final class EditorIcons {
 		
 		[Embed(source="/resources/icons/icon_16x16_add.png")]
         public static const ICON_16X16_ADD : Class;

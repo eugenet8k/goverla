@@ -2,6 +2,7 @@
 <PropertiesGroupEditorBase 
 	xmlns="org.goverla.controls.properties.*" 
 	xmlns:mx="http://www.adobe.com/2006/mxml"
+	paddingTop="5"
 	paddingLeft="5"
 	paddingRight="5"
 	paddingBottom="5"

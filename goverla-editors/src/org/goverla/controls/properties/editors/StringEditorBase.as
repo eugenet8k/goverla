@@ -117,7 +117,7 @@ package org.goverla.controls.properties.editors {
 		}
 		
 		protected function onTextInputChange() : void {
-			changePropertyValue("value" + (itemField != null ? "." + itemField : ""), text);
+			changePropertyValue(itemField, text);
 		}
 		
 		protected function onTextInputFocusIn() : void {
@@ -125,13 +125,12 @@ package org.goverla.controls.properties.editors {
 		}
 		
 		protected function onTextInputFocusOut() : void {
-			changePropertyValue("value" + (itemField != null ? "." + itemField : ""), text);
+			changePropertyValue(itemField, text);
 		}
 		
 		protected function onKeyDown(event : KeyboardEvent) : void {
-			if (event.ctrlKey || event.commandKey) {
-				if (event.keyCode != 0 && !(event.keyCode == Keyboard.Z || event.keyCode == Keyboard.X ||
-					event.keyCode == Keyboard.C || event.keyCode == Keyboard.V || event.keyCode == Keyboard.A)) {
+			if (event.ctrlKey) {
+				if (event.keyCode != 0) {
 					event.preventDefault();
 				}
 			} else if (event.keyCode == Keyboard.ESCAPE) {
