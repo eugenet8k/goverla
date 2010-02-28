@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertiesGroupEditorBase 
+	xmlns="org.goverla.controls.properties.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	paddingLeft="5"
+	paddingRight="5"
+	paddingBottom="5"
+	verticalGap="1"
+	title="{group.nameEntry.name}">
+	<mx:Repeater
+		id="propertiesRepeater"
+		width="100%"
+		dataProvider="{properties}">
+		<PropertyEditor
+			width="100%"
+			property="{propertiesRepeater.currentItem}" />
+	</mx:Repeater>
+</PropertiesGroupEditorBase>

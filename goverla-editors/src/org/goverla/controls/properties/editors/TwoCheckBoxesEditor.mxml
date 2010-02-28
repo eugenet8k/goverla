@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TwoCheckBoxesEditorBase
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns="org.goverla.controls.properties.editors.*"
+	direction="horizontal">
+	<mx:CheckBox
+		id="checkBox1"
+		styleName="EditorLabel"
+		height="100%"
+		label="{label1}"
+		click="onClick1(event)" />
+	<mx:Spacer
+		width="100%" />
+	<mx:CheckBox
+		id="checkBox2"
+		styleName="EditorLabel"
+		height="100%"
+		label="{label2}"
+		click="onClick2(event)" />
+</TwoCheckBoxesEditorBase>

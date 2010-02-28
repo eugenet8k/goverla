@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" version="3">
+  <includeClasses>
+    <classEntry path="org.goverla.constants.CustomMetadataKeyNames"/>
+    <classEntry path="org.goverla.constants.CustomMetadataNames"/>
+    <classEntry path="org.goverla.constants.Icons"/>
+    <classEntry path="org.goverla.controls.properties.PropertiesEditor"/>
+    <classEntry path="org.goverla.controls.properties.PropertiesEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.PropertiesGroupEditor"/>
+    <classEntry path="org.goverla.controls.properties.PropertiesGroupEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.PropertyEditor"/>
+    <classEntry path="org.goverla.controls.properties.classes.CollectionPropertyDefinition"/>
+    <classEntry path="org.goverla.controls.properties.classes.LinkClasses"/>
+    <classEntry path="org.goverla.controls.properties.classes.PropertiesGroup"/>
+    <classEntry path="org.goverla.controls.properties.classes.PropertiesGroupCollection"/>
+    <classEntry path="org.goverla.controls.properties.classes.PropertiesUtil"/>
+    <classEntry path="org.goverla.controls.properties.classes.PropertyDefinition"/>
+    <classEntry path="org.goverla.controls.properties.editors.BaseEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.CheckBoxEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.CheckBoxEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.CollectionEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.CollectionEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.ComboBoxEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.ComboBoxEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.StringEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.StringEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.ThreeStringsEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.ThreeStringsEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.TwoCheckBoxesEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.TwoCheckBoxesEditorBase"/>
+    <classEntry path="org.goverla.controls.properties.editors.TwoStringsEditor"/>
+    <classEntry path="org.goverla.controls.properties.editors.TwoStringsEditorBase"/>
+    <classEntry path="org.goverla.interfaces.INamedEntry"/>
+    <classEntry path="org.goverla.model.GroupNameEntry"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
